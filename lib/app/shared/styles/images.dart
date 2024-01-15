@@ -13,5 +13,5 @@ class AppImages {
   static dynamic yellowpoub = Image.asset('assets/images/yellowpoub.png');
   static dynamic logo = Image.asset('assets/images/logo.png');
   static dynamic logol = Image.asset('assets/images/logol.png');
-  static dynamic launcher_icon = Image.asset('assets/images/launcher_icon.png');
+  static dynamic launcherIcon = Image.asset('assets/images/launcher_icon.png');
 }

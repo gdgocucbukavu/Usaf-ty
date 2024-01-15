@@ -213,7 +213,7 @@ class OverView extends StatelessWidget {
               AppImages.yellowpoub,
               AppImages.logo,
               AppImages.logol,
-              AppImages.launcher_icon,
+              AppImages.launcherIcon,
               Container(height: 50, color: AppColors.tdBlack),
               Container(height: 50, color: AppColors.tdBlackO),
               Container(height: 50, color: AppColors.tdWhite),
