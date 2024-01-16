@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:usaficity/app/routes/routes.conf.dart';
+import 'package:usaficity/controller/cubit/homecubit.dart';
 
 import 'app/shared/shared.dart';
 import 'controller/cubit/cubit.dart';
@@ -27,6 +28,7 @@ class Usafty extends StatelessWidget {
         BlocProvider(
           create: (context) => MainCubit()..changeThemeMode(darkMode: isDark),
         ),
+        BlocProvider(create: (context) => HomeCubit()),
       ],
       child: BlocConsumer<MainCubit, MainState>(
         listener: (context, state) {},

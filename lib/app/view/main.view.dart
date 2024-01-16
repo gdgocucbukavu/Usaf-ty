@@ -11,6 +11,8 @@ class MainView extends StatelessWidget {
   static dynamic route = '/';
   const MainView({super.key});
 
+  
+
   @override
   Widget build(BuildContext context) {
     dynamic theme = Theme.of(context);
@@ -21,6 +23,7 @@ class MainView extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
+          
           body: Stack(
             children: [
               cubit.screens[cubit.i],
@@ -157,7 +160,6 @@ class MainView extends StatelessWidget {
 }
 
 class OverView extends StatelessWidget {
-  static dynamic route = '/overview';
   const OverView({super.key});
 
   @override
@@ -201,19 +203,20 @@ class OverView extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelSmall),
               Text('${cubit.counter}',
                   style: Theme.of(context).textTheme.displayMedium),
-              AppImages.agents,
-              AppImages.agentsv,
-              AppImages.bluepoub,
-              AppImages.cleancity,
-              AppImages.cleancityv,
-              AppImages.greenpoub,
-              AppImages.redpoub,
-              AppImages.tri,
-              AppImages.triv,
-              AppImages.yellowpoub,
-              AppImages.logo,
-              AppImages.logol,
-              AppImages.launcherIcon,
+              Image.asset('${AppImages.agents}'),
+              Image.asset('${AppImages.agentsv}'),
+              Image.asset('${AppImages.bluepoub}'),
+              Image.asset('${AppImages.cleancity}'),
+              Image.asset('${AppImages.cleancityv}'),
+              Image.asset('${AppImages.greenpoub}'),
+              Image.asset('${AppImages.redpoub}'),
+              Image.asset('${AppImages.tri}'),
+              Image.asset('${AppImages.triv}'),
+              Image.asset('${AppImages.yellowpoub}'),
+              Image.asset('${AppImages.logo}'),
+              Image.asset('${AppImages.logol}'),
+              Image.asset('${AppImages.launcherIcon}'),
+              Text('${AppImages.launcherIcon}'),
               Container(height: 50, color: AppColors.tdBlack),
               Container(height: 50, color: AppColors.tdBlackO),
               Container(height: 50, color: AppColors.tdWhite),

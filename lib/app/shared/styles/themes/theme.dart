@@ -40,7 +40,7 @@ class AppTheme {
         systemNavigationBarColor: AppColors.tdWhiteO,
       ),
     ),
-    textTheme: TxtTheme.lighttxtTheme(),
+    textTheme: TxtTheme.lighttxtTheme,
     buttonTheme: BtnTheme.lightbtnTheme(),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: AppColors.tdYellowB,
@@ -87,7 +87,7 @@ class AppTheme {
         systemNavigationBarColor: AppColors.tdBlackO,
       ),
     ),
-    textTheme: TxtTheme.darktxtTheme(),
+    textTheme: TxtTheme.darktxtTheme,
     buttonTheme: BtnTheme.darkbtnTheme(),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: AppColors.tdYellowB,

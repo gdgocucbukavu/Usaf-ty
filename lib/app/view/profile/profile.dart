@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
-  static dynamic route = '/profile';
   const ProfileScreen({super.key});
 
   @override
