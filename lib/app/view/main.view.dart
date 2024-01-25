@@ -23,6 +23,7 @@ class MainView extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               cubit.screens[cubit.i],
@@ -259,7 +260,6 @@ class OverView extends StatelessWidget {
               Container(height: 50, color: AppColors.tdGrey),
               Container(height: 50, color: AppColors.tdOrange),
               Container(height: 50, color: AppColors.tdRed),
-              Container(height: 50, color: AppColors.tdYellow),
               Container(height: 50, color: AppColors.tdYellowB),
             ],
           ),

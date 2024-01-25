@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:usaficity/app/shared/shared.dart';
+
+import 'widgets/notif_body.dart';
+import 'widgets/notif_head.dart';
 
 class NotificationScreen extends StatelessWidget {
   static const route = '/notification';
@@ -8,13 +9,19 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    dynamic size = MediaQuery.sizeOf(context);
+    dynamic theme = Theme.of(context);
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        height: MediaQuery.sizeOf(context).height,
-        width: MediaQuery.sizeOf(context).width,
-        child: GestureDetector(
-            onTap: () => context.pop(), child: Icon(AppIcons.closeX)),
+      body: SizedBox(
+        width: size.width,
+        height: size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            notifHead(size, context, theme),
+            Expanded(child: notifBody(theme, size)),
+          ],
+        ),
       ),
     );
   }

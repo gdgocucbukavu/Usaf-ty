@@ -27,4 +27,10 @@ class AppIcons {
   static dynamic retour = CupertinoIcons.chevron_back;
 
   static dynamic car = Clarity.car_line;
+
+  static dynamic scope = CupertinoIcons.scope;
+
+  static dynamic search = CupertinoIcons.search;
+
+  static dynamic mapPin = CupertinoIcons.map_pin_ellipse;
 }
