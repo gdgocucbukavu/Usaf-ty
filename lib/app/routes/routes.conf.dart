@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:usaficity/app/view/main.view.dart';
 
 import '../view/view.dart';
-import 'routes.const.dart';
+import 'routes.path.dart';
 import 'routes.name.dart';
 
 returnRoute(bool isConnected) {
@@ -18,6 +18,11 @@ returnRoute(bool isConnected) {
         name: RouteName.mainView,
         path: RoutePath.mainview,
         builder: (context, state) => MainView(),
+      ),
+      GoRoute(
+        name: RouteName.notification,
+        path: RoutePath.notification,
+        builder: (context, state) => NotificationScreen(),
       ),
     ],
   );

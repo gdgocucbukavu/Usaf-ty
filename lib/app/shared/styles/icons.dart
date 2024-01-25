@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
@@ -19,4 +20,11 @@ class AppIcons {
 
   static dynamic lightMode = Icons.light_mode;
   static dynamic darkMode = Icons.dark_mode;
+
+  static dynamic notification = CupertinoIcons.bell;
+
+  static dynamic closeX = CupertinoIcons.multiply;
+  static dynamic retour = CupertinoIcons.chevron_back;
+
+  static dynamic car = Clarity.car_line;
 }

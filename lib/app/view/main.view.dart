@@ -1,7 +1,9 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:usaficity/app/routes/routes.path.dart';
 
 import '../../controller/cubit/cubit.dart';
 import '../../controller/state/state.dart';
@@ -10,8 +12,6 @@ import '../shared/shared.dart';
 class MainView extends StatelessWidget {
   static dynamic route = '/';
   const MainView({super.key});
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,6 @@ class MainView extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          
           body: Stack(
             children: [
               cubit.screens[cubit.i],
@@ -43,7 +42,7 @@ class MainView extends StatelessWidget {
                   ),
                   width: sizeWidth,
                   height: sizeHeight * 0.08,
-                  margin: EdgeInsets.only(top: sizeWidth * 0.02),
+                  margin: EdgeInsets.only(top: sizeHeight * 0.02),
                   child: Container(),
                 ),
               ),
@@ -81,12 +80,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.home,
                           color: AppColors.tdGrey,
-                          size: sizeWidth / 20,
+                          size: sizeHeight * 0.025,
                         ),
                         selectedIcon: Icon(
                           AppIcons.homeB,
                           color: theme.primaryColor,
-                          size: sizeWidth / 15,
+                          size: sizeHeight * 0.03,
                         ),
                         label: 'Accueil',
                         tooltip: '',
@@ -95,12 +94,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.calendar,
                           color: AppColors.tdGrey,
-                          size: sizeWidth / 20,
+                          size: sizeHeight * 0.025,
                         ),
                         selectedIcon: Icon(
                           AppIcons.calendarB,
                           color: theme.primaryColor,
-                          size: sizeWidth / 16,
+                          size: sizeHeight * 0.03,
                         ),
                         label: 'Horaire',
                         tooltip: '',
@@ -109,12 +108,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.maps,
                           color: AppColors.tdGrey,
-                          size: sizeWidth / 20,
+                          size: sizeHeight * 0.025,
                         ),
                         selectedIcon: Icon(
                           AppIcons.mapsB,
                           color: theme.primaryColor,
-                          size: sizeWidth / 15,
+                          size: sizeHeight * 0.03,
                         ),
                         label: 'Maps',
                         tooltip: '',
@@ -123,26 +122,26 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.account,
                           color: AppColors.tdGrey,
-                          size: sizeWidth / 20,
+                          size: sizeHeight * 0.025,
                         ),
                         selectedIcon: Icon(
                           AppIcons.accountB,
                           color: theme.primaryColor,
-                          size: sizeWidth / 15,
+                          size: sizeHeight * 0.03,
                         ),
-                        label: 'Profil',
+                        label: 'Profile',
                         tooltip: '',
                       ),
                       NavigationDestination(
                         icon: Icon(
                           AppIcons.view,
                           color: AppColors.tdGrey,
-                          size: sizeWidth / 20,
+                          size: sizeHeight * 0.025,
                         ),
                         selectedIcon: Icon(
                           AppIcons.viewB,
                           color: theme.primaryColor,
-                          size: sizeWidth / 15,
+                          size: sizeHeight * 0.03,
                         ),
                         label: 'OverView',
                         tooltip: '',
@@ -181,6 +180,40 @@ class OverView extends StatelessWidget {
                 ),
               ),
               Gap(sizeWidth * 0.05),
+              GestureDetector(
+                onTap: () => context.push(RoutePath.notification),
+                child: Container(
+                  alignment: Alignment.center,
+                  height: sizeHeight * 0.05,
+                  width: sizeHeight * 0.05,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: theme.primaryColorLight,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      Icon(
+                        AppIcons.notification,
+                        size: sizeHeight * 0.02,
+                        color: theme.primaryColorLight,
+                      ),
+                      Container(
+                        height: sizeHeight * 0.007,
+                        width: sizeHeight * 0.007,
+                        decoration: BoxDecoration(
+                          color: AppColors.tdRed,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Gap(sizeWidth * 0.05),
             ],
           ),
           body: ListView(
@@ -216,7 +249,6 @@ class OverView extends StatelessWidget {
               Image.asset('${AppImages.logo}'),
               Image.asset('${AppImages.logol}'),
               Image.asset('${AppImages.launcherIcon}'),
-              Text('${AppImages.launcherIcon}'),
               Container(height: 50, color: AppColors.tdBlack),
               Container(height: 50, color: AppColors.tdBlackO),
               Container(height: 50, color: AppColors.tdWhite),
