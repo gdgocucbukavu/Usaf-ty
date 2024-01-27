@@ -39,7 +39,7 @@ class MainView extends StatelessWidget {
                       width: 1,
                     ),
                     borderRadius: BorderRadius.circular(20),
-                    color: theme.scaffoldBackgroundColor.withOpacity(0.5),
+                    color: theme.highlightColor.withOpacity(0.9),
                   ),
                   width: sizeWidth,
                   height: sizeHeight * 0.08,
