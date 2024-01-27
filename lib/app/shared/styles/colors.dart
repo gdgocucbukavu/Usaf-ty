@@ -15,6 +15,7 @@ class AppColors {
   static dynamic tdOrange = const Color(0xFFFF6C16);
 
   static dynamic tdGrey = const Color(0xFF949B96);
+  static dynamic tdGrey2 = const Color(0xFF949B96).withOpacity(0.5);
 
   static dynamic tdYellow = const Color(0xFFF7C143);
   static dynamic tdYellowB = const Color(0xFFED9542);
