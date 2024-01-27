@@ -10,7 +10,7 @@ import '../../controller/state/state.dart';
 import '../shared/shared.dart';
 
 class MainView extends StatelessWidget {
-  static dynamic route = '/';
+  static dynamic route = '/main/:index';
   const MainView({super.key});
 
   @override
@@ -39,7 +39,7 @@ class MainView extends StatelessWidget {
                       width: 1,
                     ),
                     borderRadius: BorderRadius.circular(20),
-                    color: AppColors.tdBlack.withOpacity(0.5),
+                    color: theme.highlightColor.withOpacity(0.9),
                   ),
                   width: sizeWidth,
                   height: sizeHeight * 0.08,
@@ -80,7 +80,7 @@ class MainView extends StatelessWidget {
                       NavigationDestination(
                         icon: Icon(
                           AppIcons.home,
-                          color: AppColors.tdGrey,
+                          color: theme.primaryColorLight,
                           size: sizeHeight * 0.025,
                         ),
                         selectedIcon: Icon(
@@ -94,7 +94,7 @@ class MainView extends StatelessWidget {
                       NavigationDestination(
                         icon: Icon(
                           AppIcons.calendar,
-                          color: AppColors.tdGrey,
+                          color: theme.primaryColorLight,
                           size: sizeHeight * 0.025,
                         ),
                         selectedIcon: Icon(
@@ -108,7 +108,7 @@ class MainView extends StatelessWidget {
                       NavigationDestination(
                         icon: Icon(
                           AppIcons.maps,
-                          color: AppColors.tdGrey,
+                          color: theme.primaryColorLight,
                           size: sizeHeight * 0.025,
                         ),
                         selectedIcon: Icon(
@@ -122,7 +122,7 @@ class MainView extends StatelessWidget {
                       NavigationDestination(
                         icon: Icon(
                           AppIcons.account,
-                          color: AppColors.tdGrey,
+                          color: theme.primaryColorLight,
                           size: sizeHeight * 0.025,
                         ),
                         selectedIcon: Icon(
@@ -136,7 +136,7 @@ class MainView extends StatelessWidget {
                       NavigationDestination(
                         icon: Icon(
                           AppIcons.view,
-                          color: AppColors.tdGrey,
+                          color: theme.primaryColorLight,
                           size: sizeHeight * 0.025,
                         ),
                         selectedIcon: Icon(

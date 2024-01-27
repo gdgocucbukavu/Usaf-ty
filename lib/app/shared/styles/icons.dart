@@ -33,4 +33,17 @@ class AppIcons {
   static dynamic search = CupertinoIcons.search;
 
   static dynamic mapPin = CupertinoIcons.map_pin_ellipse;
+
+  static dynamic signal = Clarity.alert_line;
+
+  static dynamic about = CupertinoIcons.info;
+
+  static dynamic note = Clarity.note_edit_line;
+
+  static dynamic login = Clarity.login_line;
+  static dynamic logout = Clarity.logout_line;
+
+  static dynamic card = Icons.credit_card;
+
+  static dynamic privacy = Icons.privacy_tip_outlined;
 }
