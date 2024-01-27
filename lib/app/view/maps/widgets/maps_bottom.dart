@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:usaficity/app/shared/shared.dart';
 
-import 'raliment_view.dart';
+import 'station_view.dart';
 
 class BottomView extends StatelessWidget {
   const BottomView({super.key});
@@ -33,7 +33,7 @@ class BottomView extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(AppIcons.card),
+                  Icon(AppIcons.car),
                   Text('  ...  '),
                   Text(
                     '23 km ',
@@ -48,7 +48,7 @@ class BottomView extends StatelessWidget {
               Icon(AppIcons.scope),
             ],
           ),
-          ralimentView(
+          stationView(
             sizeHeight,
             sizeWidth,
             theme,
@@ -56,7 +56,7 @@ class BottomView extends StatelessWidget {
             '1ère Station',
             'Av. Fizi/Q. Ndendere/C. Ibanda',
           ),
-          ralimentView(
+          stationView(
             sizeHeight,
             sizeWidth,
             theme,
@@ -64,7 +64,7 @@ class BottomView extends StatelessWidget {
             '2ème Station',
             'Parking du Gouverneur',
           ),
-          ralimentView(
+          stationView(
             sizeHeight,
             sizeWidth,
             theme,

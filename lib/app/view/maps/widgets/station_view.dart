@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-Container ralimentView(sizeHeight, sizeWidth, theme, color, title, adress) {
+Container stationView(sizeHeight, sizeWidth, theme, color, title, adress) {
   return Container(
     margin: EdgeInsets.only(top: sizeHeight * 0.025),
     height: sizeHeight * 0.05,
@@ -9,7 +9,7 @@ Container ralimentView(sizeHeight, sizeWidth, theme, color, title, adress) {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ralimentIcon(sizeHeight, color),
+        stationIcon(sizeHeight, color),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +29,7 @@ Container ralimentView(sizeHeight, sizeWidth, theme, color, title, adress) {
   );
 }
 
-Container ralimentIcon(sizeHeight, color) {
+Container stationIcon(sizeHeight, color) {
   return Container(
     alignment: Alignment.center,
     height: sizeHeight * 0.05,
