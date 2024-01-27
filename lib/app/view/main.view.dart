@@ -10,7 +10,7 @@ import '../../controller/state/state.dart';
 import '../shared/shared.dart';
 
 class MainView extends StatelessWidget {
-  static dynamic route = '/';
+  static dynamic route = '/main/:index';
   const MainView({super.key});
 
   @override

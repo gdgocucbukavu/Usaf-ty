@@ -12,4 +12,7 @@ class AppImages {
   static dynamic logo = 'assets/images/logo.png';
   static dynamic logol = 'assets/images/logol.png';
   static dynamic launcherIcon = 'assets/images/launcher_icon.png';
+  static dynamic ia1 = 'assets/images/ia1.png';
+  static dynamic ia2 = 'assets/images/ia2.png';
+  static dynamic gaspillage = 'assets/images/gaspillage.png';
 }

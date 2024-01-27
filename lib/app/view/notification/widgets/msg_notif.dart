@@ -1,6 +1,6 @@
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../data/models/msg.dart';
 import '../../../shared/shared.dart';
@@ -30,47 +30,47 @@ Container msgNotif(theme, size) {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                (msgs[i].isGroup)
+                (msgs[i].isString)
                     ? Container(
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: theme.primaryColorLight,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
                         height: size.width * 0.1,
                         width: size.width * 0.1,
-                        margin: EdgeInsets.only(right: size.width * 0.03),
-                        child: Icon(
-                          CupertinoIcons.person_2,
-                          color: AppColors.tdGreenO,
+                        decoration: BoxDecoration(
+                          color: AppColors.tdGrey,
+                          borderRadius: BorderRadius.circular(100),
+                          image: DecorationImage(
+                            image: NetworkImage(msgs[i].image),
+                            fit: BoxFit.cover,
+                          ),
                         ),
+                        margin: EdgeInsets.only(right: size.width * 0.03),
                       )
-                    : (msgs[i].image == null)
+                    : (msgs[i].haveIcon)
                         ? Container(
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: theme.primaryColorLight,
-                              borderRadius: BorderRadius.circular(100),
-                            ),
                             height: size.width * 0.1,
                             width: size.width * 0.1,
+                            decoration: BoxDecoration(
+                              color: msgs[i].color.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(100),
+                            ),
                             margin: EdgeInsets.only(right: size.width * 0.03),
                             child: Icon(
-                              CupertinoIcons.person,
-                              color: AppColors.tdBlue,
+                              msgs[i].icon,
+                              color: msgs[i].color,
                             ),
                           )
                         : Container(
-                            height: size.width * 0.1,
-                            width: size.width * 0.1,
+                            alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: AppColors.tdGrey,
-                              borderRadius: BorderRadius.circular(100),
+                              color: Colors.transparent,
                               image: DecorationImage(
-                                image: NetworkImage(msgs[i].image),
+                                image: AssetImage(msgs[i].icon),
                                 fit: BoxFit.cover,
                               ),
                             ),
+                            height: size.width * 0.1,
+                            width: size.width * 0.1,
                             margin: EdgeInsets.only(right: size.width * 0.03),
                           ),
                 Expanded(
@@ -86,8 +86,9 @@ Container msgNotif(theme, size) {
                             style: theme.textTheme.bodyMedium,
                           ),
                           Text(
-                            DateFormat('MMM dd à HH:mm a').format(msgs[i].date),
-                            style: theme.textTheme.labelMedium,
+                            DateFormat('HH:mm a').format(msgs[i].date),
+                            style: theme.textTheme.labelMedium
+                                .copyWith(fontSize: size.width * 0.02),
                           ),
                         ],
                       ),

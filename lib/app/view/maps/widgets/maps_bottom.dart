@@ -33,7 +33,7 @@ class BottomView extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(AppIcons.car),
+                  Icon(AppIcons.card),
                   Text('  ...  '),
                   Text(
                     '23 km ',

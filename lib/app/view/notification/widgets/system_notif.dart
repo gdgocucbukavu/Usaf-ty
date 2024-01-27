@@ -37,10 +37,16 @@ Container systemNotif(theme, size) {
                   height: size.width * 0.1,
                   width: size.width * 0.1,
                   margin: EdgeInsets.only(right: size.width * 0.03),
-                  child: Icon(
-                    sytemMessages[i].icon,
-                    color: sytemMessages[i].color,
-                  ),
+                  child: (sytemMessages[i].icon != null)
+                      ? Icon(
+                          sytemMessages[i].icon,
+                          color: sytemMessages[i].color,
+                        )
+                      : SizedBox(
+                          width: size.width * 0.06,
+                          height: size.width * 0.06,
+                          child: Image.asset(sytemMessages[i].image),
+                        ),
                 ),
                 Expanded(
                   child: Column(
@@ -56,7 +62,8 @@ Container systemNotif(theme, size) {
                           ),
                           Text(
                             sytemMessages[i].time,
-                            style: theme.textTheme.labelMedium,
+                            style: theme.textTheme.labelMedium
+                                .copyWith(fontSize: size.width * 0.02),
                           ),
                         ],
                       ),
