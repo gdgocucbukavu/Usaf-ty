@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:usaficity/app/shared/shared.dart';
 import 'package:usaficity/app/view/schedule/widgets/table_calendar.dart';
 import 'package:usaficity/app/view/schedule/widgets/bottom_schedule.dart';
 
@@ -24,7 +23,7 @@ import 'package:usaficity/app/view/schedule/widgets/bottom_schedule.dart';
 //   }
 // }
 class ScheduleScreen extends StatefulWidget {
-  static const route = '/home';
+  static const route = '/schedule';
 
   const ScheduleScreen({super.key});
 
@@ -36,13 +35,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.tdGrey2,
-        body: Stack(
-          children: [
-            TableCalendarr(),
-            BottomSchedule(),
-          ],
-        ));
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Theme.of(context).primaryColorLight.withOpacity(0.9),
+      body: Stack(
+        children: [
+          TableCalendarr(),
+          BottomSchedule(),
+        ],
+      ),
+    );
   }
 }

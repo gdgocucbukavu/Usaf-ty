@@ -58,7 +58,10 @@ Container systemNotif(theme, size) {
                         children: [
                           Text(
                             sytemMessages[i].title,
-                            style: theme.textTheme.bodyMedium,
+                            style: theme.textTheme.bodyMedium
+                                .copyWith(fontSize: size.width * 0.03),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
                           Text(
                             sytemMessages[i].time,
@@ -69,7 +72,8 @@ Container systemNotif(theme, size) {
                       ),
                       Text(
                         sytemMessages[i].msg,
-                        style: theme.textTheme.bodySmall,
+                        style: theme.textTheme.bodySmall
+                            .copyWith(fontSize: size.width * 0.025),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),

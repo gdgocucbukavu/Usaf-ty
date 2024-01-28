@@ -48,10 +48,9 @@ class MainView extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: sizeHeight * 0.88,
                 left: sizeWidth * 0.05,
                 right: sizeWidth * 0.05,
-                bottom: sizeHeight * 0.02,
+                bottom: sizeHeight * 0,
                 child: NavigationBarTheme(
                   data: NavigationBarThemeData(
                     elevation: 0,

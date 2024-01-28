@@ -83,7 +83,10 @@ Container msgNotif(theme, size) {
                         children: [
                           Text(
                             msgs[i].name,
-                            style: theme.textTheme.bodyMedium,
+                            style: theme.textTheme.bodyMedium
+                                .copyWith(fontSize: size.width * 0.03),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
                           Text(
                             DateFormat('HH:mm a').format(msgs[i].date),
@@ -94,7 +97,8 @@ Container msgNotif(theme, size) {
                       ),
                       Text(
                         msgs[i].msg,
-                        style: theme.textTheme.bodySmall,
+                        style: theme.textTheme.bodySmall
+                            .copyWith(fontSize: size.width * 0.025),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),

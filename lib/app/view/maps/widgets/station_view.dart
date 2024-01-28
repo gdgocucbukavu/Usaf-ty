@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 Container stationView(sizeHeight, sizeWidth, theme, color, title, adress) {
   return Container(
-    margin: EdgeInsets.only(top: sizeHeight * 0.025),
-    height: sizeHeight * 0.05,
+    margin: EdgeInsets.only(top: sizeHeight * 0.02),
     width: sizeWidth,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -16,11 +15,13 @@ Container stationView(sizeHeight, sizeWidth, theme, color, title, adress) {
           children: [
             Text(
               title,
-              style: theme.textTheme.titleMedium,
+              style: theme.textTheme.titleMedium
+                  .copyWith(fontSize: sizeHeight * 0.015),
             ),
             Text(
               adress,
-              style: theme.textTheme.bodySmall,
+              style: theme.textTheme.bodySmall
+                  .copyWith(fontSize: sizeHeight * 0.012),
             ),
           ],
         ),

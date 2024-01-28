@@ -24,7 +24,7 @@ class _TableCalendarrState extends State<TableCalendarr> {
 
     return Padding(
       padding: EdgeInsets.only(
-        top: sizeWidth * 0.12,
+        top: sizeWidth * 0.15,
         left: sizeWidth * 0.05,
         right: sizeWidth * 0.05,
       ),
@@ -32,40 +32,51 @@ class _TableCalendarrState extends State<TableCalendarr> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              notifIcon(
+                sizeHeight,
+                theme,
+                theme.scaffoldBackgroundColor.withOpacity(0.5),
+              )
+            ],
+          ),
           Text(
-            'Today: ' + today.toString().split(" ")[0],
-            style: Theme.of(context).textTheme.titleLarge,
+            'Today : ' + today.toString().split(" ")[0],
+            style: theme.textTheme.displaySmall,
           ),
           Container(
             child: TableCalendar(
-                onDaySelected: selectedDay,
-                selectedDayPredicate: (day) => isSameDay(day, today),
-                startingDayOfWeek: StartingDayOfWeek.monday,
-                pageAnimationEnabled: true,
-                pageAnimationDuration: Duration(milliseconds: 500),
-                rowHeight: sizeHeight * 0.06,
-                daysOfWeekHeight: 30,
-                daysOfWeekStyle: DaysOfWeekStyle(
-                  weekdayStyle: theme.textTheme.titleMedium,
-                  weekendStyle: TextStyle(
-                    color: AppColors.tdYellowB,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.tdGrey2,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    ),
+              onDaySelected: selectedDay,
+              selectedDayPredicate: (day) => isSameDay(day, today),
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              pageAnimationEnabled: true,
+              pageAnimationDuration: Duration(milliseconds: 500),
+              rowHeight: sizeHeight * 0.06,
+              daysOfWeekHeight: 30,
+              daysOfWeekStyle: DaysOfWeekStyle(
+                weekdayStyle: theme.textTheme.titleMedium,
+                weekendStyle: TextStyle(
+                  color: AppColors.tdYellowB,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.tdGrey2,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
                   ),
                 ),
-                headerStyle: HeaderStyle(
-                    formatButtonVisible: false,
-                    titleCentered: false,
-                    leftChevronMargin: EdgeInsets.all(0),
-                    rightChevronMargin: EdgeInsets.all(0)),
-                focusedDay: today,
-                firstDay: DateTime.utc(2010, 10, 16),
-                lastDay: DateTime.utc(2030, 10, 16)),
-          )
+              ),
+              headerStyle: HeaderStyle(
+                  formatButtonVisible: false,
+                  titleCentered: false,
+                  leftChevronMargin: EdgeInsets.all(0),
+                  rightChevronMargin: EdgeInsets.all(0)),
+              focusedDay: today,
+              firstDay: DateTime.utc(2010, 10, 16),
+              lastDay: DateTime.utc(2030, 10, 16),
+            ),
+          ),
         ],
       ),
     );

@@ -8,6 +8,7 @@ import 'package:usaficity/controller/cubit/homecubit.dart';
 
 import 'app/shared/shared.dart';
 import 'controller/cubit/cubit.dart';
+import 'controller/cubit/mapcubit.dart';
 import 'controller/state/state.dart';
 
 void main() async {
@@ -31,6 +32,11 @@ class Usafty extends StatelessWidget {
           create: (context) => MainCubit()..changeThemeMode(darkMode: isDark),
         ),
         BlocProvider(create: (context) => HomeCubit()),
+        BlocProvider(
+          create: (context) => MapCubit()
+            ..getCurrentLocation()
+            // ..getPolyPoints(),
+        ),
       ],
       child: BlocConsumer<MainCubit, MainState>(
         listener: (context, state) {},
