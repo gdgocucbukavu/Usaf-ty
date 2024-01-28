@@ -21,4 +21,11 @@ class AppColors {
   static dynamic tdYellowB = const Color(0xFFED9542);
 
   static dynamic tdGreenO = const Color(0xFF26780C);
+
+  //Benedict  Contents added
+
+  static dynamic tdBlueC = const Color(0xFF4059C1);
+  static dynamic tGreenC = const Color(0xFF48B97E);
+  static dynamic tdRedC = const Color(0xFFCF3555);
+  static dynamic tGYellowC = const Color(0xFFDEC72E);
 }
