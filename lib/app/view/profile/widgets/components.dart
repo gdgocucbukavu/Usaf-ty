@@ -45,7 +45,7 @@ Widget listPuller(
 //Adresse de localisation
 Widget adresseLocal(context, double sizeHe, List<String> adresse, dynamic th) {
   return Container(
-    margin: EdgeInsets.only(bottom: sizeHe * 0.011),
+    margin: EdgeInsets.only(bottom: sizeHe * 0.04),
     width: sizeHe * 0.87,
     child: Row(
       children: [
@@ -66,7 +66,7 @@ Widget adresseLocal(context, double sizeHe, List<String> adresse, dynamic th) {
 //Numéro de téléphone
 Widget numberCountry(context, double sizeHe, String tel, dynamic th) {
   return Container(
-    margin: EdgeInsets.only(bottom: sizeHe * 0.04),
+    margin: EdgeInsets.only(bottom: sizeHe * 0.011),
     width: sizeHe * 0.87,
     child: Row(
       children: [
@@ -95,6 +95,7 @@ Widget numberCountry(context, double sizeHe, String tel, dynamic th) {
 //Abonnement Information
 Widget abonnementStruct(
     context, double sizew, String logoImg, String agenceName, String fret) {
+  dynamic theme = Theme.of(context);
   return Container(
     margin: EdgeInsets.only(bottom: sizew * 0.04),
     width: sizew * 0.87,
@@ -118,7 +119,9 @@ Widget abonnementStruct(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('$agenceName', style: Theme.of(context).textTheme.bodyMedium),
+            Text('$agenceName',
+                style: theme.textTheme.bodyMedium
+                    .copyWith(color: AppColors.tdYellowB)),
             Container(
               margin: EdgeInsets.only(
                 bottom: sizew * 0.005,

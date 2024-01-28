@@ -111,19 +111,19 @@ class ProfileScreen extends StatelessWidget {
                             child: ProfilCubic.get(context).isConnect
                                 ? Column(
                                     children: [
-                                      adresseLocal(
-                                          context,
-                                          sizeWidth,
-                                          ProfilCubic.get(context)
-                                              .personnage
-                                              .location,
-                                          theme),
                                       numberCountry(
                                           context,
                                           sizeWidth,
                                           ProfilCubic.get(context)
                                               .personnage
                                               .numero,
+                                          theme),
+                                      adresseLocal(
+                                          context,
+                                          sizeWidth,
+                                          ProfilCubic.get(context)
+                                              .personnage
+                                              .location,
                                           theme),
                                       abonnementStruct(
                                           context,
@@ -186,7 +186,7 @@ class ProfileScreen extends StatelessWidget {
                                           color: Colors.black,
                                           shape: BoxShape.circle),
                                       child: Center(
-                                          child: !MainCubit.get(context).isDark
+                                          child: MainCubit.get(context).isDark
                                               ? Icon(
                                                   AppIcons.darkMode,
                                                   color: Colors.white,
@@ -201,14 +201,22 @@ class ProfileScreen extends StatelessWidget {
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Text("Mode sombre",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium),
+                                    Padding(
+                                      padding: const EdgeInsets.all(0),
+                                      child: MainCubit.get(context).isDark
+                                          ? Text("Mode sombre",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium)
+                                          : Text("Mode lumineux",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium),
+                                    ),
                                   ],
                                 ),
                                 Switch(
-                                    inactiveTrackColor: Color(0xff3f3f3f),
+                                    inactiveTrackColor: AppColors.tdWhite,
                                     activeTrackColor: Color(0xff3f3f3f),
                                     activeColor: Colors.white,
                                     hoverColor: Colors.white10,
@@ -223,7 +231,7 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(height: sizeWidth * 0.02),
                           GestureDetector(
                             child: listPuller(context, sizeWidth,
-                                AppIcons.langue, "Langue", AppColors.tGreenC),
+                                AppIcons.langue, "Langue", AppColors.tdBlueC),
                             onTap: () => bottomSheetLangage(
                                 context, sizeHeight, sizeWidth, theme),
                           ),
@@ -241,7 +249,7 @@ class ProfileScreen extends StatelessWidget {
                                     "Se déconnecter",
                                     AppColors.tdRedC)
                                 : listPuller(context, sizeWidth, AppIcons.login,
-                                    "Se Connecter", AppColors.tdBlueC),
+                                    "Se Connecter", AppColors.tGreenC),
                             onTap: () => ProfilCubic.get(context).seConnecter(),
                           ),
                         ],
