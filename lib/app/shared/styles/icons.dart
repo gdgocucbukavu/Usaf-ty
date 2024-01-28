@@ -46,4 +46,18 @@ class AppIcons {
   static dynamic card = Icons.credit_card;
 
   static dynamic privacy = Icons.privacy_tip_outlined;
+  // Benedict add icones
+  static dynamic rdcFlag = Flags.democratic_republic_of_congo;
+
+  static dynamic arrowDown = Icons.keyboard_arrow_down;
+
+  static dynamic langue = Icons.language;
+
+  static dynamic english = Flags.united_states_of_america;
+
+  static dynamic franais = Flags.france;
+
+  static dynamic swahili = Flags.tanzania;
+
+  static dynamic validate = Icons.check;
 }
