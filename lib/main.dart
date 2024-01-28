@@ -33,15 +33,10 @@ class Usafty extends StatelessWidget {
           create: (context) => MainCubit()..changeThemeMode(darkMode: isDark),
         ),
         BlocProvider(create: (context) => HomeCubit()),
-<<<<<<< HEAD
-        BlocProvider(
-          create: (context) => MapCubit()
-            ..getCurrentLocation()
+        BlocProvider(create: (context) => MapCubit()..getCurrentLocation()
             // ..getPolyPoints(),
-        ),
-=======
+            ),
         BlocProvider(create: (context) => ProfilCubic()),
->>>>>>> 670fbcfb40e64e466ea805767fdb2823e7ea4f4f
       ],
       child: BlocConsumer<MainCubit, MainState>(
         listener: (context, state) {},
