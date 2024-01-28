@@ -48,6 +48,7 @@ Widget adresseLocal(context, double sizeHe, List<String> adresse, dynamic th) {
     margin: EdgeInsets.only(bottom: sizeHe * 0.04),
     width: sizeHe * 0.87,
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
           AppIcons.mapPin,
@@ -66,9 +67,11 @@ Widget adresseLocal(context, double sizeHe, List<String> adresse, dynamic th) {
 //Numéro de téléphone
 Widget numberCountry(context, double sizeHe, String tel, dynamic th) {
   return Container(
+    alignment: Alignment.center,
     margin: EdgeInsets.only(bottom: sizeHe * 0.011),
     width: sizeHe * 0.87,
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Flag(
           AppIcons.rdcFlag,
