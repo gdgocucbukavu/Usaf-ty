@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:usaficity/app/routes/routes.conf.dart';
-import 'package:usaficity/controller/cubit/homecubit.dart';
-import 'package:usaficity/controller/cubit/profilcubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app/routes/routes.dart';
 import 'app/shared/shared.dart';
 import 'controller/cubit/cubit.dart';
-import 'controller/cubit/mapcubit.dart';
 import 'controller/state/state.dart';
+import 'controller/cubit/homecubit.dart';
+import 'controller/cubit/mapcubit.dart';
+import 'controller/cubit/profilcubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
