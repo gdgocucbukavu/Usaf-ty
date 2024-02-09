@@ -14,4 +14,5 @@ class RoutePath {
   static dynamic conseil = Conseil.route;
   static dynamic privacy = Privacy.route;
   static dynamic signaler = SignalPage.route;
+  static dynamic schedule = ScheduleScreen.route;
 }

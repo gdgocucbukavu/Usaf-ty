@@ -48,6 +48,11 @@ returnRoute(bool isConnected) {
         path: RoutePath.signaler,
         builder: (context, state) => SignalPage(),
       ),
+      GoRoute(
+        name: RouteName.schedule,
+        path: RoutePath.schedule,
+        builder: (context, state) => ScheduleScreen(),
+      ),
     ],
   );
   return route;

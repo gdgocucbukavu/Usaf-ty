@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:usaficity/app/routes/routes.path.dart';
 import 'package:usaficity/app/shared/shared.dart';
 import 'package:usaficity/app/view/schedule/widgets/tools.dart';
 
@@ -24,7 +26,7 @@ class _TableCalendarrState extends State<TableCalendarr> {
 
     return Padding(
       padding: EdgeInsets.only(
-        top: sizeWidth * 0.15,
+        top: sizeWidth * 0.12,
         left: sizeWidth * 0.05,
         right: sizeWidth * 0.05,
       ),
@@ -35,15 +37,18 @@ class _TableCalendarrState extends State<TableCalendarr> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              notifIcon(
-                sizeHeight,
-                theme,
-                theme.scaffoldBackgroundColor.withOpacity(0.5),
+              GestureDetector(
+                onTap: () => context.push(RoutePath.notification),
+                child: notifIcon(
+                  sizeHeight,
+                  theme,
+                  theme.scaffoldBackgroundColor.withOpacity(0.5),
+                ),
               )
             ],
           ),
           Text(
-            'Today : ' + today.toString().split(" ")[0],
+            'Today : ' + DateTime.now().toString().split(" ")[0],
             style: theme.textTheme.displaySmall,
           ),
           Container(
