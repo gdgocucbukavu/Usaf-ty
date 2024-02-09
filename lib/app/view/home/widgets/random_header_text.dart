@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:usaficity/app/shared/styles/colors.dart';
 
+// ignore: must_be_immutable
 class HeaderTextPage extends StatelessWidget {
   HeaderTextPage({super.key});
   Random random = Random();

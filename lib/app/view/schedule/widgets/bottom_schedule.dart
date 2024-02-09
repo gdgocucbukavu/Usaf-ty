@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:usaficity/app/shared/shared.dart';
-import 'package:usaficity/app/view/schedule/widgets/table_calendar.dart';
 import 'package:usaficity/app/view/schedule/widgets/tools.dart';
 
 class BottomSchedule extends StatefulWidget {
