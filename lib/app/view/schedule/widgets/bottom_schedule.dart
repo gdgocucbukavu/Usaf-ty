@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:usaficity/app/shared/shared.dart';
 import 'package:usaficity/app/view/schedule/widgets/tools.dart';
 
@@ -31,11 +32,12 @@ class _BottomScheduleState extends State<BottomSchedule> {
         height: sizeHeight * 0.4,
         width: sizeWidth,
         decoration: BoxDecoration(
-            color: theme.scaffoldBackgroundColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25),
-              topRight: Radius.circular(25),
-            )),
+          color: theme.scaffoldBackgroundColor,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
+          ),
+        ),
         child: Stack(
           children: [
             ListView.builder(
@@ -55,9 +57,7 @@ class _BottomScheduleState extends State<BottomSchedule> {
                         width: sizeWidth * 0.01,
                         color: AppColors.tdBlue,
                       ),
-                      SizedBox(
-                        width: sizeWidth * 0.03,
-                      ),
+                      Gap(sizeWidth * 0.03),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,18 +67,14 @@ class _BottomScheduleState extends State<BottomSchedule> {
                               today.toString().split(" ")[0],
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
-                            SizedBox(
-                              height: sizeHeight * 0.02,
-                            ),
+                            Gap(sizeHeight * 0.02),
                             Text("Pas d'evénement aujourd'hui"),
                           ],
                         ),
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: sizeHeight * 0.02,
-                  ),
+                  Gap(sizeHeight * 0.02),
                 ],
               ),
               itemCount: 100,

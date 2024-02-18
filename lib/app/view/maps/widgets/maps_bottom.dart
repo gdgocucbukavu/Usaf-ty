@@ -34,6 +34,7 @@ class _BottomViewState extends State<BottomView> {
 
     dynamic disFormat = cubit.distanceRestant / 1000;
     String distance = disFormat.toStringAsFixed(1);
+
     return BlocConsumer<MapCubit, MapState>(
       listener: (context, state) {},
       builder: (context, state) {

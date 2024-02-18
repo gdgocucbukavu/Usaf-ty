@@ -39,7 +39,7 @@ class _TableCalendarrState extends State<TableCalendarr> {
                 sizeHeight,
                 theme,
                 theme.scaffoldBackgroundColor.withOpacity(0.5),
-              )
+              ),
             ],
           ),
           Text(
@@ -57,21 +57,18 @@ class _TableCalendarrState extends State<TableCalendarr> {
               daysOfWeekHeight: 30,
               daysOfWeekStyle: DaysOfWeekStyle(
                 weekdayStyle: theme.textTheme.titleMedium,
-                weekendStyle: TextStyle(
-                  color: AppColors.tdYellowB,
-                ),
+                weekendStyle: TextStyle(color: AppColors.tdYellowB),
                 decoration: BoxDecoration(
                   color: AppColors.tdGrey2,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
               ),
               headerStyle: HeaderStyle(
-                  formatButtonVisible: false,
-                  titleCentered: false,
-                  leftChevronMargin: EdgeInsets.all(0),
-                  rightChevronMargin: EdgeInsets.all(0)),
+                formatButtonVisible: false,
+                titleCentered: false,
+                leftChevronMargin: EdgeInsets.all(0),
+                rightChevronMargin: EdgeInsets.all(0),
+              ),
               focusedDay: today,
               firstDay: DateTime.utc(2010, 10, 16),
               lastDay: DateTime.utc(2030, 10, 16),
