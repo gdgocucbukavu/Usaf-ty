@@ -36,7 +36,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Theme.of(context).primaryColorLight.withOpacity(0.9),
+      backgroundColor: Theme.of(context).highlightColor.withOpacity(0.9),
       body: Stack(
         children: [
           TableCalendarr(),

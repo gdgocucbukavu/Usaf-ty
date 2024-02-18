@@ -8,4 +8,5 @@ class RouteName {
   static dynamic conseil = 'conseil';
   static dynamic privacy = 'privacy';
   static dynamic signaler = 'signaler';
+  static dynamic schedule = 'schedule';
 }
