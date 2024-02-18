@@ -22,7 +22,11 @@ class ProfileScreen extends StatelessWidget {
           child: Scaffold(
             body: Stack(
               children: [
-                NotificationBottom(),
+                Positioned(
+                  top: sizeHeight * 0.01,
+                  right: sizeWidth * 0.05,
+                  child: NotificationBottom(),
+                ),
                 Positioned(
                     top: sizeHeight * 0.05,
                     child: Container(
