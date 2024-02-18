@@ -60,4 +60,10 @@ class AppIcons {
   static dynamic swahili = Flags.tanzania;
 
   static dynamic validate = Icons.check;
+
+  static dynamic actualiser = Icons.refresh;
+
+  static dynamic send = Icons.near_me_outlined;
+
+  static dynamic photoCapture = Icons.camera_alt_outlined;
 }
