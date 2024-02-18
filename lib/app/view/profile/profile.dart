@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:usaficity/app/shared/shared.dart';
 import 'package:usaficity/controller/cubit/profilcubit.dart';
 import 'package:usaficity/controller/state/profilstate.dart';
@@ -12,19 +13,18 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
+    dynamic sizeHeight = MediaQuery.sizeOf(context).width;
+
     return BlocConsumer<ProfilCubic, ProfilState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return SafeArea(
-            child: Scaffold(
-                body: Stack(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return SafeArea(
+          child: Scaffold(
+            body: Stack(
               children: [
+                NotificationBottom(),
                 Positioned(
-                    top: sizeWidth * 0,
-                    right: sizeWidth * 0.05,
-                    child: NotificationBottom()),
-                Positioned(
-                    top: sizeWidth * 0.05,
+                    top: sizeHeight * 0.05,
                     child: Container(
                       width: sizeWidth,
                       child: Column(
@@ -39,16 +39,16 @@ class ProfileScreen extends StatelessWidget {
                             indent: sizeWidth * 0.1,
                             endIndent: sizeWidth * 0.1,
                           ),
-                          SizedBox(
-                            height: 18,
-                          ),
+                          Gap(sizeHeight * 0.03),
                           IconButtonFleche(),
                         ],
                       ),
-                    ))
+                    )),
               ],
-            )),
-          );
-        });
+            ),
+          ),
+        );
+      },
+    );
   }
 }
