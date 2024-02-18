@@ -1,7 +1,12 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
+<<<<<<< HEAD
 export "FLUTTER_ROOT=C:\src\flutter"
 export "FLUTTER_APPLICATION_PATH=D:\SolChal\Usaf-ty"
+=======
+export "FLUTTER_ROOT=C:\src\flutter\flutter"
+export "FLUTTER_APPLICATION_PATH=D:\USAF'TY Projet\Usaf-ty"
+>>>>>>> f18227c11dcbfa98c07aa6622c138559682e4e89
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"
