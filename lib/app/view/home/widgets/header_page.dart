@@ -24,37 +24,8 @@ class _HeaderPageState extends State<HeaderPage> {
           ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment. center,
         children: [
-          // Container(
-          //   alignment: Alignment.center,
-          //   height: sizeHeight * 0.05,
-          //   width: sizeHeight * 0.05,
-          //   decoration: BoxDecoration(
-          //     image: DecorationImage(
-          //       image:
-          //           AssetImage("${ProfilCubic.get(context).personnage.photoP}"),
-          //     ),
-          //     color: theme.scaffoldBackgroundColor.withOpacity(0.5),
-          //     border: Border.all(
-          //       color: theme.primaryColorLight,
-          //       width: 1,
-          //     ),
-          //     borderRadius: BorderRadius.circular(100),
-          //   ),
-          // // ),
-          // Expanded(
-          //   child: Padding(
-          //     padding: EdgeInsets.only(left: sizeWidth * 0.02),
-          //     child: Text(
-          //       "Bénédict LUBEMBELA",
-          //       style: TextStyle(
-          //           color: Theme.of(context).primaryColorDark,
-          //           fontSize: 12,
-          //           fontWeight: FontWeight.bold),
-          //     ),
-          //   ),
-          // ),
           Text.rich(TextSpan(
               text: "USAF",
               style: theme.textTheme.displayMedium.copyWith(fontSize: 40.0),

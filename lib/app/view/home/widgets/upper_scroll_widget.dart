@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:usaficity/app/shared/shared.dart';
 import 'package:usaficity/app/view/home/widgets/tools.dart';
@@ -14,20 +15,28 @@ late PageController pageController;
 class _UpperScrollwidgetState extends State<UpperScrollwidget> {
   void initState() {
     super.initState();
-    pageController = PageController(viewportFraction: 0.8);
+    pageController = PageController(
+      viewportFraction: 0.8,
+      initialPage: 2,
+    );
   }
 
+  bool smallPageSize = false;
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     dynamic sizeHeight = MediaQuery.sizeOf(context).height;
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     return SizedBox(
-      height: sizeHeight * 0.2,
+      height: sizeWidth * 0.52 ,
       width: sizeWidth * 0.9,
       child: PageView.builder(
+      
         controller: pageController,
         itemCount: imageslist.length,
         reverse: false,
+        pageSnapping: true,
+        physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) => AnimatedBuilder(
             animation: pageController,
             builder: (context, child) {
@@ -55,7 +64,7 @@ class _UpperScrollwidgetState extends State<UpperScrollwidget> {
                       image: DecorationImage(
                           image: AssetImage("${imageslist[index]}"),
                           alignment: Alignment(-pageOffset.abs(), 0),
-                          fit: BoxFit. contain),
+                          fit: BoxFit.contain),
                     ),
                   ),
                 ),

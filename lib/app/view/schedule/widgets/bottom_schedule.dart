@@ -20,7 +20,6 @@ class _BottomScheduleState extends State<BottomSchedule> {
       minChildSize: 0.35,
       maxChildSize: 0.95,
       snap: true,
-      // snapAnimationDuration: Duration(milliseconds: 100),
       builder: (BuildContext context, ScrollController scrollController) =>
           Container(
         padding: EdgeInsets.only(
@@ -41,6 +40,7 @@ class _BottomScheduleState extends State<BottomSchedule> {
             Padding(
               padding: EdgeInsets.only(top: sizeHeight * 0.025),
               child: ListView.builder(
+                physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 controller: scrollController,
