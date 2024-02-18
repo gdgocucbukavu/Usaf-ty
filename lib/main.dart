@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,9 +12,11 @@ import 'controller/state/state.dart';
 import 'controller/cubit/homecubit.dart';
 import 'controller/cubit/mapcubit.dart';
 import 'controller/cubit/profilcubit.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   bool isDark = sharedPreferences.getBool('isDark') ?? false;
   initializeDateFormatting('en_US', null);

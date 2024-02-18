@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "474478825939",
+    "project_id": "usaf-ty",
+    "storage_bucket": "usaf-ty.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474478825939:android:2a6989dde1cc8b09ac9f26",
+        "android_client_info": {
+          "package_name": "com.example.usaficity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp_AdGk4ZDEfzdWcMzZ0LytF1lREJilqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

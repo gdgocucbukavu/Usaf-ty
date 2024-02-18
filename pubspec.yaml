@@ -47,6 +47,7 @@ dependencies:
   flutter_polyline_points: ^2.0.0
   location: ^5.0.3
   geocoding: ^2.1.1
+  firebase_core: ^2.24.2
 
 dev_dependencies:
   flutter_test:
