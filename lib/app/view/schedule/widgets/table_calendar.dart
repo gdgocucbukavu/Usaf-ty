@@ -24,7 +24,7 @@ class _TableCalendarrState extends State<TableCalendarr> {
 
     return Padding(
       padding: EdgeInsets.only(
-        top: sizeWidth * 0.15,
+        top: sizeWidth * 0.12,
         left: sizeWidth * 0.05,
         right: sizeWidth * 0.05,
       ),
@@ -43,7 +43,7 @@ class _TableCalendarrState extends State<TableCalendarr> {
             ],
           ),
           Text(
-            'Today : ' + today.toString().split(" ")[0],
+            'Today : ' + DateTime.now().toString().split(" ")[0],
             style: theme.textTheme.displaySmall,
           ),
           Container(

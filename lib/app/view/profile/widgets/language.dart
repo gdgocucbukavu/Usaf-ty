@@ -20,7 +20,7 @@ void bottomSheetLangage(
             listener: (context, state) {},
             builder: (context, state) {
               return Container(
-                height: sizeHeight * 0.8,
+                height: sizeHeight * 0.4,
                 width: sizeWidth,
                 decoration: BoxDecoration(
                   color: theme.scaffoldBackgroundColor,
@@ -39,7 +39,7 @@ void bottomSheetLangage(
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                     SizedBox(
-                      height: sizeHeight * 0.15,
+                      height: sizeHeight * 0.05,
                     ),
                     GestureDetector(
                       child: ProfilCubic.get(context).c1
