@@ -17,7 +17,6 @@ class MainView extends StatelessWidget {
   Widget build(BuildContext context) {
     dynamic theme = Theme.of(context);
     dynamic cubit = MainCubit.get(context);
-    dynamic sizeHeight = MediaQuery.sizeOf(context).height;
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     return BlocConsumer<MainCubit, MainState>(
       listener: (context, state) {},
@@ -42,15 +41,15 @@ class MainView extends StatelessWidget {
                     color: theme.highlightColor.withOpacity(0.9),
                   ),
                   width: sizeWidth,
-                  height: sizeHeight * 0.08,
-                  margin: EdgeInsets.only(top: sizeHeight * 0.02),
+                  height: sizeWidth * 0.17,
+                  margin: EdgeInsets.only(top: 2),
                   child: Container(),
                 ),
               ),
               Positioned(
                 left: sizeWidth * 0.05,
                 right: sizeWidth * 0.05,
-                bottom: sizeHeight * 0,
+                bottom: 0,
                 child: NavigationBarTheme(
                   data: NavigationBarThemeData(
                     elevation: 0,
@@ -59,7 +58,7 @@ class MainView extends StatelessWidget {
                     labelTextStyle: MaterialStatePropertyAll(
                       GoogleFonts.poppins(
                         color: AppColors.tdYellowB,
-                        fontSize: sizeHeight * 0.01,
+                        fontSize: sizeWidth * 0.015,
                         fontWeight: FontWeight.w300,
                         letterSpacing: 1.5,
                       ),
@@ -80,12 +79,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.home,
                           color: theme.primaryColorLight,
-                          size: sizeHeight * 0.025,
+                          size: sizeWidth * 0.05,
                         ),
                         selectedIcon: Icon(
                           AppIcons.homeB,
                           color: theme.primaryColor,
-                          size: sizeHeight * 0.03,
+                          size: sizeWidth * 0.07,
                         ),
                         label: 'Accueil',
                         tooltip: '',
@@ -94,12 +93,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.calendar,
                           color: theme.primaryColorLight,
-                          size: sizeHeight * 0.025,
+                          size: sizeWidth * 0.05,
                         ),
                         selectedIcon: Icon(
                           AppIcons.calendarB,
                           color: theme.primaryColor,
-                          size: sizeHeight * 0.03,
+                          size: sizeWidth * 0.07,
                         ),
                         label: 'Horaire',
                         tooltip: '',
@@ -108,12 +107,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.maps,
                           color: theme.primaryColorLight,
-                          size: sizeHeight * 0.025,
+                          size: sizeWidth * 0.05,
                         ),
                         selectedIcon: Icon(
                           AppIcons.mapsB,
                           color: theme.primaryColor,
-                          size: sizeHeight * 0.03,
+                          size: sizeWidth * 0.07,
                         ),
                         label: 'Maps',
                         tooltip: '',
@@ -122,12 +121,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.account,
                           color: theme.primaryColorLight,
-                          size: sizeHeight * 0.025,
+                          size: sizeWidth * 0.05,
                         ),
                         selectedIcon: Icon(
                           AppIcons.accountB,
                           color: theme.primaryColor,
-                          size: sizeHeight * 0.03,
+                          size: sizeWidth * 0.07,
                         ),
                         label: 'Profile',
                         tooltip: '',
@@ -136,12 +135,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.view,
                           color: theme.primaryColorLight,
-                          size: sizeHeight * 0.025,
+                          size: sizeWidth * 0.05,
                         ),
                         selectedIcon: Icon(
                           AppIcons.viewB,
                           color: theme.primaryColor,
-                          size: sizeHeight * 0.03,
+                          size: sizeWidth * 0.07,
                         ),
                         label: 'OverView',
                         tooltip: '',
@@ -211,15 +210,11 @@ class OverView extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelSmall),
               Text('${cubit.counter}',
                   style: Theme.of(context).textTheme.displayMedium),
-              Image.asset('${AppImages.agents}'),
-              Image.asset('${AppImages.agentsv}'),
               Image.asset('${AppImages.bluepoub}'),
               Image.asset('${AppImages.cleancity}'),
-              Image.asset('${AppImages.cleancityv}'),
               Image.asset('${AppImages.greenpoub}'),
               Image.asset('${AppImages.redpoub}'),
               Image.asset('${AppImages.tri}'),
-              Image.asset('${AppImages.triv}'),
               Image.asset('${AppImages.yellowpoub}'),
               Image.asset('${AppImages.logo}'),
               Image.asset('${AppImages.logol}'),

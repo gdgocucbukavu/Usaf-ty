@@ -1,6 +1,5 @@
+import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:usaficity/app/routes/routes.path.dart';
 import 'package:usaficity/app/shared/shared.dart';
 import 'package:usaficity/app/view/schedule/widgets/tools.dart';
 
@@ -18,105 +17,124 @@ class _ScheduleContainerState extends State<ScheduleContainer> {
     dynamic theme = Theme.of(context);
     dynamic sizeHeight = MediaQuery.sizeOf(context).height;
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    return GestureDetector(
-      onTap: () => context.push(RoutePath.schedule),
-      child: Padding(
-        padding: EdgeInsets.only(
-            top: sizeHeight * 0.01,
-            bottom: sizeHeight * 0.01,
-            left: sizeWidth * 0.02,
-            right: sizeWidth * 0.02),
-        child: Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Aujourd'hui",
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Gap(sizeHeight * 0.01),
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: sizeHeight * 0.16,
               width: sizeWidth * 0.25,
+              height: sizeWidth * 0.3,
+              margin: EdgeInsets.only(right: sizeWidth * 0.01),
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColorDark,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(sizeHeight * 0.035),
-                  bottomLeft: Radius.circular(sizeHeight * 0.035),
+                  topLeft: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
                 ),
               ),
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      daytoday.toString(),
-                      style: theme.textTheme.displayLarge,
-                    ),
-                    Text(
-                      getMonths(),
-                      style: theme.textTheme.titleLarge,
-                    ),
-                  ]),
-            ),
-            SizedBox(
-              width: sizeWidth * 0.01,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    daytoday.toString(),
+                    style: theme.textTheme.displaySmall,
+                  ),
+                  Text(
+                    getMonths(),
+                    style: theme.textTheme.titleLarge,
+                  ),
+                ],
+              ),
             ),
             Expanded(
               child: Container(
-                height: sizeHeight * 0.16,
+                height: sizeWidth * 0.3,
+                padding: EdgeInsets.symmetric(
+                  vertical: sizeHeight * 0.02,
+                  horizontal: sizeHeight * 0.015,
+                ),
                 decoration: BoxDecoration(
                   border: Border.all(
-                    width: 2,
                     color: Theme.of(context).primaryColorDark,
+                    width: 1,
                   ),
                   borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(40),
-                    bottomRight: Radius.circular(40),
+                    topRight: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   ),
                 ),
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      top: sizeHeight * 0.01,
-                      bottom: sizeHeight * 0.01,
-                      left: sizeWidth * 0.02,
-                      right: sizeWidth * 0.02),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Passage du car",
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            color: Theme.of(context).primaryColorDark,
-                            fontSize: 24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Passage du car",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Divider(
-                          height: sizeHeight * 0.03,
-                          color: Theme.of(context).primaryColorDark,
-                          endIndent: sizeWidth * 0.06),
-                      Expanded(
-                        child: SizedBox(
-                            // height: 20,
-                            width: 200,
-                            child: Text.rich(TextSpan(
-                                text: "Lieu: ",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(
-                                      color: AppColors.tdYellowB,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                children: [
-                                  TextSpan(
-                                    text: "Av. Fizi/Q. Ndendere/C. Ibanda",
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.tdGrey),
-                                  )
-                                ]))),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Divider(
+                      color: Theme.of(context).primaryColorDark,
+                      endIndent: 20,
+                    ),
+                    Text(
+                      "Lieu : ",
+                      style:
+                          Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: AppColors.tdYellowB,
+                                fontWeight: FontWeight.bold,
+                                fontSize: sizeWidth * 0.03,
+                              ),
+                    ),
+                    Text(
+                      "Av. Fizi/Q. Ndendere/C. Ibanda",
+                      style:
+                          Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: AppColors.tdGrey,
+                                fontSize: sizeWidth * 0.025,
+                              ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Agence : ",
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: AppColors.tdYellowB,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: sizeWidth * 0.03,
+                                  ),
+                        ),
+                        Text(
+                          "MTNC/UC",
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: AppColors.tdGrey,
+                                    fontSize: sizeWidth * 0.025,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             )
           ],
         ),
-      ),
+      ],
     );
   }
 }

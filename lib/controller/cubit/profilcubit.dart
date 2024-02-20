@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:usaficity/app/shared/styles/styles.dart';
 import 'package:usaficity/controller/state/profilstate.dart';
+import 'package:usaficity/data/services/db.dart';
 
 class ProfilCubic extends Cubit<ProfilState> {
   ProfilCubic() : super(InitialState());
@@ -13,39 +13,31 @@ class ProfilCubic extends Cubit<ProfilState> {
   dynamic useR;
 
   ProfilPage personnage = ProfilPage(
-      name: "Bénédict Lubembela",
-      mail: "mhg4@gmail.com",
-      location: ["Fizi", "Ndendere", "n°54"],
-      numero: "+243 894 097 071",
-      agence: "Usaf'ty",
-      frais: "90 000 CDF/mois",
-      imgPhoto: AppImages.ia1,
-      photoP: AppImages.logo);
+    name: "Bénédict Lubembela",
+    mail: "mhg4@gmail.com",
+    location: ["Fizi", "Ndendere", "n°54"],
+    numero: "+243 894 097 071",
+    agence: "Usaf'ty",
+    frais: "50 000 CDF/mois",
+    imgPhoto: AppImages.ia1,
+    photoP: AppImages.logo,
+  );
 
   void userName(String user) {
     useR = user;
     emit(UserNameState());
   }
 
-  bool isDark = false;
-
-  void changeThemeMode({bool? darkMode}) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    if (darkMode != null) {
-      isDark = darkMode;
-    } else {
-      isDark = !isDark;
-      sharedPreferences.setBool('isDark', isDark);
-    }
-    emit(ChangeThemeModeState());
-  }
-
-  bool isConnect = false;
+  dynamic user = DBServices().user;
 
   void seConnecter() {
-    isConnect = !isConnect;
-
+    DBServices().signInWithGoogle();
     emit(SeConnecterState());
+  }
+
+  void seDeconnecter() {
+    DBServices().signOut();
+    emit(SeDeconnecterState());
   }
 
   bool c1 = true;

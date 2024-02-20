@@ -7,11 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/routes/routes.dart';
 import 'app/shared/shared.dart';
-import 'controller/cubit/cubit.dart';
 import 'controller/state/state.dart';
-import 'controller/cubit/homecubit.dart';
+import 'controller/cubit/cubit.dart';
+import 'package:provider/provider.dart';
 import 'controller/cubit/mapcubit.dart';
+import 'controller/cubit/homecubit.dart';
 import 'controller/cubit/profilcubit.dart';
+import 'data/services/db.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -20,7 +22,9 @@ void main() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   bool isDark = sharedPreferences.getBool('isDark') ?? false;
   initializeDateFormatting('en_US', null);
-  runApp(Usafty(isDark: isDark));
+  runApp(MultiProvider(providers: [
+    StreamProvider.value(value: DBServices().user, initialData: null),
+  ], child: Usafty(isDark: isDark)));
 }
 
 class Usafty extends StatelessWidget {

@@ -1,57 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:icons_plus/icons_plus.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:usaficity/app/shared/shared.dart';
 import 'package:usaficity/app/view/profile/widgets/language.dart';
 import 'package:usaficity/controller/state/profilstate.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
-import '../../../../controller/cubit/cubit.dart';
 import '../../../../controller/cubit/profilcubit.dart';
 import '../../../routes/routes.dart';
-import '../../../shared/styles/colors.dart';
-import '../../../shared/styles/icons.dart';
-
-//Le bouton de notifiaction
-
-class NotificationBottom extends StatelessWidget {
-  const NotificationBottom({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    dynamic sizeHeight = MediaQuery.sizeOf(context).width;
-    dynamic theme = Theme.of(context);
-    return GestureDetector(
-      onTap: () => context.push(RoutePath.notification),
-      child: Container(
-          alignment: Alignment.center,
-          height: sizeHeight * 0.1,
-          width: sizeHeight * 0.1,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: theme.primaryColorLight,
-              width: 1,
-            ),
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: Stack(alignment: Alignment.topRight, children: [
-            Icon(
-              AppIcons.notification,
-              size: sizeHeight * 0.04,
-              color: theme.primaryColorLight,
-            ),
-            Container(
-              height: sizeHeight * 0.014,
-              width: sizeHeight * 0.014,
-              decoration: BoxDecoration(
-                color: AppColors.tdRed,
-                borderRadius: BorderRadius.circular(100),
-              ),
-            ),
-          ])),
-    );
-  }
-}
 
 //L'entête de la page profile composé des identifaints
 class HeadProfile extends StatelessWidget {
@@ -60,7 +18,9 @@ class HeadProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
+    dynamic user = Provider.of<User?>(context);
     dynamic theme = Theme.of(context);
+
     return BlocConsumer<ProfilCubic, ProfilState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -69,63 +29,66 @@ class HeadProfile extends StatelessWidget {
             Container(
               width: sizeWidth * 0.24,
               height: sizeWidth * 0.24,
-              decoration: ProfilCubic.get(context).isConnect
+              decoration: user != null
                   ? BoxDecoration(
+                      color: AppColors.tdGrey,
                       image: DecorationImage(
-                        image: AssetImage(
-                            "${ProfilCubic.get(context).personnage.photoP}"),
+                        image: NetworkImage(user.photoURL),
+                        fit: BoxFit.cover,
                       ),
                       shape: BoxShape.circle,
                       border: Border.all(
-                          width: 3,
-                          color: AppColors.tdGrey,
-                          style: BorderStyle.solid))
+                        width: 3,
+                        color: AppColors.tdGrey,
+                        style: BorderStyle.solid,
+                      ),
+                    )
                   : BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                          width: 3,
-                          color: AppColors.tdGrey,
-                          style: BorderStyle.solid)),
+                        width: 3,
+                        color: AppColors.tdGrey,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
             ),
-            SizedBox(
-              height: 15,
-            ),
-            Text(
-                ProfilCubic.get(context).isConnect
-                    ? ProfilCubic.get(context).personnage.name
-                    : "Not name found",
+            Gap(15),
+            Text(user != null ? user.displayName : "Aucun nom",
                 style: Theme.of(context).textTheme.titleMedium),
-            SizedBox(
-              height: 3,
-            ),
+            Gap(3),
             Text(
-                ProfilCubic.get(context).isConnect
-                    ? ProfilCubic.get(context).personnage.mail
-                    : "######",
-                style: Theme.of(context).textTheme.bodySmall),
-            SizedBox(
-              height: 20,
+              user != null
+                  ? user.email
+                  : "Veuillez vous connecter pour d'autres infos !",
+              style: Theme.of(context).textTheme.bodySmall,
             ),
+            Gap(20),
             Container(
-              child: ProfilCubic.get(context).isConnect
+              child: user != null
                   ? Column(
                       children: [
-                        numberCountry(context, sizeWidth,
-                            ProfilCubic.get(context).personnage.numero, theme),
+                        numberCountry(
+                          context,
+                          sizeWidth,
+                          ProfilCubic.get(context).personnage.numero,
+                          theme,
+                        ),
                         adresseLocal(
-                            context,
-                            sizeWidth,
-                            ProfilCubic.get(context).personnage.location,
-                            theme),
+                          context,
+                          sizeWidth,
+                          ProfilCubic.get(context).personnage.location,
+                          theme,
+                        ),
                         abonnementStruct(
-                            context,
-                            sizeWidth,
-                            "${ProfilCubic.get(context).personnage.imgPhoto}",
-                            ProfilCubic.get(context).personnage.agence,
-                            ProfilCubic.get(context).personnage.frais),
+                          context,
+                          sizeWidth,
+                          "${ProfilCubic.get(context).personnage.imgPhoto}",
+                          ProfilCubic.get(context).personnage.agence,
+                          ProfilCubic.get(context).personnage.frais,
+                        ),
                       ],
                     )
-                  : Column(),
+                  : Container(),
             ),
           ],
         );
@@ -141,30 +104,54 @@ class ControllerOptionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
+    dynamic user = Provider.of<User?>(context);
 
     return Container(
       margin: EdgeInsets.only(bottom: sizeWidth * 0.04),
       width: sizeWidth * 0.87,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          GestureDetector(
-            child: boutonC(
-                context, sizeWidth, sizeWidth, AppIcons.note, "Conseil"),
-            onTap: () => context.push(RoutePath.conseil),
-          ),
-          GestureDetector(
-            child: boutonC(
-                context, sizeWidth, sizeWidth, AppIcons.signal, "Signaler"),
-            onTap: () => context.push(RoutePath.signaler),
-          ),
-          GestureDetector(
-            child: boutonC(
-                context, sizeWidth, sizeWidth, AppIcons.privacy, "Privacy"),
-            onTap: () => context.push(RoutePath.privacy),
-          )
-        ],
-      ),
+      child: user != null
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // GestureDetector(
+                //   child: boutonC(
+                //       context, sizeWidth, sizeWidth, AppIcons.note, "Conseil"),
+                //   onTap: () => context.push(RoutePath.conseil),
+                // ),
+                GestureDetector(
+                  child: boutonC(
+                    context,
+                    sizeWidth,
+                    AppIcons.signal,
+                    "Signalisation",
+                  ),
+                  onTap: () => context.push(RoutePath.signaler),
+                ),
+                GestureDetector(
+                  child: boutonC(
+                    context,
+                    sizeWidth,
+                    AppIcons.privacy,
+                    "Confidentialité",
+                  ),
+                  onTap: () => context.push(RoutePath.privacy),
+                )
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  child: boutonC(
+                    context,
+                    sizeWidth,
+                    AppIcons.privacy,
+                    "Confidentialité",
+                  ),
+                  onTap: () => context.push(RoutePath.privacy),
+                )
+              ],
+            ),
     );
   }
 }
@@ -175,74 +162,146 @@ class IconButtonFleche extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    dynamic user = Provider.of<User?>(context);
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     dynamic sizeHeight = MediaQuery.sizeOf(context).height;
+    dynamic cubit = ProfilCubic.get(context);
     dynamic theme = Theme.of(context);
     return BlocConsumer<ProfilCubic, ProfilState>(
         listener: (context, state) {},
         builder: (context, state) {
           return Column(
             children: [
-              Container(
-                width: sizeWidth * 0.87,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          width: sizeWidth * 0.08,
-                          height: sizeWidth * 0.08,
-                          decoration: BoxDecoration(
-                              color: Colors.black, shape: BoxShape.circle),
-                          child: Center(
-                              child: Icon(
-                            AppIcons.darkMode,
-                            color: Colors.white,
-                            size: sizeWidth * 0.04,
-                          )),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Text("Mode sombre",
-                                style: Theme.of(context).textTheme.bodyMedium)),
-                      ],
-                    ),
-                    Switch(
-                        inactiveTrackColor: AppColors.tdWhite,
-                        activeTrackColor: Color(0xff3f3f3f),
-                        activeColor: Colors.white,
-                        hoverColor: Colors.white10,
-                        value: MainCubit.get(context).isDark,
-                        onChanged: (valu) {
-                          MainCubit.get(context).changeThemeMode();
-                        })
-                  ],
+              SizedBox(height: sizeWidth * 0.02),
+              GestureDetector(
+                child: listPuller(
+                  context,
+                  sizeWidth,
+                  AppIcons.langue,
+                  "Langue",
+                  AppColors.tdBlueC,
+                ),
+                onTap: () => bottomSheetLangage(
+                  context,
+                  sizeHeight,
+                  sizeWidth,
+                  theme,
                 ),
               ),
-              SizedBox(height: sizeWidth * 0.02),
-              SizedBox(height: sizeWidth * 0.02),
               GestureDetector(
-                child: listPuller(context, sizeWidth, AppIcons.langue, "Langue",
-                    AppColors.tdBlueC),
-                onTap: () =>
-                    bottomSheetLangage(context, sizeHeight, sizeWidth, theme),
-              ),
-              GestureDetector(
-                child: listPuller(context, sizeWidth, AppIcons.about, "Apropos",
-                    AppColors.tGYellowC),
+                child: listPuller(
+                  context,
+                  sizeWidth,
+                  AppIcons.about,
+                  "Apropos",
+                  AppColors.tdYellow,
+                ),
                 onTap: () => context.push(RoutePath.about),
               ),
               GestureDetector(
-                child: ProfilCubic.get(context).isConnect
-                    ? listPuller(context, sizeWidth, AppIcons.logout,
-                        "Se déconnecter", AppColors.tdRedC)
-                    : listPuller(context, sizeWidth, AppIcons.login,
-                        "Se Connecter", AppColors.tGreenC),
-                onTap: () => ProfilCubic.get(context).seConnecter(),
+                onTap: () {
+                  user == null
+                      ? cubit.seConnecter()
+                      : showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            alignment: Alignment.center,
+                            backgroundColor: theme.scaffoldBackgroundColor,
+                            content: SizedBox(
+                              width: sizeWidth * 0.5,
+                              height: sizeWidth * 0.5,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    AppIcons.warn,
+                                    color: AppColors.tdRed,
+                                    size: sizeWidth * 0.1,
+                                  ),
+                                  const Gap(10),
+                                  Text(
+                                    "Veux-tu te déconnecter ?",
+                                    style: theme.textTheme.bodySmall.copyWith(
+                                      letterSpacing: 2.0,
+                                      fontSize: sizeWidth * 0.05,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const Gap(10),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      InkWell(
+                                        borderRadius: BorderRadius.circular(20),
+                                        onTap: () {
+                                          context.pop();
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          padding:
+                                              EdgeInsets.all(sizeWidth * 0.02),
+                                          child: Text(
+                                            'Annuler',
+                                            style: theme.textTheme.bodySmall
+                                                .copyWith(
+                                              fontSize: sizeWidth * 0.03,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Gap(20),
+                                      InkWell(
+                                        borderRadius: BorderRadius.circular(20),
+                                        onTap: () {
+                                          cubit.seDeconnecter();
+                                          context.pop();
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: AppColors.tdRed,
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                          padding:
+                                              EdgeInsets.all(sizeWidth * 0.02),
+                                          child: Text(
+                                            'Déconnecter',
+                                            style: theme.textTheme.bodySmall
+                                                .copyWith(
+                                              fontSize: sizeWidth * 0.03,
+                                              color: AppColors.tdBlueB,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                },
+                child: user != null
+                    ? listPuller(
+                        context,
+                        sizeWidth,
+                        AppIcons.logout,
+                        "Se déconnecter",
+                        AppColors.tdRed,
+                      )
+                    : listPuller(
+                        context,
+                        sizeWidth,
+                        AppIcons.login,
+                        "Se Connecter",
+                        AppColors.tdGreenO,
+                      ),
               ),
             ],
           );
@@ -252,7 +311,12 @@ class IconButtonFleche extends StatelessWidget {
 
 //Bouton texte à droite flêche
 Widget listPuller(
-    context, double sizeW, dynamic ico, String texts, Color colur) {
+  context,
+  double sizeW,
+  dynamic icon,
+  String text,
+  Color color,
+) {
   return Container(
     margin: EdgeInsets.only(bottom: sizeW * 0.04),
     width: sizeW * 0.87,
@@ -264,18 +328,20 @@ Widget listPuller(
             Container(
               width: sizeW * 0.08,
               height: sizeW * 0.08,
-              decoration: BoxDecoration(color: colur, shape: BoxShape.circle),
+              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
               child: Center(
-                  child: Icon(
-                ico,
-                size: sizeW * 0.04,
-                color: Colors.white,
-              )),
+                child: Icon(
+                  icon,
+                  size: sizeW * 0.04,
+                  color: AppColors.tdWhite,
+                ),
+              ),
             ),
-            SizedBox(
-              width: 10,
+            Gap(20),
+            Text(
+              text,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
-            Text(texts, style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
         Icon(
@@ -303,8 +369,10 @@ Widget adresseLocal(context, double sizeHe, List<String> adresse, dynamic th) {
         SizedBox(
           width: sizeHe * 0.02,
         ),
-        Text(' ${adresse[0]} / ${adresse[1]} / ${adresse[2]}',
-            style: Theme.of(context).textTheme.bodyMedium),
+        Text(
+          ' ${adresse[0]} / ${adresse[1]} / ${adresse[2]}',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
       ],
     ),
   );
@@ -316,50 +384,42 @@ Widget numberCountry(context, double sizeHe, String tel, dynamic th) {
     alignment: Alignment.center,
     margin: EdgeInsets.only(bottom: sizeHe * 0.011),
     width: sizeHe * 0.87,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Flag(
-          AppIcons.rdcFlag,
-          size: sizeHe * 0.06,
-        )
-        //color: th.primaryColorLight,
-        ,
-        SizedBox(
-          width: sizeHe * 0.01,
-        ),
-        Icon(
-          AppIcons.arrowDown,
-          color: th.primaryColorLight,
-        ),
-        SizedBox(
-          width: sizeHe * 0.02,
-        ),
-        Text(' $tel', style: Theme.of(context).textTheme.bodyMedium),
-      ],
-    ),
+    child: Text(' $tel', style: Theme.of(context).textTheme.bodyMedium),
   );
 }
 
 //Abonnement Information
 Widget abonnementStruct(
-    context, double sizew, String logoImg, String agenceName, String fret) {
+  context,
+  double sizew,
+  String logoImg,
+  String agenceName,
+  String fret,
+) {
   dynamic theme = Theme.of(context);
   return Container(
     margin: EdgeInsets.only(bottom: sizew * 0.04),
     width: sizew * 0.87,
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           width: sizew * 0.15,
           height: sizew * 0.15,
           decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('$logoImg'),
+            borderRadius: BorderRadius.circular(100),
+            image: DecorationImage(
+              image: AssetImage(
+                AppImages.logol,
               ),
-              shape: BoxShape.circle,
-              border: Border.all(
-                  width: 1, color: AppColors.tdGrey, style: BorderStyle.solid)),
+              fit: BoxFit.cover,
+            ),
+            border: Border.all(
+              width: 1,
+              color: AppColors.tdGrey,
+              style: BorderStyle.solid,
+            ),
+          ),
         ),
         SizedBox(
           width: sizew * 0.05,
@@ -368,9 +428,12 @@ Widget abonnementStruct(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('$agenceName',
-                style: theme.textTheme.bodyMedium
-                    .copyWith(color: AppColors.tdYellowB)),
+            Text(
+              '$agenceName',
+              style: theme.textTheme.bodyMedium.copyWith(
+                color: AppColors.tdYellowB,
+              ),
+            ),
             Container(
               margin: EdgeInsets.only(
                 bottom: sizew * 0.005,
@@ -380,8 +443,14 @@ Widget abonnementStruct(
               height: sizew * 0.001,
               color: AppColors.tdGrey,
             ),
-            Text('Abonnement', style: Theme.of(context).textTheme.bodySmall),
-            Text("$fret", style: Theme.of(context).textTheme.bodySmall),
+            Text(
+              'Abonnement',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            Text(
+              "$fret",
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
           ],
         )
       ],
@@ -390,7 +459,7 @@ Widget abonnementStruct(
 }
 
 //
-Widget boutonC(context, double sizeh, double sizew, dynamic ico, String txt) {
+Widget boutonC(context, double sizew, dynamic ico, String txt) {
   return Container(
     margin: EdgeInsets.only(right: sizew * 0.02),
     width: sizew * 0.27,
@@ -401,11 +470,9 @@ Widget boutonC(context, double sizeh, double sizew, dynamic ico, String txt) {
       children: [
         Icon(
           ico,
-          size: sizew * 0.10,
+          size: sizew * 0.1,
         ),
-        SizedBox(
-          height: sizew * 0.02,
-        ),
+        Gap(sizew * 0.02),
         Text("$txt", style: Theme.of(context).textTheme.bodySmall),
       ],
     ),

@@ -12,7 +12,20 @@
           "package_name": "com.example.usaficity"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "474478825939-74aqmcvnd8f0t11crv2pkpmh62p1neq7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.usaficity",
+            "certificate_hash": "f7090809ca98ab14165b3dc0213edcd2a6b37db4"
+          }
+        },
+        {
+          "client_id": "474478825939-rlerj3oheq9ve670m895am2rgi8c42bh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCp_AdGk4ZDEfzdWcMzZ0LytF1lREJilqI"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474478825939-rlerj3oheq9ve670m895am2rgi8c42bh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "474478825939-3ieibft0klaborcdepac99sfmks60pc9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.usaficity"
+              }
+            }
+          ]
         }
       }
     }

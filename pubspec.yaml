@@ -46,6 +46,11 @@ dependencies:
   firebase_core: ^2.25.4
   geolocator: ^11.0.0
   flutter_polyline_points: ^2.0.0
+  list_wheel_scroll_view_nls: ^0.0.3
+  firebase_auth: ^4.17.4
+  firebase_storage: ^11.6.6
+  cloud_firestore: ^4.15.5
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:

@@ -8,4 +8,6 @@ class UserNameState extends ProfilState {}
 
 class SeConnecterState extends ProfilState {}
 
+class SeDeconnecterState extends ProfilState {}
+
 class SelectLanguageState extends ProfilState {}

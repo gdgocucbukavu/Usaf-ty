@@ -45,6 +45,8 @@ class AppIcons {
 
   static dynamic card = Icons.credit_card;
 
+  static dynamic warn = Clarity.warning_line;
+
   static dynamic privacy = Icons.privacy_tip_outlined;
   // Benedict add icones
   static dynamic rdcFlag = Flags.democratic_republic_of_congo;

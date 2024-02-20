@@ -19,7 +19,7 @@ double textSize=13.0;
         children: [
           TextSpan(
               text: "plus propre ",
-              style: TextStyle(color: AppColors.tdGrey, fontSize: textSize)),
+              style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
             text: "pour une santé ",
             style: Theme.of(context)
@@ -29,7 +29,7 @@ double textSize=13.0;
           ),
           TextSpan(
               text: "plus saine",
-              style: TextStyle(color: AppColors.tdGrey, fontSize: textSize)),
+              style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
             text: ".",
             style: Theme.of(context)
@@ -48,7 +48,7 @@ double textSize=13.0;
         children: [
           TextSpan(
               text: "propre ",
-              style: TextStyle(color: AppColors.tdGrey, fontSize: textSize)),
+              style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
             text: "et la propreté ",
             style: Theme.of(context)
@@ -58,7 +58,7 @@ double textSize=13.0;
           ),
           TextSpan(
               text: "vous gardera",
-              style: TextStyle(color: AppColors.tdGrey, fontSize: textSize)),
+              style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
             text: ".",
             style: Theme.of(context)
@@ -76,7 +76,7 @@ double textSize=13.0;
         children: [
           TextSpan(
               text: "maison commune",
-              style: TextStyle(color: AppColors.tdGrey, fontSize: textSize)),
+              style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
             text: ", prenez en bien ",
             style: Theme.of(context)
@@ -86,7 +86,7 @@ double textSize=13.0;
           ),
           TextSpan(
               text: "soin",
-              style: TextStyle(color: AppColors.tdGrey, fontSize: textSize)),
+              style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
             text: ".",
             style: Theme.of(context)
@@ -98,7 +98,7 @@ double textSize=13.0;
 
     dynamic headertext4 = Text.rich(TextSpan(
         text: "Bien gérer ",
-        style: TextStyle(color: AppColors.tdGrey, fontSize: textSize),
+        style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize),
         children: [
           TextSpan(
             text: "les déchets ",
@@ -109,7 +109,7 @@ double textSize=13.0;
           ),
           TextSpan(
             text: "améliore ",
-            style: TextStyle(color: AppColors.tdGrey, fontSize: textSize),
+            style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize),
           ),
           TextSpan(
             text: "l'état du climat.",
