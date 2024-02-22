@@ -11,3 +11,11 @@ class SeConnecterState extends ProfilState {}
 class SeDeconnecterState extends ProfilState {}
 
 class SelectLanguageState extends ProfilState {}
+
+class PickImgFromCameraState extends ProfilState {}
+
+class PickImgFromGalleryState extends ProfilState {}
+
+class ShowImagePickerOptionsState extends ProfilState {}
+
+class OnSignalisationSubmitedState extends ProfilState {}

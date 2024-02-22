@@ -1,24 +1,28 @@
-import 'dart:async';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:usaficity/data/models/location.dart';
 
-import '../../app/shared/shared.dart';
 import '../state/mapstate.dart';
+import '../../data/services/db.dart';
+import '../../app/shared/shared.dart';
 
 class MapCubit extends Cubit<MapState> {
   MapCubit() : super(InitialState());
 
   static MapCubit get(context) => BlocProvider.of(context);
 
-  Completer<GoogleMapController> mapController = Completer();
+  void createMap(user) {
+    DBServices().updateUserLocation(
+      user.email,
+      Location(
+        lat: currentLocation!.latitude,
+        lng: currentLocation!.longitude,
+      ),
+    );
 
-  void onMapCreated(GoogleMapController controller) async {
-    if (!mapController.isCompleted) {
-      mapController.complete(controller);
-    }
+    print('**************************************** ${user.email}');
   }
 
   static dynamic destination = LatLng(-2.4992107119225553, 28.868730999629342);
@@ -27,6 +31,8 @@ class MapCubit extends Cubit<MapState> {
   bool? serviceEnabled;
   Position? currentLocation;
   LocationPermission? permissionGranted;
+  dynamic currentPlace;
+  Geolocator geolocator = Geolocator();
 
   dynamic distanceRestant = Geolocator.distanceBetween(
     -2.4034369199135437,
@@ -92,13 +98,16 @@ class MapCubit extends Cubit<MapState> {
     ),
   ];
 
-  void addMarker(dynamic latLng) {
-    markers.add(
-      Marker(
-        markerId: MarkerId('${latLng.latitude}'),
-        position: LatLng(latLng.latitude, latLng.longitude),
+  getUserLocation(user) {
+    DBServices().addUserLocation(
+      UserLoc(
+        name: user.displayName,
+        email: user.email,
+        location: Location(
+          lat: currentLocation!.latitude,
+          lng: currentLocation!.longitude,
+        ),
       ),
     );
-    emit(AddMarkerState());
   }
 }

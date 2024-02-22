@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:usaficity/app/shared/shared.dart';
 import 'package:usaficity/app/view/schedule/widgets/tools.dart';
 
@@ -13,7 +14,6 @@ class _BottomScheduleState extends State<BottomSchedule> {
   @override
   Widget build(BuildContext context) {
     dynamic theme = Theme.of(context);
-    dynamic sizeHeight = MediaQuery.sizeOf(context).height;
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     return DraggableScrollableSheet(
       initialChildSize: 0.35,
@@ -23,12 +23,12 @@ class _BottomScheduleState extends State<BottomSchedule> {
       builder: (BuildContext context, ScrollController scrollController) =>
           Container(
         padding: EdgeInsets.only(
-          // top: sizeHeight * 0.03,
-          left: sizeHeight * 0.03,
-          right: sizeHeight * 0.03,
+          left: sizeWidth * 0.05,
+          right: sizeWidth * 0.05,
+          bottom: sizeWidth * 0.2,
         ),
-        height: sizeHeight * 0.4,
         width: sizeWidth,
+        height: MediaQuery.sizeOf(context).height * 0.8,
         decoration: BoxDecoration(
           color: theme.scaffoldBackgroundColor,
           borderRadius: BorderRadius.only(
@@ -36,16 +36,35 @@ class _BottomScheduleState extends State<BottomSchedule> {
             topRight: Radius.circular(25),
           ),
         ),
-        child: Stack(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: sizeHeight * 0.025),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     Container(
+            //       margin: EdgeInsets.only(top: sizeWidth * 0.03),
+            //       decoration: BoxDecoration(
+            //         color: theme.primaryColorLight,
+            //         borderRadius: BorderRadius.circular(100),
+            //       ),
+            //       width: sizeWidth * 0.25,
+            //       height: sizeWidth * 0.01,
+            //     ),
+            //   ],
+            // ),
+            Gap(sizeWidth * 0.05),
+            Text(
+              'Horaire',
+              style: theme.textTheme.displaySmall,
+            ),
+            Expanded(
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 controller: scrollController,
-                padding: EdgeInsets.only(top: sizeHeight * 0.06),
+                padding: EdgeInsets.only(top: sizeWidth * 0.06),
                 itemBuilder: (context, int index) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -54,13 +73,11 @@ class _BottomScheduleState extends State<BottomSchedule> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          height: sizeHeight * 0.07,
+                          height: sizeWidth * 0.2,
                           width: sizeWidth * 0.01,
-                          color: AppColors.tdBlue,
+                          color: AppColors.tdYellowB.withOpacity(0.3),
                         ),
-                        SizedBox(
-                          width: sizeWidth * 0.03,
-                        ),
+                        Gap(sizeWidth * 0.05),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,48 +89,80 @@ class _BottomScheduleState extends State<BottomSchedule> {
                                     .split(" ")[0],
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
-                              SizedBox(
-                                height: sizeHeight * 0.02,
+                              Gap(sizeWidth * 0.02),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Agence : ",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: AppColors.tdYellowB,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: sizeWidth * 0.03,
+                                        ),
+                                  ),
+                                  Text(
+                                    " --- ",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(fontSize: sizeWidth * 0.025),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ],
                               ),
-                              Text("Pas d'evénement aujourd'hui"),
+                              Gap(sizeWidth * 0.01),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Adresse : ",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: AppColors.tdYellowB,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: sizeWidth * 0.03,
+                                        ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Icon(Icons.place),
+                                      Gap(sizeWidth * 0.01),
+                                      Text(
+                                        "Av. ---/Q. ---/C. ---",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                fontSize: sizeWidth * 0.025),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: sizeHeight * 0.02,
-                    ),
+                    Gap(sizeWidth * 0.02),
                   ],
                 ),
                 itemCount: getDaysDifference(),
                 addSemanticIndexes: true,
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: sizeHeight * 0.02),
-                  decoration: BoxDecoration(
-                    color: theme.primaryColorLight,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  width: sizeWidth * 0.25,
-                  height: sizeHeight * 0.005,
-                ),
-                Container(
-                  height: sizeHeight * 0.06,
-                  width: double.infinity,
-                  color: theme.scaffoldBackgroundColor,
-                  // color: Colors.transparent,
-                  child: Text(
-                    'Horaire',
-                    style: theme.textTheme.displaySmall,
-                  ),
-                ),
-              ],
-            )
           ],
         ),
       ),

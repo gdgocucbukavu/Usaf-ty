@@ -7,6 +7,7 @@ import 'package:usaficity/app/view/profile/widgets/language.dart';
 import 'package:usaficity/controller/state/profilstate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:usaficity/data/services/db.dart';
 
 import '../../../../controller/cubit/profilcubit.dart';
 import '../../../routes/routes.dart';
@@ -21,7 +22,7 @@ class HeadProfile extends StatelessWidget {
     dynamic user = Provider.of<User?>(context);
     dynamic theme = Theme.of(context);
 
-    return BlocConsumer<ProfilCubic, ProfilState>(
+    return BlocConsumer<ProfilCubit, ProfilState>(
       listener: (context, state) {},
       builder: (context, state) {
         return Column(
@@ -50,10 +51,14 @@ class HeadProfile extends StatelessWidget {
                         color: AppColors.tdGrey,
                         style: BorderStyle.solid,
                       ),
+                      image: DecorationImage(
+                        image: AssetImage(AppImages.user),
+                        fit: BoxFit.cover,
+                      ),
                     ),
             ),
             Gap(15),
-            Text(user != null ? user.displayName : "Aucun nom",
+            Text(user != null ? user.displayName : "Nom",
                 style: Theme.of(context).textTheme.titleMedium),
             Gap(3),
             Text(
@@ -67,24 +72,18 @@ class HeadProfile extends StatelessWidget {
               child: user != null
                   ? Column(
                       children: [
-                        numberCountry(
-                          context,
-                          sizeWidth,
-                          ProfilCubic.get(context).personnage.numero,
-                          theme,
-                        ),
                         adresseLocal(
                           context,
                           sizeWidth,
-                          ProfilCubic.get(context).personnage.location,
+                          ProfilCubit.get(context).personnage.location,
                           theme,
                         ),
                         abonnementStruct(
                           context,
                           sizeWidth,
-                          "${ProfilCubic.get(context).personnage.imgPhoto}",
-                          ProfilCubic.get(context).personnage.agence,
-                          ProfilCubic.get(context).personnage.frais,
+                          "${ProfilCubit.get(context).personnage.imgPhoto}",
+                          ProfilCubit.get(context).personnage.agence,
+                          ProfilCubit.get(context).personnage.frais,
                         ),
                       ],
                     )
@@ -165,9 +164,9 @@ class IconButtonFleche extends StatelessWidget {
     dynamic user = Provider.of<User?>(context);
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     dynamic sizeHeight = MediaQuery.sizeOf(context).height;
-    dynamic cubit = ProfilCubic.get(context);
+    dynamic cubit = ProfilCubit.get(context);
     dynamic theme = Theme.of(context);
-    return BlocConsumer<ProfilCubic, ProfilState>(
+    return BlocConsumer<ProfilCubit, ProfilState>(
         listener: (context, state) {},
         builder: (context, state) {
           return Column(
@@ -179,7 +178,7 @@ class IconButtonFleche extends StatelessWidget {
                   sizeWidth,
                   AppIcons.langue,
                   "Langue",
-                  AppColors.tdBlueC,
+                  AppColors.tdBlue,
                 ),
                 onTap: () => bottomSheetLangage(
                   context,
@@ -200,92 +199,91 @@ class IconButtonFleche extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  user == null
-                      ? cubit.seConnecter()
-                      : showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            alignment: Alignment.center,
-                            backgroundColor: theme.scaffoldBackgroundColor,
-                            content: SizedBox(
-                              width: sizeWidth * 0.5,
-                              height: sizeWidth * 0.5,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                  if (user == null) {
+                    cubit.seConnecter();
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        alignment: Alignment.center,
+                        backgroundColor: theme.scaffoldBackgroundColor,
+                        content: SizedBox(
+                          width: sizeWidth * 0.5,
+                          height: sizeWidth * 0.5,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                AppIcons.warn,
+                                color: AppColors.tdRed,
+                                size: sizeWidth * 0.1,
+                              ),
+                              const Gap(10),
+                              Text(
+                                "Veux-tu te déconnecter ?",
+                                style: theme.textTheme.bodySmall.copyWith(
+                                  letterSpacing: 2.0,
+                                  fontSize: sizeWidth * 0.05,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const Gap(10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Icon(
-                                    AppIcons.warn,
-                                    color: AppColors.tdRed,
-                                    size: sizeWidth * 0.1,
-                                  ),
-                                  const Gap(10),
-                                  Text(
-                                    "Veux-tu te déconnecter ?",
-                                    style: theme.textTheme.bodySmall.copyWith(
-                                      letterSpacing: 2.0,
-                                      fontSize: sizeWidth * 0.05,
+                                  InkWell(
+                                    borderRadius: BorderRadius.circular(20),
+                                    onTap: () {
+                                      context.pop();
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.transparent,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      padding: EdgeInsets.all(sizeWidth * 0.02),
+                                      child: Text(
+                                        'Annuler',
+                                        style:
+                                            theme.textTheme.bodySmall.copyWith(
+                                          fontSize: sizeWidth * 0.03,
+                                        ),
+                                      ),
                                     ),
-                                    textAlign: TextAlign.center,
                                   ),
-                                  const Gap(10),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      InkWell(
+                                  Gap(20),
+                                  InkWell(
+                                    borderRadius: BorderRadius.circular(20),
+                                    onTap: () {
+                                      cubit.seDeconnecter();
+                                      DBServices().rmvUserLocation(user.email);
+                                      context.pop();
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: AppColors.tdRed,
                                         borderRadius: BorderRadius.circular(20),
-                                        onTap: () {
-                                          context.pop();
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.transparent,
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding:
-                                              EdgeInsets.all(sizeWidth * 0.02),
-                                          child: Text(
-                                            'Annuler',
-                                            style: theme.textTheme.bodySmall
-                                                .copyWith(
-                                              fontSize: sizeWidth * 0.03,
-                                            ),
-                                          ),
+                                      ),
+                                      padding: EdgeInsets.all(sizeWidth * 0.02),
+                                      child: Text(
+                                        'Déconnecter',
+                                        style:
+                                            theme.textTheme.bodySmall.copyWith(
+                                          fontSize: sizeWidth * 0.03,
+                                          color: AppColors.tdBlueB,
                                         ),
                                       ),
-                                      Gap(20),
-                                      InkWell(
-                                        borderRadius: BorderRadius.circular(20),
-                                        onTap: () {
-                                          cubit.seDeconnecter();
-                                          context.pop();
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: AppColors.tdRed,
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding:
-                                              EdgeInsets.all(sizeWidth * 0.02),
-                                          child: Text(
-                                            'Déconnecter',
-                                            style: theme.textTheme.bodySmall
-                                                .copyWith(
-                                              fontSize: sizeWidth * 0.03,
-                                              color: AppColors.tdBlueB,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
+                            ],
                           ),
-                        );
+                        ),
+                      ),
+                    );
+                  }
                 },
                 child: user != null
                     ? listPuller(

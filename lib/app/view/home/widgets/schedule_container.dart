@@ -98,7 +98,7 @@ class _ScheduleContainerState extends State<ScheduleContainer> {
                               ),
                     ),
                     Text(
-                      "Av. Fizi/Q. Ndendere/C. Ibanda",
+                      "Av. ---/Q. ---/C. ---",
                       style:
                           Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 color: AppColors.tdGrey,
@@ -119,7 +119,7 @@ class _ScheduleContainerState extends State<ScheduleContainer> {
                                   ),
                         ),
                         Text(
-                          "MTNC/UC",
+                          "USAF'TY",
                           style:
                               Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: AppColors.tdGrey,

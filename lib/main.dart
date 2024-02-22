@@ -1,12 +1,13 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/routes/routes.dart';
 import 'app/shared/shared.dart';
+import 'controller/state/mapstate.dart';
 import 'controller/state/state.dart';
 import 'controller/cubit/cubit.dart';
 import 'package:provider/provider.dart';
@@ -37,13 +38,13 @@ class Usafty extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => MainCubit()..changeThemeMode(darkMode: isDark),
+          create: (context) => MainCubit()
+            ..changeThemeMode(darkMode: isDark)
+            ..getPhoneInfo(),
         ),
         BlocProvider(create: (context) => HomeCubit()),
-        BlocProvider(create: (context) => MapCubit()..getCurrentLocation()
-            // ..getPolyPoints(),
-            ),
-        BlocProvider(create: (context) => ProfilCubic()),
+        BlocProvider(create: (context) => MapCubit()..getCurrentLocation()),
+        BlocProvider(create: (context) => ProfilCubit()),
       ],
       child: BlocConsumer<MainCubit, MainState>(
         listener: (context, state) {},
@@ -61,13 +62,18 @@ class Usafty extends StatelessWidget {
                   cubit.isDark ? AppColors.tdWhiteO : AppColors.tdBlackO,
             ),
           );
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: "Usaf'ty",
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: cubit.isDark ? ThemeMode.light : ThemeMode.dark,
-            routerConfig: returnRoute(false),
+          return BlocConsumer<MapCubit, MapState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                title: "Usaf'ty",
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                themeMode: cubit.isDark ? ThemeMode.light : ThemeMode.dark,
+                routerConfig: router,
+              );
+            },
           );
         },
       ),

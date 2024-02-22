@@ -7,8 +7,11 @@ dynamic lastdate = DateTime.utc(2030, 10, 16);
 
 int getDaysDifference() {
   // final int alldayslength =firstdate.difference(lastdate).inDays;
-  final int oneyearlength =
-      today.difference(today.add(Duration(days: 366))).inDays;
+  final int oneyearlength = today
+      .difference(
+        today.add(Duration(days: 10)),
+      )
+      .inDays;
   return oneyearlength.abs();
 }
 

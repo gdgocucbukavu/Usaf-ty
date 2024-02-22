@@ -16,7 +16,7 @@ void bottomSheetLangage(
   showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return BlocConsumer<ProfilCubic, ProfilState>(
+        return BlocConsumer<ProfilCubit, ProfilState>(
             listener: (context, state) {},
             builder: (context, state) {
               return Container(
@@ -42,7 +42,7 @@ void bottomSheetLangage(
                       height: sizeHeight * 0.05,
                     ),
                     GestureDetector(
-                      child: ProfilCubic.get(context).c1
+                      child: ProfilCubit.get(context).c1
                           ? lineLanguage(
                               context,
                               sizeWidth,
@@ -57,13 +57,13 @@ void bottomSheetLangage(
                               "Français (Paris)",
                               false,
                             ),
-                      onTap: () => ProfilCubic.get(context).selectLanguage(0),
+                      onTap: () => ProfilCubit.get(context).selectLanguage(0),
                     ),
                     SizedBox(
                       height: sizeHeight * 0.02,
                     ),
                     GestureDetector(
-                      child: ProfilCubic.get(context).c2
+                      child: ProfilCubit.get(context).c2
                           ? lineLanguage(
                               context,
                               sizeWidth,
@@ -78,7 +78,7 @@ void bottomSheetLangage(
                               "Anglais (USA)",
                               false,
                             ),
-                      onTap: () => ProfilCubic.get(context).selectLanguage(1),
+                      onTap: () => ProfilCubit.get(context).selectLanguage(1),
                     ),
                     Gap(sizeHeight * 0.02),
                     GestureDetector(
@@ -87,9 +87,9 @@ void bottomSheetLangage(
                         sizeWidth,
                         AppIcons.swahili,
                         "Swahili (Tanzani)",
-                        ProfilCubic.get(context).c3,
+                        ProfilCubit.get(context).c3,
                       ),
-                      onTap: () => ProfilCubic.get(context).selectLanguage(2),
+                      onTap: () => ProfilCubit.get(context).selectLanguage(2),
                     ),
                   ],
                 ),
@@ -129,7 +129,7 @@ Widget lineLanguage(
               ? Icon(
                   AppIcons.validate,
                   size: sizeW * 0.06,
-                  color: AppColors.tGreenC,
+                  color: AppColors.tdGreenO,
                 )
               : SizedBox(),
         ),

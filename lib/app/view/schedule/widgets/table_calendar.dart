@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:usaficity/app/shared/shared.dart';
 import 'package:usaficity/app/view/schedule/widgets/tools.dart';
@@ -42,6 +43,7 @@ class _TableCalendarrState extends State<TableCalendarr> {
               ),
             ],
           ),
+          Gap(sizeWidth * 0.1),
           Text(
             'Today : ' + DateTime.now().toString().split(" ")[0],
             style: theme.textTheme.displaySmall,
@@ -55,11 +57,21 @@ class _TableCalendarrState extends State<TableCalendarr> {
               pageAnimationDuration: Duration(milliseconds: 500),
               rowHeight: sizeHeight * 0.06,
               daysOfWeekHeight: 30,
+              calendarStyle: CalendarStyle(
+                weekendTextStyle: TextStyle(color: AppColors.tdGrey),
+                outsideTextStyle: TextStyle(
+                  color: AppColors.tdGrey.withOpacity(0.5),
+                ),
+                selectedDecoration: BoxDecoration(
+                  color: AppColors.tdYellowB,
+                  shape: BoxShape.circle,
+                ),
+              ),
               daysOfWeekStyle: DaysOfWeekStyle(
                 weekdayStyle: theme.textTheme.titleMedium,
                 weekendStyle: TextStyle(color: AppColors.tdYellowB),
                 decoration: BoxDecoration(
-                  color: AppColors.tdGrey2,
+                  color: AppColors.tdGrey.withOpacity(0.5),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
               ),

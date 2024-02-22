@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
-Container stationView(sizeHeight, sizeWidth, theme, color, title, adress) {
+Container stationView(sizeWidth, theme, color, title, adress) {
   return Container(
-    margin: EdgeInsets.only(top: sizeHeight * 0.02),
+    margin: EdgeInsets.only(top: sizeWidth * 0.04),
     width: sizeWidth,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        stationIcon(sizeHeight, color),
+        stationIcon(sizeWidth, color),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -16,12 +16,14 @@ Container stationView(sizeHeight, sizeWidth, theme, color, title, adress) {
             Text(
               title,
               style: theme.textTheme.titleMedium
-                  .copyWith(fontSize: sizeHeight * 0.015),
+                  .copyWith(fontSize: sizeWidth * 0.03),
             ),
             Text(
               adress,
               style: theme.textTheme.bodySmall
-                  .copyWith(fontSize: sizeHeight * 0.012),
+                  .copyWith(fontSize: sizeWidth * 0.025),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -30,12 +32,12 @@ Container stationView(sizeHeight, sizeWidth, theme, color, title, adress) {
   );
 }
 
-Container stationIcon(sizeHeight, color) {
+Container stationIcon(sizeWidth, color) {
   return Container(
     alignment: Alignment.center,
-    height: sizeHeight * 0.05,
-    width: sizeHeight * 0.05,
-    margin: EdgeInsets.only(right: sizeHeight * 0.03),
+    height: sizeWidth * 0.12,
+    width: sizeWidth * 0.12,
+    margin: EdgeInsets.only(right: sizeWidth * 0.05),
     decoration: BoxDecoration(
       color: color.withOpacity(0.1),
       border: Border.all(
@@ -47,6 +49,7 @@ Container stationIcon(sizeHeight, color) {
     child: Icon(
       CupertinoIcons.map_pin_ellipse,
       color: color,
+      size: sizeWidth * 0.05,
     ),
   );
 }

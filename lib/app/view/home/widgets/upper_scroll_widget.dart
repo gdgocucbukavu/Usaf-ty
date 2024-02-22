@@ -158,12 +158,11 @@ class ActivePage extends StatelessWidget {
               ? MediaQuery.sizeOf(context).width * 0.02
               : MediaQuery.sizeOf(context).width * 0.01,
           decoration: BoxDecoration(
-            color: (currentPage == index)
-                ? Theme.of(context).primaryColorLight
-                : Colors.transparent,
+            color:
+                (currentPage == index) ? AppColors.tdWhite : Colors.transparent,
             borderRadius: BorderRadius.circular(100),
             border: Border.all(
-              color: Theme.of(context).primaryColorLight,
+              color: AppColors.tdWhite,
               style: BorderStyle.solid,
               width: 1,
             ),

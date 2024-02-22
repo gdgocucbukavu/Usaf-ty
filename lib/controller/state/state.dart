@@ -7,3 +7,7 @@ class ChangeThemeModeState extends MainState {}
 class CounterState extends MainState {}
 
 class NavigationBarState extends MainState {}
+
+class GetPhoneInfoState extends MainState {}
+
+class SendFeedBackState extends MainState {}

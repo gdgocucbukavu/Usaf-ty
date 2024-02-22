@@ -1,8 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:usaficity/app/view/main.view.dart';
 
+import '../../app/shared/shared.dart';
 import '../../app/view/view.dart';
+import '../../data/models/feedback.dart';
+import '../../data/services/db.dart';
 import '../state/state.dart';
 
 class MainCubit extends Cubit<MainState> {
@@ -23,19 +28,11 @@ class MainCubit extends Cubit<MainState> {
     emit(ChangeThemeModeState());
   }
 
-  dynamic counter = 0;
-
-  void incrementCounter() {
-    counter++;
-    emit(CounterState());
-  }
-
   List screens = [
     const HomeScreen(),
     const ScheduleScreen(),
     const MapsScreen(),
     const ProfileScreen(),
-    const OverView(),
   ];
 
   int i = 0;
@@ -43,5 +40,43 @@ class MainCubit extends Cubit<MainState> {
   void navigationBar(int index) {
     i = index;
     emit(NavigationBarState());
+  }
+
+  dynamic phoneInfo = 'aucune info';
+
+  void getPhoneInfo() async {
+    final deviceInfo = DeviceInfoPlugin();
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      phoneInfo = androidInfo.model;
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      phoneInfo = iosInfo.model;
+    }
+    emit(GetPhoneInfoState());
+  }
+
+  bool feed = false;
+
+  void sendFeedback({context, name, email, content}) async {
+    final deviceInfo = DeviceInfoPlugin();
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      phoneInfo = androidInfo.model;
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      phoneInfo = iosInfo.model;
+    }
+    DBServices().addFeedBack(
+      FeedBack(name: name, email: email, type: phoneInfo, content: content),
+    );
+    feed = true;
+    ScaffoldMessenger.of(context).showSnackBar(
+      customSnackBar(
+        context,
+        'Merci pour votre feedback, nous en prendront note ...',
+      ),
+    );
+    emit(SendFeedBackState());
   }
 }

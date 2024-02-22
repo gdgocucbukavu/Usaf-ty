@@ -1,16 +1,13 @@
-import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:usaficity/app/routes/routes.path.dart';
 
 import '../../controller/cubit/cubit.dart';
 import '../../controller/state/state.dart';
 import '../shared/shared.dart';
 
 class MainView extends StatelessWidget {
-  static dynamic route = '/main/:index';
+  static dynamic route = '/main';
   const MainView({super.key});
 
   @override
@@ -131,114 +128,11 @@ class MainView extends StatelessWidget {
                         label: 'Profile',
                         tooltip: '',
                       ),
-                      NavigationDestination(
-                        icon: Icon(
-                          AppIcons.view,
-                          color: theme.primaryColorLight,
-                          size: sizeWidth * 0.05,
-                        ),
-                        selectedIcon: Icon(
-                          AppIcons.viewB,
-                          color: theme.primaryColor,
-                          size: sizeWidth * 0.07,
-                        ),
-                        label: 'OverView',
-                        tooltip: '',
-                      ),
                     ],
                   ),
                 ),
               ),
             ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class OverView extends StatelessWidget {
-  const OverView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic cubit = MainCubit.get(context);
-    dynamic sizeHeight = MediaQuery.sizeOf(context).height;
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    return BlocConsumer<MainCubit, MainState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            actions: [
-              GestureDetector(
-                onTap: () => cubit.changeThemeMode(),
-                child: Icon(
-                  cubit.isDark ? AppIcons.lightMode : AppIcons.darkMode,
-                ),
-              ),
-              Gap(sizeWidth * 0.05),
-              GestureDetector(
-                onTap: () => context.push(RoutePath.notification),
-                child: notifIcon(
-                  sizeHeight,
-                  theme,
-                  theme.scaffoldBackgroundColor.withOpacity(0.5),
-                ),
-              ),
-              Gap(sizeWidth * 0.05),
-            ],
-          ),
-          body: ListView(
-            children: <Widget>[
-              Text("Usaf'ty", style: theme.textTheme.displayLarge),
-              Text('Hello', style: theme.textTheme.titleLarge),
-              Text('Salut', style: theme.textTheme.headlineLarge),
-              Text('Kevin', style: theme.textTheme.headlineMedium),
-              Text('Bénédicte',
-                  style: Theme.of(context).textTheme.headlineSmall),
-              Text('Georges', style: Theme.of(context).textTheme.titleSmall),
-              Text('Byona', style: Theme.of(context).textTheme.displayMedium),
-              Text('Lumbex', style: Theme.of(context).textTheme.displaySmall),
-              Text('Kish', style: Theme.of(context).textTheme.titleMedium),
-              Text('Losingson', style: Theme.of(context).textTheme.bodyMedium),
-              Text("Usaf'ty", style: Theme.of(context).textTheme.bodySmall),
-              Text("azertyuiolkjhgfdswxcvbn,",
-                  style: Theme.of(context).textTheme.labelMedium),
-              Text("error error error error error error",
-                  style: Theme.of(context).textTheme.labelSmall),
-              Text('${cubit.counter}',
-                  style: Theme.of(context).textTheme.displayMedium),
-              Image.asset('${AppImages.bluepoub}'),
-              Image.asset('${AppImages.cleancity}'),
-              Image.asset('${AppImages.greenpoub}'),
-              Image.asset('${AppImages.redpoub}'),
-              Image.asset('${AppImages.tri}'),
-              Image.asset('${AppImages.yellowpoub}'),
-              Image.asset('${AppImages.logo}'),
-              Image.asset('${AppImages.logol}'),
-              Image.asset('${AppImages.launcherIcon}'),
-              Container(height: 50, color: AppColors.tdBlack),
-              Container(height: 50, color: AppColors.tdBlackO),
-              Container(height: 50, color: AppColors.tdWhite),
-              Container(height: 50, color: AppColors.tdWhiteO),
-              Container(height: 50, color: AppColors.tdBlue),
-              Container(height: 50, color: AppColors.tdBlueB),
-              Container(height: 50, color: AppColors.tdGreenO),
-              Container(height: 50, color: AppColors.tdGrey),
-              Container(height: 50, color: AppColors.tdOrange),
-              Container(height: 50, color: AppColors.tdRed),
-              Container(height: 50, color: AppColors.tdYellowB),
-            ],
-          ),
-          floatingActionButton: Container(
-            margin: EdgeInsets.only(bottom: sizeHeight * 0.1),
-            child: FloatingActionButton(
-              onPressed: () => cubit.incrementCounter(),
-              tooltip: 'Increment',
-              child: const Icon(Icons.add),
-            ),
           ),
         );
       },

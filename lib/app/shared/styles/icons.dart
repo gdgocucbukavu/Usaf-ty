@@ -47,6 +47,8 @@ class AppIcons {
 
   static dynamic warn = Clarity.warning_line;
 
+  static dynamic galleryPhoto = CupertinoIcons.photo;
+
   static dynamic privacy = Icons.privacy_tip_outlined;
   // Benedict add icones
   static dynamic rdcFlag = Flags.democratic_republic_of_congo;
@@ -67,5 +69,5 @@ class AppIcons {
 
   static dynamic send = Icons.near_me_outlined;
 
-  static dynamic photoCapture = Icons.camera_alt_outlined;
+  static dynamic photoCapture = CupertinoIcons.photo_camera;
 }

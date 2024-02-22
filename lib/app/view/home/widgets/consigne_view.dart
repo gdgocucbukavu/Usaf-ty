@@ -1,7 +1,6 @@
+import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:gap/gap.dart';
-import 'package:icons_plus/icons_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:list_wheel_scroll_view_nls/list_wheel_scroll_view_nls.dart';
 
@@ -42,7 +41,7 @@ class _ConsigneViewState extends State<ConsigneView> {
           ),
           Gap(sizeWidth * 0.005),
           Container(
-            height: sizeWidth * 0.45,
+            height: sizeWidth * 0.5,
             color: Colors.transparent,
             child: ListWheelScrollViewX(
               scrollDirection: Axis.horizontal,
@@ -57,9 +56,9 @@ class _ConsigneViewState extends State<ConsigneView> {
                 consignes.length,
                 (index) {
                   return Container(
-                    height: sizeWidth * 0.4,
+                    height: sizeWidth * 0.45,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColorDark,
+                      color: Theme.of(context).highlightColor,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     padding: const EdgeInsets.all(15),
@@ -73,23 +72,32 @@ class _ConsigneViewState extends State<ConsigneView> {
                                 Container(
                                   alignment: Alignment.center,
                                   margin: const EdgeInsets.only(right: 15),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.tdGrey,
-                                    borderRadius: BorderRadius.circular(100),
-                                    border: Border.all(
-                                      color: AppColors.tdGrey,
-                                      width: 1,
-                                      style: BorderStyle.solid,
-                                    ),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                        consignes[index].img,
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  height: 45,
-                                  width: 45,
+                                  decoration: (consignes[index].img == '')
+                                      ? BoxDecoration(
+                                          color: Colors.transparent,
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                              AppImages.gaspillage,
+                                            ),
+                                          ),
+                                        )
+                                      : BoxDecoration(
+                                          color: AppColors.tdGrey,
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: AppColors.tdGrey,
+                                            style: BorderStyle.solid,
+                                            width: 1,
+                                          ),
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              consignes[index].img,
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                  height: sizeWidth * 0.1,
+                                  width: sizeWidth * 0.1,
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,31 +109,27 @@ class _ConsigneViewState extends State<ConsigneView> {
                                         Text(
                                           consignes[index].name,
                                           style: GoogleFonts.poppins(
-                                            color: theme.highlightColor,
-                                            fontSize: MediaQuery.sizeOf(context)
-                                                    .width /
-                                                30,
+                                            color: theme.primaryColorLight,
+                                            fontSize: sizeWidth * 0.035,
                                             fontWeight: FontWeight.bold,
                                             letterSpacing: 2,
                                             height: 1.5,
                                           ),
                                         ),
                                         Icon(
-                                          CupertinoIcons.quote_bubble,
-                                          color: theme.highlightColor,
-                                          size:
-                                              MediaQuery.sizeOf(context).width /
-                                                  22,
+                                          (consignes[index].img == '')
+                                              ? CupertinoIcons.lightbulb
+                                              : CupertinoIcons.light_max,
+                                          color: theme.primaryColorLight,
+                                          size: sizeWidth * 0.04,
                                         ),
                                       ],
                                     ),
                                     Text(
-                                      consignes[index].profession,
+                                      consignes[index].mail,
                                       style: GoogleFonts.poppins(
                                         color: AppColors.tdGrey,
-                                        fontSize:
-                                            MediaQuery.sizeOf(context).width /
-                                                50,
+                                        fontSize: sizeWidth * 0.02,
                                         fontWeight: FontWeight.w300,
                                         letterSpacing: 1.5,
                                         height: 1.5,
@@ -135,52 +139,39 @@ class _ConsigneViewState extends State<ConsigneView> {
                                 ),
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Icon(
-                                  Clarity.block_quote_line,
-                                  color: theme.highlightColor,
-                                  size: MediaQuery.sizeOf(context).width / 22,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    padding: const EdgeInsets.only(
-                                      top: 8,
-                                      left: 5,
-                                      right: 15,
+                            Container(
+                              padding: EdgeInsets.only(
+                                top: sizeWidth * 0.01,
+                                left: sizeWidth * 0.02,
+                                right: sizeWidth * 0.02,
+                              ),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    consignes[index].content,
+                                    style: GoogleFonts.poppins(
+                                      color: theme.primaryColorDark,
+                                      fontSize: sizeWidth * 0.02,
+                                      fontWeight: FontWeight.normal,
+                                      letterSpacing: 1.5,
+                                      height: 1.8,
                                     ),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          consignes[index].content,
-                                          style: GoogleFonts.poppins(
-                                            color: theme.highlightColor,
-                                            fontSize: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                0.02,
-                                            fontWeight: FontWeight.normal,
-                                            letterSpacing: 1.5,
-                                            height: 1.8,
-                                          ),
-                                          softWrap: true,
-                                          textAlign: TextAlign.justify,
-                                          maxLines: 4,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ],
-                                    ),
+                                    softWrap: true,
+                                    textAlign: TextAlign.justify,
+                                    maxLines: 6,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
                         Icon(
-                          CupertinoIcons.signature,
-                          color: theme.highlightColor,
-                          size: MediaQuery.sizeOf(context).width * 0.04,
+                          (consignes[index].img == '')
+                              ? null
+                              : CupertinoIcons.signature,
+                          color: theme.primaryColorDark,
+                          size: sizeWidth * 0.04,
                         ),
                       ],
                     ),

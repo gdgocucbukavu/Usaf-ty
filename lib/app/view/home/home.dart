@@ -12,11 +12,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic sizeHeight = MediaQuery.sizeOf(context).height;
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
-      backgroundColor: theme.highlightColor.withOpacity(0.9),
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.only(
@@ -28,14 +25,15 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               HeaderPage(),
-              Gap(sizeHeight * 0.01),
+              Gap(sizeWidth * 0.02),
               HeaderTextPage(),
-              Gap(sizeHeight * 0.01),
+              Gap(sizeWidth * 0.02),
               UpperScrollwidget(),
-              Gap(sizeHeight * 0.02),
+              Gap(sizeWidth * 0.02),
               ScheduleContainer(),
-              Gap(sizeHeight * 0.02),
+              Gap(sizeWidth * 0.02),
               ConsigneView(),
+              Gap(sizeWidth * 0.18),
             ],
           ),
         ),

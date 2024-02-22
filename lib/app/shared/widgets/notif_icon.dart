@@ -23,14 +23,14 @@ Container notifIcon(sizeHeight, theme, color) {
           size: sizeHeight * 0.02,
           color: theme.primaryColorLight,
         ),
-        Container(
-          height: sizeHeight * 0.007,
-          width: sizeHeight * 0.007,
-          decoration: BoxDecoration(
-            color: AppColors.tdRed,
-            borderRadius: BorderRadius.circular(100),
-          ),
-        ),
+        // Container(
+        //   height: sizeHeight * 0.007,
+        //   width: sizeHeight * 0.007,
+        //   decoration: BoxDecoration(
+        //     color: AppColors.tdRed,
+        //     borderRadius: BorderRadius.circular(100),
+        //   ),
+        // ),
       ],
     ),
   );

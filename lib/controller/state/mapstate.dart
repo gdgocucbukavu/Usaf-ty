@@ -7,3 +7,7 @@ class AddMarkerState extends MapState {}
 class GetCurrentLocationState extends MapState {}
 
 class GetPolyPointState extends MapState {}
+
+class GetUserLocationState extends MapState {}
+
+class UpDateUserLocationState extends MapState {}
