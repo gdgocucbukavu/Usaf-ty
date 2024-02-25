@@ -25,8 +25,8 @@ class MainView extends StatelessWidget {
             children: [
               cubit.screens[cubit.i],
               Positioned(
-                left: sizeWidth * 0.02,
-                right: sizeWidth * 0.02,
+                left: 10,
+                right: 10,
                 bottom: 0,
                 child: Container(
                   decoration: BoxDecoration(
@@ -39,14 +39,14 @@ class MainView extends StatelessWidget {
                     color: theme.highlightColor.withOpacity(0.9),
                   ),
                   width: sizeWidth,
-                  height: sizeWidth * 0.17,
+                  height: 80,
                   margin: EdgeInsets.only(top: 2),
                   child: Container(),
                 ),
               ),
               Positioned(
-                left: sizeWidth * 0.05,
-                right: sizeWidth * 0.05,
+                left: 20,
+                right: 20,
                 bottom: 0,
                 child: NavigationBarTheme(
                   data: NavigationBarThemeData(
@@ -56,9 +56,9 @@ class MainView extends StatelessWidget {
                     labelTextStyle: MaterialStatePropertyAll(
                       GoogleFonts.poppins(
                         color: AppColors.tdYellowB,
-                        fontSize: sizeWidth * 0.015,
                         fontWeight: FontWeight.w300,
                         letterSpacing: 1.5,
+                        fontSize: 7,
                       ),
                     ),
                     overlayColor:
@@ -77,12 +77,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.home,
                           color: theme.primaryColorLight,
-                          size: sizeWidth * 0.05,
+                          size: 25,
                         ),
                         selectedIcon: Icon(
                           AppIcons.homeB,
                           color: theme.primaryColor,
-                          size: sizeWidth * 0.07,
+                          size: 35,
                         ),
                         label: 'Accueil'.tr(),
                         tooltip: '',
@@ -91,12 +91,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.calendar,
                           color: theme.primaryColorLight,
-                          size: sizeWidth * 0.05,
+                          size: 25,
                         ),
                         selectedIcon: Icon(
                           AppIcons.calendarB,
                           color: theme.primaryColor,
-                          size: sizeWidth * 0.07,
+                          size: 35,
                         ),
                         label: 'Horaire'.tr(),
                         tooltip: '',
@@ -105,12 +105,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.maps,
                           color: theme.primaryColorLight,
-                          size: sizeWidth * 0.05,
+                          size: 25,
                         ),
                         selectedIcon: Icon(
                           AppIcons.mapsB,
                           color: theme.primaryColor,
-                          size: sizeWidth * 0.07,
+                          size: 35,
                         ),
                         label: 'Map'.tr(),
                         tooltip: '',
@@ -119,12 +119,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.account,
                           color: theme.primaryColorLight,
-                          size: sizeWidth * 0.05,
+                          size: 25,
                         ),
                         selectedIcon: Icon(
                           AppIcons.accountB,
                           color: theme.primaryColor,
-                          size: sizeWidth * 0.07,
+                          size: 35,
                         ),
                         label: 'Profil'.tr(),
                         tooltip: '',

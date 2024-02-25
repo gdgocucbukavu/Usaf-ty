@@ -75,7 +75,7 @@ List msgs = [
     name: 'Conseil IA',
     isString: false,
     haveIcon: false,
-    icon: AppImages.ia1,
+    icon: AppImages.ia,
     msg:
         "La gestion des déchêts nous aide nos seulement à bien structurer nos odrures mais aussi à diminuer la pollution de l'air et permettre aux agents d'avoir une vision claire sur ce fait et tel type serait dans tel endroit !",
     date: DateTime.now(),

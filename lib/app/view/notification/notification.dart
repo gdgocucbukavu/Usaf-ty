@@ -30,7 +30,7 @@ class NotificationScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: Expanded(child: notifBody(theme, size)),
+      body: notifBody(theme, size),
     );
   }
 }

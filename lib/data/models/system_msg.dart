@@ -42,7 +42,7 @@ List sytemMessages = [
   SystemMsg(
     title: 'IA',
     time: DateFormat.MMMEd().format(DateTime.now()),
-    image: AppImages.ia1,
+    image: AppImages.ia,
     color: AppColors.tdWhite,
     msg:
         "Commencez à participer au bien être de la société en fournissant à l'application des données en image ou en texte sur des déchets à la maison et partout.",

@@ -45,7 +45,7 @@ class ProfilCubit extends Cubit<ProfilState> {
     numero: "+243 894 097 071",
     agence: "Usaf'ty",
     frais: "50 000 CDF/mois",
-    imgPhoto: AppImages.ia1,
+    imgPhoto: AppImages.ia,
     photoP: AppImages.logo,
   );
 
