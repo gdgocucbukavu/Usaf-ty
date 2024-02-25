@@ -4,22 +4,23 @@ Usaf'ty is an application, designed in the simplest way to use, aimed at achievi
 
 ## Run & Installation
 
-Pour run le code, commencer par cloner le code dans votre machine, avec la commande : 
+To run the code, start by cloning the code into your machine, with the command :
+```code
+git clone https://github.com/GDSC-UCB/Usaf-ty.git
+```
+
+Then make sure you have all the necessary tools that Flutter requires to run on a computer (Flutter SDK) with an Android and/or iOS emulator, and Flutter version 3.16.9.
+Download all the packages that the project used, just by using the command:
+
 ```code
 flutter clean
 flutter pub get
 flutter pub outdated
 ```
 
-Puis assurez-vous d'avoir tous les outils nécessaires que Flutter demande pour être exécuter sur un ordinateur (SDK Flutter) avec un émulateur Android et/ou iOS, et la version Flutter 3.16.9.
-Télécharger tous les packages que le projet a utilisé, juste en utilisant la commande :
-```code
-flutter clean
-flutter pub get
-flutter pub outdated
-```
+For Maps, make sure you have accepted permission for the Maps API to access Device features.
 
-Pour une connection réussi avec Firebase, assurer vous de pouvoir installer tous les packgages firebases utilisés, 
+For a successful connection with Firebase, make sure that all Firebase packages used are installed, be connected to the internet to use certain features such as authentication, sending feedback, advice, signaling and others. And if it requires Firebase configuration for some tools like npm, nodeJS, please follow Firebase documentation.
 
 ### Contribution
 For any contributions or modifications please add your own branch using the functionality you want to add as the branch name.
