@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -21,12 +22,14 @@ class MapCubit extends Cubit<MapState> {
         lng: currentLocation!.longitude,
       ),
     );
-
-    print('**************************************** ${user.email}');
   }
 
-  static dynamic destination = LatLng(-2.4992107119225553, 28.868730999629342);
-  static dynamic source = LatLng(-2.504368100365365, 28.865738715637093);
+  static dynamic destination = LatLng(-2.404338883207981, 28.838976997537976);
+  static dynamic source = LatLng(-2.5007389434069105, 28.849003662179616);
+
+  BitmapDescriptor sourceIcon = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor destinationIcon = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor currentIcon = BitmapDescriptor.defaultMarker;
 
   bool? serviceEnabled;
   Position? currentLocation;
@@ -40,6 +43,22 @@ class MapCubit extends Cubit<MapState> {
     -2.4992107119225553,
     28.868730999629342,
   );
+
+  setCustomMatkerIcons() {
+    BitmapDescriptor.fromAssetImage(
+      ImageConfiguration.empty,
+      AppImages.logo,
+    ).then(
+      (icon) => sourceIcon = icon,
+    );
+    BitmapDescriptor.fromAssetImage(
+      ImageConfiguration.empty,
+      AppImages.gdsclogo,
+    ).then(
+      (icon) => destinationIcon = icon,
+    );
+    emit(SetCustomMarkerIconsState());
+  }
 
   getCurrentLocation() async {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -61,8 +80,7 @@ class MapCubit extends Cubit<MapState> {
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
 
-    PolylineResult polylineResult =
-        await polylinePoints.getRouteBetweenCoordinates(
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       google_api_key,
       PointLatLng(source.latitude, source.longitude),
       PointLatLng(destination.latitude, destination.longitude),
@@ -70,12 +88,11 @@ class MapCubit extends Cubit<MapState> {
       wayPoints: [PolylineWayPoint(location: "Bukavu, DRC")],
     );
 
-    if (polylineResult.points.isNotEmpty) {
-      polylineResult.points.forEach((PointLatLng point) {
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
     }
-
     emit(GetPolyPointState());
   }
 

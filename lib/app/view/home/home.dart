@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
               ScheduleContainer(),
               Gap(sizeWidth * 0.02),
               ConsigneView(),
-              Gap(sizeWidth * 0.18),
+              Gap(sizeWidth * 0.2),
             ],
           ),
         ),

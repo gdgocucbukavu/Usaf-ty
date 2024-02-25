@@ -1,8 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:usaficity/app/shared/shared.dart';
 import 'package:usaficity/app/view/schedule/widgets/tools.dart';
+
+import '../../../routes/routes.dart';
 
 class TableCalendarr extends StatefulWidget {
   const TableCalendarr({super.key});
@@ -36,17 +40,27 @@ class _TableCalendarrState extends State<TableCalendarr> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              notifIcon(
-                sizeHeight,
-                theme,
-                theme.scaffoldBackgroundColor.withOpacity(0.5),
+              GestureDetector(
+                onTap: () => context.push(RoutePath.notification),
+                child: notifIcon(
+                  sizeHeight,
+                  theme,
+                  theme.scaffoldBackgroundColor.withOpacity(0.5),
+                ),
               ),
             ],
           ),
-          Gap(sizeWidth * 0.1),
+          Gap(sizeWidth * 0.05),
           Text(
-            'Today : ' + DateTime.now().toString().split(" ")[0],
+            "Aujourd'hui : ".tr(),
             style: theme.textTheme.displaySmall,
+          ),
+          Gap(sizeWidth * 0.02),
+          Text(
+            DateTime.now().toString().split(" ")[0].tr(),
+            style: theme.textTheme.displaySmall.copyWith(
+              fontSize: sizeWidth * 0.05,
+            ),
           ),
           Container(
             child: TableCalendar(

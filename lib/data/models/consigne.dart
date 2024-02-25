@@ -1,20 +1,25 @@
+import '../../app/shared/shared.dart';
+
 class Consigne {
   String img;
   String name;
   String mail;
   String content;
+  dynamic bckImg;
 
   Consigne({
     required this.img,
     required this.name,
     required this.mail,
     required this.content,
+    required this.bckImg,
   });
 }
 
 List<Consigne> consignes = [
   Consigne(
     img: '',
+    bckImg: AppImages.home1,
     name: 'Tri des déchêts ',
     mail: 'uusafty@gmail.com',
     content:
@@ -26,6 +31,7 @@ List<Consigne> consignes = [
   ),
   Consigne(
     img: '',
+    bckImg: AppImages.tri,
     name: 'Tri des déchêts ',
     mail: 'uusafty@gmail.com',
     content:
@@ -35,6 +41,7 @@ List<Consigne> consignes = [
   ),
   Consigne(
     img: 'https://avatars.githubusercontent.com/u/127692851?v=4',
+    bckImg: AppImages.cleancity,
     name: 'Georges Byona ',
     mail: 'georgesbyona@gmail.com',
     content: '''? Comment réduire les déchêts
@@ -45,6 +52,7 @@ List<Consigne> consignes = [
   ),
   Consigne(
     img: 'https://avatars.githubusercontent.com/u/96162207?s=70&v=4',
+    bckImg: AppImages.protection,
     name: 'Bénédict Lubembela ',
     mail: 'mahangobenedict4@gmail.com',
     content: '''? Comment vous protéger
@@ -55,6 +63,7 @@ List<Consigne> consignes = [
   ),
   Consigne(
     img: 'https://avatars.githubusercontent.com/u/147336570?s=70&v=4',
+    bckImg: AppImages.maladie,
     name: 'Kévin Kish ',
     mail: 'kevinkish117@gmail.com',
     content: '''? Types de maladie lié aux déchêts
@@ -64,6 +73,7 @@ List<Consigne> consignes = [
   ),
   Consigne(
     img: 'https://avatars.githubusercontent.com/u/128302807?s=70&v=4',
+    bckImg: AppImages.home3,
     name: 'Abraham Imani ',
     mail: 'imanibahati0@gmail.com',
     content: '''Son impact sur le changement climatique

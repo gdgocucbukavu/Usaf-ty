@@ -10,8 +10,8 @@ Container systemNotif(theme, size) {
       color: theme.highlightColor,
       borderRadius: BorderRadius.circular(20),
     ),
-    width: size.width,
-    padding: EdgeInsets.all(size.width * 0.05),
+    width: size,
+    padding: EdgeInsets.all(size * 0.05),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,9 +21,9 @@ Container systemNotif(theme, size) {
         ),
         for (int i = 0; i < sytemMessages.length; i++) ...{
           Container(
-            margin: EdgeInsets.only(top: size.width * 0.05),
-            height: size.width * 0.15,
-            width: size.width,
+            margin: EdgeInsets.only(top: size * 0.05),
+            height: size * 0.15,
+            width: size,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,17 +34,17 @@ Container systemNotif(theme, size) {
                     color: sytemMessages[i].color.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(100),
                   ),
-                  height: size.width * 0.1,
-                  width: size.width * 0.1,
-                  margin: EdgeInsets.only(right: size.width * 0.03),
+                  height: size * 0.1,
+                  width: size * 0.1,
+                  margin: EdgeInsets.only(right: size * 0.03),
                   child: (sytemMessages[i].icon != null)
                       ? Icon(
                           sytemMessages[i].icon,
                           color: sytemMessages[i].color,
                         )
                       : SizedBox(
-                          width: size.width * 0.06,
-                          height: size.width * 0.06,
+                          width: size * 0.06,
+                          height: size * 0.06,
                           child: Image.asset(sytemMessages[i].image),
                         ),
                 ),
@@ -59,21 +59,21 @@ Container systemNotif(theme, size) {
                           Text(
                             sytemMessages[i].title,
                             style: theme.textTheme.bodyMedium
-                                .copyWith(fontSize: size.width * 0.03),
+                                .copyWith(fontSize: size * 0.03),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                           Text(
                             sytemMessages[i].time,
                             style: theme.textTheme.labelMedium
-                                .copyWith(fontSize: size.width * 0.02),
+                                .copyWith(fontSize: size * 0.02),
                           ),
                         ],
                       ),
                       Text(
                         sytemMessages[i].msg,
                         style: theme.textTheme.bodySmall
-                            .copyWith(fontSize: size.width * 0.025),
+                            .copyWith(fontSize: size * 0.025),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
@@ -84,7 +84,7 @@ Container systemNotif(theme, size) {
             ),
           ),
         },
-        Gap(size.width * 0.05),
+        Gap(size * 0.05),
       ],
     ),
   );

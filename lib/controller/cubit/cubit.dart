@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,9 +75,38 @@ class MainCubit extends Cubit<MainState> {
     ScaffoldMessenger.of(context).showSnackBar(
       customSnackBar(
         context,
-        'Merci pour votre feedback, nous en prendront note ...',
+        'Merci pour votre feedback, nous en prendront note ...'.tr(),
       ),
     );
     emit(SendFeedBackState());
+  }
+
+  dynamic locale = const Locale('fr', 'FR');
+
+  void changeLanguagesToSwahili(BuildContext context) {
+    if (EasyLocalization.of(context)!.locale == const Locale('en', 'US') ||
+        EasyLocalization.of(context)!.locale == const Locale('fr', 'FR')) {
+      context.locale = const Locale('sw', 'TZ');
+    }
+    Navigator.pop(context);
+    emit(ChangeLanguagesToSwahili());
+  }
+
+  void changeLanguagesToEnglish(BuildContext context) {
+    if (EasyLocalization.of(context)!.locale == const Locale('sw', 'TZ') ||
+        EasyLocalization.of(context)!.locale == const Locale('fr', 'FR')) {
+      context.locale = const Locale('en', 'US');
+    }
+    Navigator.pop(context);
+    emit(ChangeLanguagesToEnglish());
+  }
+
+  void changeLanguagesToFrench(BuildContext context) {
+    if (EasyLocalization.of(context)!.locale == const Locale('en', 'US') ||
+        EasyLocalization.of(context)!.locale == const Locale('sw', 'TZ')) {
+      context.locale = const Locale('fr', 'FR');
+    }
+    Navigator.pop(context);
+    emit(ChangeLanguagesToFrench());
   }
 }

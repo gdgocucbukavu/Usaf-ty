@@ -1,14 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:usaficity/app/shared/shared.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:usaficity/controller/cubit/cubit.dart';
 import 'package:usaficity/controller/cubit/profilcubit.dart';
 import 'package:usaficity/controller/state/profilstate.dart';
 
 import '../../routes/routes.path.dart';
 import 'widgets/components.dart';
+import 'widgets/menu_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -17,6 +21,8 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     dynamic sizeHeight = MediaQuery.sizeOf(context).height;
+    dynamic user = Provider.of<User?>(context);
+    dynamic cubit1 = ProfilCubit.get(context);
     dynamic cubit = MainCubit.get(context);
     dynamic theme = Theme.of(context);
 
@@ -34,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -59,15 +65,28 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 Gap(sizeWidth * 0.1),
                 HeadProfile(),
+                Gap(sizeWidth * 0.05),
                 ControllerOptionButton(),
-                Divider(
-                  height: 0.6,
-                  color: AppColors.tdGrey,
-                  indent: sizeWidth * 0.1,
-                  endIndent: sizeWidth * 0.1,
-                ),
-                Gap(sizeHeight * 0.02),
-                IconButtonFleche(),
+                Gap(sizeWidth * 0.05),
+                IconButtonWithArrow(),
+                Gap(sizeWidth * 0.1),
+                cubit1.isConnecting && user == null
+                    ? Column(
+                        children: [
+                          CircularProgressIndicator(
+                            color: theme.primaryColorLight,
+                            strokeWidth: 2,
+                          ),
+                          Gap(sizeWidth * 0.02),
+                          Text(
+                            'Connexion ...'.tr(),
+                            style: TextStyle(
+                              fontSize: sizeWidth * 0.02,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
               ],
             ),
           ),

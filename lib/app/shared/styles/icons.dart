@@ -40,6 +40,9 @@ class AppIcons {
 
   static dynamic note = Clarity.note_edit_line;
 
+  static dynamic star = Clarity.star_line;
+  static dynamic starB = Clarity.star_solid;
+
   static dynamic login = Clarity.login_line;
   static dynamic logout = Clarity.logout_line;
 
@@ -49,7 +52,7 @@ class AppIcons {
 
   static dynamic galleryPhoto = CupertinoIcons.photo;
 
-  static dynamic privacy = Icons.privacy_tip_outlined;
+  static dynamic privacy = CupertinoIcons.exclamationmark_shield;
   // Benedict add icones
   static dynamic rdcFlag = Flags.democratic_republic_of_congo;
 

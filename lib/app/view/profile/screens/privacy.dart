@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:usaficity/app/shared/shared.dart';
 
 class Privacy extends StatelessWidget {
-  static const route = '/Privacy';
+  static const route = '/privacy';
   const Privacy({super.key});
 
   @override
@@ -11,66 +12,62 @@ class Privacy extends StatelessWidget {
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar: AppBar(),
-      body: ListView(
-        children: [
-          Container(
-            width: sizeWidth,
-            padding: EdgeInsets.symmetric(horizontal: sizeWidth * 0.05),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(
-                    top: sizeWidth * 0.02,
-                    bottom: sizeWidth * 0.05,
-                  ),
-                  width: sizeWidth / 6.2,
-                  height: sizeWidth / 6.2,
-                  decoration: BoxDecoration(
-                    color: AppColors.tdGrey,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage(AppImages.logo),
-                    ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: sizeWidth * 0.05),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                  top: sizeWidth * 0.02,
+                  bottom: sizeWidth * 0.05,
+                ),
+                width: sizeWidth / 6.2,
+                height: sizeWidth / 6.2,
+                decoration: BoxDecoration(
+                  color: AppColors.tdGrey,
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage(AppImages.logo),
                   ),
                 ),
-                Gap(sizeWidth * 0.02),
-                Text(
-                  dataTerms.gtitre,
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-                Gap(sizeWidth * 0.05),
-                SmallTextContent(txt: dataTerms.text1),
-                SmallTextContent(txt: dataTerms.text2),
-                SmallTextContent(txt: dataTerms.text3),
-                TitleLine(titre: dataTerms.stitre1),
-                TextPoint(txt: dataTerms.pts1),
-                TextPoint(txt: dataTerms.pts2),
-                TextPoint(txt: dataTerms.pts3),
-                TextPoint(txt: dataTerms.pts4),
-                SizedBox(
-                  height: sizeWidth * 0.03,
-                ),
-                TitleLine(titre: dataTerms.stitre2),
-                SmallTextContent(txt: dataTerms.text4),
-                TextPoint(txt: dataTerms.pts5),
-                TextPoint(txt: dataTerms.pts6),
-                TextPoint(txt: dataTerms.pts7),
-                TextPoint(txt: dataTerms.pts8),
-                TextPoint(txt: dataTerms.pts9),
-                SizedBox(
-                  height: sizeWidth * 0.03,
-                ),
-                TitleLine(titre: dataTerms.stitre3),
-                SmallTextContent(txt: dataTerms.text5),
-                TitleLine(titre: dataTerms.stitre4),
-                SmallTextContent(txt: dataTerms.text6),
-                Footer(),
-              ],
-            ),
+              ),
+              Gap(sizeWidth * 0.02),
+              Text(
+                dataTerms.gtitre,
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              Gap(sizeWidth * 0.05),
+              SmallTextContent(txt: dataTerms.text1),
+              SmallTextContent(txt: dataTerms.text2),
+              SmallTextContent(txt: dataTerms.text3),
+              TitleLine(titre: dataTerms.stitre1),
+              TextPoint(txt: dataTerms.pts1),
+              TextPoint(txt: dataTerms.pts2),
+              TextPoint(txt: dataTerms.pts3),
+              TextPoint(txt: dataTerms.pts4),
+              SizedBox(
+                height: sizeWidth * 0.03,
+              ),
+              TitleLine(titre: dataTerms.stitre2),
+              SmallTextContent(txt: dataTerms.text4),
+              TextPoint(txt: dataTerms.pts5),
+              TextPoint(txt: dataTerms.pts6),
+              TextPoint(txt: dataTerms.pts7),
+              TextPoint(txt: dataTerms.pts8),
+              TextPoint(txt: dataTerms.pts9),
+              SizedBox(
+                height: sizeWidth * 0.03,
+              ),
+              TitleLine(titre: dataTerms.stitre3),
+              SmallTextContent(txt: dataTerms.text5),
+              TitleLine(titre: dataTerms.stitre4),
+              SmallTextContent(txt: dataTerms.text6),
+              Footer(),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -87,7 +84,7 @@ class SmallTextContent extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(bottom: sizeWidth * 0.04),
       width: sizeWidth - sizeWidth * 0.1,
-      child: Text(txt, style: font),
+      child: Text(txt.tr(), style: font),
     );
   }
 }
@@ -103,7 +100,7 @@ class TitleLine extends StatelessWidget {
       width: sizeWidth - sizeWidth * 0.1,
       padding: EdgeInsets.only(bottom: sizeWidth * 0.05),
       child: Text(
-        titre,
+        titre.tr(),
         style: TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 16,
@@ -140,7 +137,7 @@ class TextPoint extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(bottom: sizeWidth * 0.01),
             width: sizeWidth - sizeWidth * 0.1 - sizeWidth * 0.1,
-            child: Text(txt, style: font),
+            child: Text(txt.tr(), style: font),
           )
         ],
       ),

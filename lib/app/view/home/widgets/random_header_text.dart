@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:usaficity/app/shared/styles/colors.dart';
@@ -6,29 +7,29 @@ import 'package:usaficity/app/shared/styles/colors.dart';
 class HeaderTextPage extends StatelessWidget {
   HeaderTextPage({super.key});
   Random random = Random();
-double textSize=13.0;
+  double textSize = 13.0;
   @override
   Widget build(BuildContext context) {
     //LIST TOOLS
     dynamic headertext1 = Text.rich(TextSpan(
-        text: "Une ville ",
+        text: "Une ville ".tr(),
         style: Theme.of(context)
             .textTheme
             .headlineSmall!
             .copyWith(fontSize: textSize, fontWeight: FontWeight.bold),
         children: [
           TextSpan(
-              text: "plus propre ",
+              text: "plus propre ".tr(),
               style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
-            text: "pour une santé ",
+            text: "pour une santé ".tr(),
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall!
                 .copyWith(fontSize: textSize, fontWeight: FontWeight.bold),
           ),
           TextSpan(
-              text: "plus saine",
+              text: "plus saine".tr(),
               style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
             text: ".",
@@ -39,15 +40,16 @@ double textSize=13.0;
           ),
         ]));
 
-    dynamic headertext2 = Text.rich(TextSpan(
-        text: "Gardez la ville ",
+    dynamic headertext2 = Text.rich(
+      TextSpan(
+        text: "Gardez la ville ".tr(),
         style: Theme.of(context)
             .textTheme
             .headlineSmall!
             .copyWith(fontSize: textSize, fontWeight: FontWeight.bold),
         children: [
           TextSpan(
-              text: "propre ",
+              text: "propre ".tr(),
               style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
             text: "et la propreté ",
@@ -57,7 +59,7 @@ double textSize=13.0;
                 .copyWith(fontSize: textSize, fontWeight: FontWeight.bold),
           ),
           TextSpan(
-              text: "vous gardera",
+              text: "vous gardera".tr(),
               style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
             text: ".",
@@ -66,26 +68,28 @@ double textSize=13.0;
                 .headlineSmall!
                 .copyWith(fontSize: textSize, fontWeight: FontWeight.bold),
           ),
-        ]));
+        ],
+      ),
+    );
     dynamic headertext3 = Text.rich(TextSpan(
-        text: "L'environnement est notre ",
+        text: "L'environnement est notre ".tr(),
         style: Theme.of(context)
             .textTheme
             .headlineSmall!
             .copyWith(fontSize: textSize, fontWeight: FontWeight.bold),
         children: [
           TextSpan(
-              text: "maison commune",
+              text: "maison commune".tr(),
               style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
-            text: ", prenez en bien ",
+            text: ", prenez en bien ".tr(),
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall!
                 .copyWith(fontSize: textSize, fontWeight: FontWeight.bold),
           ),
           TextSpan(
-              text: "soin",
+              text: "soin".tr(),
               style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize)),
           TextSpan(
             text: ".",
@@ -97,22 +101,22 @@ double textSize=13.0;
         ]));
 
     dynamic headertext4 = Text.rich(TextSpan(
-        text: "Bien gérer ",
+        text: "Bien gérer ".tr(),
         style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize),
         children: [
           TextSpan(
-            text: "les déchets ",
+            text: "les déchets ".tr(),
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall!
-                .copyWith(fontSize:textSize, fontWeight: FontWeight.bold),
+                .copyWith(fontSize: textSize, fontWeight: FontWeight.bold),
           ),
           TextSpan(
-            text: "améliore ",
+            text: "améliore ".tr(),
             style: TextStyle(color: AppColors.tdYellowB, fontSize: textSize),
           ),
           TextSpan(
-            text: "l'état du climat.",
+            text: "l'état du climat.".tr(),
             style: Theme.of(context)
                 .textTheme
                 .headlineSmall!

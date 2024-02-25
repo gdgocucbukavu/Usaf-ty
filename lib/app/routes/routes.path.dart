@@ -7,7 +7,6 @@ import 'package:usaficity/app/view/profile/widgets/about.dart';
 import '../view/view.dart';
 
 class RoutePath {
-  static dynamic auth = AuthScreen.route;
   static dynamic mainview = MainView.route;
   static dynamic notification = NotificationScreen.route;
   static dynamic about = AboutPage.route;

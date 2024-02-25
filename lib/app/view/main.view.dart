@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../controller/cubit/cubit.dart';
 import '../../controller/state/state.dart';
@@ -83,7 +84,7 @@ class MainView extends StatelessWidget {
                           color: theme.primaryColor,
                           size: sizeWidth * 0.07,
                         ),
-                        label: 'Accueil',
+                        label: 'Accueil'.tr(),
                         tooltip: '',
                       ),
                       NavigationDestination(
@@ -97,7 +98,7 @@ class MainView extends StatelessWidget {
                           color: theme.primaryColor,
                           size: sizeWidth * 0.07,
                         ),
-                        label: 'Horaire',
+                        label: 'Horaire'.tr(),
                         tooltip: '',
                       ),
                       NavigationDestination(
@@ -111,7 +112,7 @@ class MainView extends StatelessWidget {
                           color: theme.primaryColor,
                           size: sizeWidth * 0.07,
                         ),
-                        label: 'Maps',
+                        label: 'Map'.tr(),
                         tooltip: '',
                       ),
                       NavigationDestination(
@@ -125,7 +126,7 @@ class MainView extends StatelessWidget {
                           color: theme.primaryColor,
                           size: sizeWidth * 0.07,
                         ),
-                        label: 'Profile',
+                        label: 'Profil'.tr(),
                         tooltip: '',
                       ),
                     ],

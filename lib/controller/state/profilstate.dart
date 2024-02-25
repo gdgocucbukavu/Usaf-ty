@@ -19,3 +19,7 @@ class PickImgFromGalleryState extends ProfilState {}
 class ShowImagePickerOptionsState extends ProfilState {}
 
 class OnSignalisationSubmitedState extends ProfilState {}
+
+class OnEditSubmitedState extends ProfilState {}
+
+class CheckConnectionState extends ProfilState {}

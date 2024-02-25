@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -72,7 +73,8 @@ class _BottomViewState extends State<BottomView> {
                             '$distance km ',
                             style: theme.textTheme.titleMedium,
                           ),
-                          Text("restant", style: theme.textTheme.bodySmall),
+                          Text("restant".tr(),
+                              style: theme.textTheme.bodySmall),
                         ],
                       ),
                     ],
@@ -81,21 +83,21 @@ class _BottomViewState extends State<BottomView> {
                     sizeWidth,
                     theme,
                     AppColors.tdGreenO,
-                    '1ère Station',
+                    '1ère Station'.tr(),
                     'Av. Fizi/Q. Ndendere/C. Ibanda',
                   ),
                   stationView(
                     sizeWidth,
                     theme,
                     AppColors.tdYellowB,
-                    '2ème Station',
+                    '2ème Station'.tr(),
                     'Parking du Gouverneur',
                   ),
                   stationView(
                     sizeWidth,
                     theme,
                     AppColors.tdRed,
-                    '3ème Station',
+                    '3ème Station'.tr(),
                     'Bureau SNEL/AV. Gouverneur',
                   ),
                 ],

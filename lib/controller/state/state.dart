@@ -11,3 +11,9 @@ class NavigationBarState extends MainState {}
 class GetPhoneInfoState extends MainState {}
 
 class SendFeedBackState extends MainState {}
+
+class ChangeLanguagesToSwahili extends MainState {}
+
+class ChangeLanguagesToEnglish extends MainState {}
+
+class ChangeLanguagesToFrench extends MainState {}

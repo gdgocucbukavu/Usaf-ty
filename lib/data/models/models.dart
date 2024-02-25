@@ -98,20 +98,3 @@ class Abonnement {
 }
 
 List<Abonnement> abonnements = [];
-
-class Signal {
-  String idSignal;
-  dynamic photo;
-  dynamic localisation;
-  dynamic heure;
-  String message;
-
-  Signal(
-      {required this.idSignal,
-      required this.message,
-      this.photo,
-      this.heure,
-      this.localisation});
-}
-
-List<Signal> signalisation = [];

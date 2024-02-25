@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -30,14 +31,14 @@ class _FooterState extends State<Footer> {
           ),
           const Gap(10),
           Text(
-            'Développé par GDSC-UCB®',
+            'Développé par GDSC-UCB®'.tr(),
             style:
                 theme.textTheme.bodyMedium.copyWith(fontSize: sizeWidth * 0.02),
             textAlign: TextAlign.center,
           ),
           const Gap(5),
           Text(
-            '©2024 Tous droits réservés',
+            '©2024 Tous droits réservés'.tr(),
             style: theme.textTheme.labelMedium
                 .copyWith(fontSize: sizeWidth * 0.015),
             textAlign: TextAlign.center,

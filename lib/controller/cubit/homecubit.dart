@@ -9,10 +9,24 @@ class HomeCubit extends Cubit<HomeState> {
     return BlocProvider.of(context);
   }
 
-  dynamic useR;
-
-  void userName(String user) {
-    useR = user;
-    emit(UserNameState());
+  bool isLike = false;
+  int starCount = 0;
+  void isLiked() {
+    isLike = !isLike;
+    isLike ? starCount = 1 : starCount = 0;
+    // DBServices().addStarBlog(
+    //   StarBlogModel(
+    //     userName: user.displayName,
+    //     userMail: user.email,
+    //     authorName: authorName,
+    //     authorMail: authorMail,
+    //     blogTitle: blogTitle,
+    //     star: StarModel(
+    //       isStar: isLike,
+    //       starNumber: starCount,
+    //     ),
+    //   ),
+    // );
+    emit(IsLikedState());
   }
 }

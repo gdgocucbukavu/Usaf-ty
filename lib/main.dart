@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/routes/routes.dart';
@@ -20,12 +21,30 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await EasyLocalization.ensureInitialized();
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   bool isDark = sharedPreferences.getBool('isDark') ?? false;
   initializeDateFormatting('en_US', null);
-  runApp(MultiProvider(providers: [
-    StreamProvider.value(value: DBServices().user, initialData: null),
-  ], child: Usafty(isDark: isDark)));
+  runApp(
+    MultiProvider(
+      providers: [
+        StreamProvider.value(value: DBServices().user, initialData: null),
+      ],
+      child: EasyLocalization(
+        path: 'assets/translations',
+        supportedLocales: const [
+          Locale('fr', 'FR'),
+          Locale('en', 'US'),
+          Locale('sw', 'TZ'),
+        ],
+        fallbackLocale: const Locale('fr', 'FR'),
+        saveLocale: true,
+        child: Usafty(
+          isDark: isDark,
+        ),
+      ),
+    ),
+  );
 }
 
 class Usafty extends StatelessWidget {
@@ -43,8 +62,12 @@ class Usafty extends StatelessWidget {
             ..getPhoneInfo(),
         ),
         BlocProvider(create: (context) => HomeCubit()),
-        BlocProvider(create: (context) => MapCubit()..getCurrentLocation()),
-        BlocProvider(create: (context) => ProfilCubit()),
+        BlocProvider(
+          create: (context) => MapCubit()
+            ..getCurrentLocation()
+            ..getPolyPoints(),
+        ),
+        BlocProvider(create: (context) => ProfilCubit()..checkConnection()),
       ],
       child: BlocConsumer<MainCubit, MainState>(
         listener: (context, state) {},
@@ -67,6 +90,9 @@ class Usafty extends StatelessWidget {
             builder: (context, state) {
               return MaterialApp.router(
                 debugShowCheckedModeBanner: false,
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
                 title: "Usaf'ty",
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,

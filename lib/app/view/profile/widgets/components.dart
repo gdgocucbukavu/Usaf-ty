@@ -1,18 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:usaficity/app/shared/shared.dart';
-import 'package:usaficity/app/view/profile/widgets/language.dart';
 import 'package:usaficity/controller/state/profilstate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:usaficity/data/services/db.dart';
 
 import '../../../../controller/cubit/profilcubit.dart';
 import '../../../routes/routes.dart';
 
-//L'entête de la page profile composé des identifaints
+//L'entête de la page profile composé des identifiants
 class HeadProfile extends StatelessWidget {
   const HeadProfile({super.key});
 
@@ -20,8 +20,7 @@ class HeadProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     dynamic user = Provider.of<User?>(context);
-    dynamic theme = Theme.of(context);
-
+    dynamic cubit = ProfilCubit.get(context);
     return BlocConsumer<ProfilCubit, ProfilState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -39,32 +38,38 @@ class HeadProfile extends StatelessWidget {
                       ),
                       shape: BoxShape.circle,
                       border: Border.all(
-                        width: 3,
                         color: AppColors.tdGrey,
                         style: BorderStyle.solid,
+                        width: 1,
                       ),
                     )
                   : BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        width: 3,
                         color: AppColors.tdGrey,
                         style: BorderStyle.solid,
+                        width: 1,
                       ),
                       image: DecorationImage(
                         image: AssetImage(AppImages.user),
                         fit: BoxFit.cover,
                       ),
                     ),
+              child: !cubit.isConnected
+                  ? Icon(
+                      CupertinoIcons.exclamationmark_circle,
+                      size: sizeWidth * 0.1,
+                    )
+                  : Container(),
             ),
             Gap(15),
-            Text(user != null ? user.displayName : "Nom",
+            Text(user != null ? user.displayName : "Nom".tr(),
                 style: Theme.of(context).textTheme.titleMedium),
             Gap(3),
             Text(
               user != null
                   ? user.email
-                  : "Veuillez vous connecter pour d'autres infos !",
+                  : "Veuillez vous connecter pour d'autres infos !".tr(),
               style: Theme.of(context).textTheme.bodySmall,
             ),
             Gap(20),
@@ -72,12 +77,6 @@ class HeadProfile extends StatelessWidget {
               child: user != null
                   ? Column(
                       children: [
-                        adresseLocal(
-                          context,
-                          sizeWidth,
-                          ProfilCubit.get(context).personnage.location,
-                          theme,
-                        ),
                         abonnementStruct(
                           context,
                           sizeWidth,
@@ -112,11 +111,15 @@ class ControllerOptionButton extends StatelessWidget {
           ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // GestureDetector(
-                //   child: boutonC(
-                //       context, sizeWidth, sizeWidth, AppIcons.note, "Conseil"),
-                //   onTap: () => context.push(RoutePath.conseil),
-                // ),
+                GestureDetector(
+                  child: boutonC(
+                    context,
+                    sizeWidth,
+                    AppIcons.note,
+                    "Participation",
+                  ),
+                  onTap: () => context.push(RoutePath.conseil),
+                ),
                 GestureDetector(
                   child: boutonC(
                     context,
@@ -155,203 +158,6 @@ class ControllerOptionButton extends StatelessWidget {
   }
 }
 
-//Le bouton des paramètres avec des icones
-class IconButtonFleche extends StatelessWidget {
-  const IconButtonFleche({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    dynamic user = Provider.of<User?>(context);
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic sizeHeight = MediaQuery.sizeOf(context).height;
-    dynamic cubit = ProfilCubit.get(context);
-    dynamic theme = Theme.of(context);
-    return BlocConsumer<ProfilCubit, ProfilState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return Column(
-            children: [
-              SizedBox(height: sizeWidth * 0.02),
-              GestureDetector(
-                child: listPuller(
-                  context,
-                  sizeWidth,
-                  AppIcons.langue,
-                  "Langue",
-                  AppColors.tdBlue,
-                ),
-                onTap: () => bottomSheetLangage(
-                  context,
-                  sizeHeight,
-                  sizeWidth,
-                  theme,
-                ),
-              ),
-              GestureDetector(
-                child: listPuller(
-                  context,
-                  sizeWidth,
-                  AppIcons.about,
-                  "Apropos",
-                  AppColors.tdYellow,
-                ),
-                onTap: () => context.push(RoutePath.about),
-              ),
-              GestureDetector(
-                onTap: () {
-                  if (user == null) {
-                    cubit.seConnecter();
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        alignment: Alignment.center,
-                        backgroundColor: theme.scaffoldBackgroundColor,
-                        content: SizedBox(
-                          width: sizeWidth * 0.5,
-                          height: sizeWidth * 0.5,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(
-                                AppIcons.warn,
-                                color: AppColors.tdRed,
-                                size: sizeWidth * 0.1,
-                              ),
-                              const Gap(10),
-                              Text(
-                                "Veux-tu te déconnecter ?",
-                                style: theme.textTheme.bodySmall.copyWith(
-                                  letterSpacing: 2.0,
-                                  fontSize: sizeWidth * 0.05,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const Gap(10),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  InkWell(
-                                    borderRadius: BorderRadius.circular(20),
-                                    onTap: () {
-                                      context.pop();
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.transparent,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      padding: EdgeInsets.all(sizeWidth * 0.02),
-                                      child: Text(
-                                        'Annuler',
-                                        style:
-                                            theme.textTheme.bodySmall.copyWith(
-                                          fontSize: sizeWidth * 0.03,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Gap(20),
-                                  InkWell(
-                                    borderRadius: BorderRadius.circular(20),
-                                    onTap: () {
-                                      cubit.seDeconnecter();
-                                      DBServices().rmvUserLocation(user.email);
-                                      context.pop();
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: AppColors.tdRed,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      padding: EdgeInsets.all(sizeWidth * 0.02),
-                                      child: Text(
-                                        'Déconnecter',
-                                        style:
-                                            theme.textTheme.bodySmall.copyWith(
-                                          fontSize: sizeWidth * 0.03,
-                                          color: AppColors.tdBlueB,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                },
-                child: user != null
-                    ? listPuller(
-                        context,
-                        sizeWidth,
-                        AppIcons.logout,
-                        "Se déconnecter",
-                        AppColors.tdRed,
-                      )
-                    : listPuller(
-                        context,
-                        sizeWidth,
-                        AppIcons.login,
-                        "Se Connecter",
-                        AppColors.tdGreenO,
-                      ),
-              ),
-            ],
-          );
-        });
-  }
-}
-
-//Bouton texte à droite flêche
-Widget listPuller(
-  context,
-  double sizeW,
-  dynamic icon,
-  String text,
-  Color color,
-) {
-  return Container(
-    margin: EdgeInsets.only(bottom: sizeW * 0.04),
-    width: sizeW * 0.87,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Container(
-              width: sizeW * 0.08,
-              height: sizeW * 0.08,
-              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-              child: Center(
-                child: Icon(
-                  icon,
-                  size: sizeW * 0.04,
-                  color: AppColors.tdWhite,
-                ),
-              ),
-            ),
-            Gap(20),
-            Text(
-              text,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
-        ),
-        Icon(
-          Icons.navigate_next,
-          size: sizeW * 0.06,
-          color: AppColors.tdGrey,
-        )
-      ],
-    ),
-  );
-}
-
 //Adresse de localisation
 Widget adresseLocal(context, double sizeHe, List<String> adresse, dynamic th) {
   return Container(
@@ -364,9 +170,7 @@ Widget adresseLocal(context, double sizeHe, List<String> adresse, dynamic th) {
           AppIcons.mapPin,
           color: th.primaryColorLight,
         ),
-        SizedBox(
-          width: sizeHe * 0.02,
-        ),
+        Gap(sizeHe * 0.02),
         Text(
           ' ${adresse[0]} / ${adresse[1]} / ${adresse[2]}',
           style: Theme.of(context).textTheme.bodyMedium,
@@ -407,21 +211,17 @@ Widget abonnementStruct(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             image: DecorationImage(
-              image: AssetImage(
-                AppImages.logol,
-              ),
+              image: AssetImage(AppImages.logo),
               fit: BoxFit.cover,
             ),
             border: Border.all(
-              width: 1,
               color: AppColors.tdGrey,
               style: BorderStyle.solid,
+              width: 1,
             ),
           ),
         ),
-        SizedBox(
-          width: sizew * 0.05,
-        ),
+        Gap(sizew * 0.05),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -442,7 +242,7 @@ Widget abonnementStruct(
               color: AppColors.tdGrey,
             ),
             Text(
-              'Abonnement',
+              'Abonnement'.tr(),
               style: Theme.of(context).textTheme.bodySmall,
             ),
             Text(
@@ -471,7 +271,13 @@ Widget boutonC(context, double sizew, dynamic ico, String txt) {
           size: sizew * 0.1,
         ),
         Gap(sizew * 0.02),
-        Text("$txt", style: Theme.of(context).textTheme.bodySmall),
+        Text(
+          "$txt".tr(),
+          style: Theme.of(context)
+              .textTheme
+              .bodySmall!
+              .copyWith(fontSize: sizew * 0.02),
+        ),
       ],
     ),
   );
@@ -504,19 +310,25 @@ class TextContainerForm extends StatelessWidget {
           Gap(sizeHeight * 0.01),
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: sizeWidth * 0.05, vertical: sizeWidth * 0.01),
+              horizontal: sizeWidth * 0.05,
+              vertical: sizeWidth * 0.01,
+            ),
             child: Text(
-              titre,
+              titre.tr(),
               style: font.copyWith(
-                  fontSize: sizeWidth * 0.045, fontWeight: FontWeight.normal),
+                fontSize: sizeWidth * 0.045,
+                fontWeight: FontWeight.normal,
+              ),
             ),
           ),
           Container(
             width: sizeWidth * 0.90,
             padding: EdgeInsets.symmetric(
-                horizontal: sizeWidth * 0.05, vertical: sizeWidth * 0.02),
+              horizontal: sizeWidth * 0.05,
+              vertical: sizeWidth * 0.02,
+            ),
             child: Text(
-              text,
+              text.tr(),
               style: font1.copyWith(
                 fontSize: sizeWidth * 0.035,
                 fontWeight: FontWeight.normal,

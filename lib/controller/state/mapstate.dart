@@ -11,3 +11,5 @@ class GetPolyPointState extends MapState {}
 class GetUserLocationState extends MapState {}
 
 class UpDateUserLocationState extends MapState {}
+
+class SetCustomMarkerIconsState extends MapState {}

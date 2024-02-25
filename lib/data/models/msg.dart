@@ -54,7 +54,7 @@ List msgs = [
     name: 'Tri des déchêts',
     isString: false,
     haveIcon: false,
-    icon: AppImages.gaspillage,
+    icon: AppImages.logo,
     msg:
         "Selon les normes du triage des déchêts au niveau universel, il nous est disposé 6 poubelles de différentes couleurs ...",
     date: DateTime.now(),
@@ -89,16 +89,6 @@ List msgs = [
     color: AppColors.tdOrange,
     msg:
         "Ring! Ring! Ring!\nSalut, nous vous espérons bien portant, juste pour vous faire signe que suite aux soucis météorologiques, nous ne serons pas dans le quartier X et nous vous demandons de préserver vos déchêts dans des endroits bien sécurisés et bien entretenus en attendant notre passage prévu pour la date du 25 Janvier.\nMerci !",
-  ),
-  Msg(
-    name: 'BONS SAMARITAINS asbl',
-    isString: true,
-    haveIcon: false,
-    image:
-        'https://scontent.fgom1-1.fna.fbcdn.net/v/t39.30808-6/311027742_403013302025597_7171254912802096035_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=efb6e6&_nc_eui2=AeFHNd-Xr2lo6muA40OJ603_-xMcSoGp3C37ExxKgancLfSJ0ngu2lGnIAqNpDN8EkjbRi27rx3NUggQf3LgUNur&_nc_ohc=U8gBVQZOpZAAX9NV6an&_nc_zt=23&_nc_ht=scontent.fgom1-1.fna&oh=00_AfAZjINvP5pcEloAXSS4juyd02tY0htbWqRD8R3vpiXFdw&oe=65B8E03E',
-    msg:
-        "Il est à nous de pouvoir lutter pour garder notre entourage toujours propre et sain, cela garantit à nos générations futures une vie paisible et lutte contre le changement climatique !",
-    date: DateTime.now(),
   ),
   Msg(
     name: "Incident",

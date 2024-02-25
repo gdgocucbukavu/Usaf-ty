@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:usaficity/app/shared/shared.dart';
@@ -21,7 +22,7 @@ class _ScheduleContainerState extends State<ScheduleContainer> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Aujourd'hui",
+          "Aujourd'hui".tr(),
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.bold,
@@ -78,7 +79,7 @@ class _ScheduleContainerState extends State<ScheduleContainer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Passage du car",
+                      "Passage du car".tr(),
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -89,28 +90,26 @@ class _ScheduleContainerState extends State<ScheduleContainer> {
                       endIndent: 20,
                     ),
                     Text(
-                      "Lieu : ",
-                      style:
-                          Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: AppColors.tdYellowB,
-                                fontWeight: FontWeight.bold,
-                                fontSize: sizeWidth * 0.03,
-                              ),
+                      "Lieu :".tr(),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: AppColors.tdYellowB,
+                            fontWeight: FontWeight.bold,
+                            fontSize: sizeWidth * 0.03,
+                          ),
                     ),
                     Text(
                       "Av. ---/Q. ---/C. ---",
-                      style:
-                          Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: AppColors.tdGrey,
-                                fontSize: sizeWidth * 0.025,
-                              ),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: AppColors.tdGrey,
+                            fontSize: sizeWidth * 0.025,
+                          ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),
                     Row(
                       children: [
                         Text(
-                          "Agence : ",
+                          "Agence :".tr(),
                           style:
                               Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: AppColors.tdYellowB,

@@ -13,11 +13,6 @@ GoRouter router = GoRouter(
   initialLocation: RoutePath.mainview,
   routes: [
     GoRoute(
-      name: RouteName.auth,
-      path: RoutePath.auth,
-      builder: (context, state) => AuthScreen(),
-    ),
-    GoRoute(
       name: RouteName.mainView,
       path: RoutePath.mainview,
       builder: (context, state) => MainView(),

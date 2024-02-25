@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class AboutPage extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         customSnackBar(
                           context,
-                          'Veuillez vous connecter pour un feedback ...',
+                          'Veuillez vous connecter pour un feedback ...'.tr(),
                         ),
                       );
                     } else {
@@ -67,7 +68,7 @@ class AboutPage extends StatelessWidget {
                                 fontWeight: FontWeight.normal,
                               ),
                               decoration: InputDecoration(
-                                hintText: "Faites nous savoir !",
+                                hintText: "Faites nous savoir !".tr(),
                                 hintStyle: font,
                                 border: InputBorder.none,
                               ),
@@ -91,7 +92,7 @@ class AboutPage extends StatelessWidget {
                                       horizontal: sizeWidth * 0.03,
                                     ),
                                     child: Text(
-                                      'Annuler',
+                                      'Annuler'.tr(),
                                       style: theme.textTheme.bodySmall.copyWith(
                                         fontSize: sizeWidth * 0.025,
                                       ),
@@ -119,7 +120,7 @@ class AboutPage extends StatelessWidget {
                                       horizontal: sizeWidth * 0.03,
                                     ),
                                     child: Text(
-                                      'Envoyer',
+                                      'Envoyer'.tr(),
                                       style: theme.textTheme.bodySmall.copyWith(
                                         fontSize: sizeWidth * 0.025,
                                         color: AppColors.tdBlueB,
@@ -192,7 +193,8 @@ class AboutPage extends StatelessWidget {
                       ),
                       Gap(sizeWidth * 0.05),
                       Text(
-                        "'Usaf'ty' est une solution réalisée par la Communinauté GDSC - Google Developer Student Club - de l'Université Catholique de Bukavu pour la ville de Bukavu et ses environs, solution ayant pour but de mettre en contact direct les agences chargées de gestion des ordures en ville et la population.",
+                        "'Usaf'ty' est une solution réalisée par la Communinauté GDSC - Google Developer Student Club - de l'Université Catholique de Bukavu pour la ville de Bukavu et ses environs, solution ayant pour but de mettre en contact direct les agences chargées de gestion des ordures en ville et la population."
+                            .tr(),
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium!
@@ -201,7 +203,8 @@ class AboutPage extends StatelessWidget {
                       ),
                       Gap(sizeWidth * 0.02),
                       Text(
-                        "Cette Solution a été conçu à l'occasion de la Solution Challenge organisée chaque année par Google. Les solutions de ce challenge visent de donner solution aux problèmes locaux d'un milieu à un autre tout en se référant aux ODD - Objectifs de Développement Durable - des Nations Unies.",
+                        "Cette Solution a été conçu à l'occasion de la Solution Challenge organisée chaque année par Google. Les solutions de ce challenge visent de donner solution aux problèmes locaux d'un milieu à un autre tout en se référant aux ODD - Objectifs de Développement Durable - des Nations Unies."
+                            .tr(),
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium!
@@ -210,7 +213,8 @@ class AboutPage extends StatelessWidget {
                       ),
                       Gap(sizeWidth * 0.02),
                       Text(
-                        "D'où nous avons ciblé ce souci qui est aussi extrême que mortel pour notre ville et sa population, en prennant en compte les ODD N°3, N°11 et N°12, nous nous sommes donnés les missions suivantes : ",
+                        "D'où nous avons ciblé ce souci qui est aussi extrême que mortel pour notre ville et sa population, en prennant en compte les ODD N°3, N°11 et N°12, nous nous sommes donnés les missions suivantes : "
+                            .tr(),
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium!
@@ -235,7 +239,8 @@ class AboutPage extends StatelessWidget {
                             "de donner certaines bonnes pratiques de rendre certains déchêts utils pour une réutilisation responsable ;",
                       ),
                       Text(
-                        "Ainsi, pour atteindre ces objectifs, nous demandons à tous de mettre nos mains dans la patte, comme on dit chez nous : \"Kidole kimoja hakiui mbu\" - Un seul doigt ne tue pas un moustique - ",
+                        "Ainsi, pour atteindre ces objectifs, nous demandons à tous de mettre nos mains dans la patte, comme on dit chez nous : \"Kidole kimoja hakiui mbu\" - Un seul doigt ne tue pas un moustique - "
+                            .tr(),
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium!
@@ -244,7 +249,8 @@ class AboutPage extends StatelessWidget {
                       ),
                       Gap(sizeWidth * 0.02),
                       Text(
-                        "Soyons tous acteurs pour le bien de notre ville, notre planète !",
+                        "Soyons tous acteurs pour le bien de notre ville, notre planète !"
+                            .tr(),
                         style: Theme.of(context)
                             .textTheme
                             .bodyMedium!
@@ -290,7 +296,7 @@ class TextPoint extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(bottom: sizeWidth * 0.01),
             width: sizeWidth - sizeWidth * 0.1 - sizeWidth * 0.1,
-            child: Text(txt, style: font),
+            child: Text(txt.tr(), style: font),
           )
         ],
       ),
@@ -333,7 +339,7 @@ class SendButton extends StatelessWidget {
               ),
               Gap(sizeWidth * 0.04),
               Text(
-                "Envoyez",
+                "Envoyer".tr(),
                 style: font2.copyWith(
                   fontSize: sizeWidth * 0.03,
                   fontWeight: FontWeight.w100,

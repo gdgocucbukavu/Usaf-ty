@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:usaficity/app/shared/shared.dart';
@@ -81,14 +82,14 @@ class _UpperScrollwidgetState extends State<UpperScrollwidget> {
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      width: sizeWidth * 0.15,
-                      padding: EdgeInsets.all(sizeWidth * 0.01),
+                      width: sizeWidth * 0.18,
+                      padding: EdgeInsets.all(sizeWidth * 0.015),
                       decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        'avec nous',
+                        'avec nous'.tr(),
                         style: TextStyle(
                           color: AppColors.tdWhite,
                           fontSize: sizeWidth * 0.015,
@@ -100,7 +101,7 @@ class _UpperScrollwidgetState extends State<UpperScrollwidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          mainview[index].title,
+                          '${mainview[index].title}'.tr(),
                           style: TextStyle(
                             color: AppColors.tdYellowB,
                             fontSize: sizeWidth * 0.04,
@@ -109,7 +110,7 @@ class _UpperScrollwidgetState extends State<UpperScrollwidget> {
                           ),
                         ),
                         Text(
-                          mainview[index].content,
+                          '${mainview[index].content}'.tr(),
                           style: TextStyle(
                             color: AppColors.tdWhite,
                             fontSize: sizeWidth * 0.02,

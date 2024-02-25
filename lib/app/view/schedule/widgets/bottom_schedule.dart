@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:usaficity/app/shared/shared.dart';
@@ -55,7 +56,7 @@ class _BottomScheduleState extends State<BottomSchedule> {
             // ),
             Gap(sizeWidth * 0.05),
             Text(
-              'Horaire',
+              'Horaire'.tr(),
               style: theme.textTheme.displaySmall,
             ),
             Expanded(
@@ -95,7 +96,7 @@ class _BottomScheduleState extends State<BottomSchedule> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Agence : ",
+                                    "Agence : ".tr(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium!
@@ -106,7 +107,7 @@ class _BottomScheduleState extends State<BottomSchedule> {
                                         ),
                                   ),
                                   Text(
-                                    " --- ",
+                                    " --- ".tr(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium!
@@ -122,7 +123,7 @@ class _BottomScheduleState extends State<BottomSchedule> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Adresse : ",
+                                    "Adresse : ".tr(),
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium!
@@ -138,7 +139,7 @@ class _BottomScheduleState extends State<BottomSchedule> {
                                       Icon(Icons.place),
                                       Gap(sizeWidth * 0.01),
                                       Text(
-                                        "Av. ---/Q. ---/C. ---",
+                                        "Av. ---/Q. ---/C. ---".tr(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!

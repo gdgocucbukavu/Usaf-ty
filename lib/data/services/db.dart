@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:usaficity/data/models/blog.dart';
+import 'package:usaficity/data/models/starblog.dart';
 
 import '../models/feedback.dart';
 import '../models/location.dart';
@@ -9,6 +11,9 @@ import '../models/signalisation.dart';
 
 class DBServices {
   CollectionReference usersDB = FirebaseFirestore.instance.collection('users');
+  CollectionReference blogDB = FirebaseFirestore.instance.collection('blogs');
+  CollectionReference starBlogDB =
+      FirebaseFirestore.instance.collection('starBlogs');
   CollectionReference signalDB =
       FirebaseFirestore.instance.collection('signalisations');
   CollectionReference phoneFeedbacks = FirebaseFirestore.instance.collection(
@@ -72,6 +77,26 @@ class DBServices {
     });
   }
 
+  uploadBlogFile(file) async {
+    Reference reference = storage.ref().child(
+          'blogs/${DateTime.now()}',
+        );
+    UploadTask uploadTask = reference.putFile(file);
+    TaskSnapshot taskSnapshot = await uploadTask;
+    return await taskSnapshot.ref.getDownloadURL();
+  }
+
+  addBlog(BlogModel blogModel) {
+    blogDB.add({
+      "authorName": blogModel.authorName,
+      "authorEmail": blogModel.authorName,
+      "authorImg": blogModel.authorImg,
+      "imgUrl": blogModel.img,
+      "content": blogModel.content,
+      "time": FieldValue.serverTimestamp(),
+    });
+  }
+
   addFeedBack(FeedBack feedBack) {
     phoneFeedbacks.add({
       "userName": feedBack.name,
@@ -94,6 +119,19 @@ class DBServices {
     });
   }
 
+  addStarBlog(StarBlogModel starBlogModel) {
+    starBlogDB.add({
+      "userName": starBlogModel.userName,
+      "userMail": starBlogModel.userMail,
+      "authorName": starBlogModel.authorName,
+      "authorMail": starBlogModel.authorMail,
+      "blogTitle": starBlogModel.blogTitle,
+      "isStar": starBlogModel.star.isStar,
+      "starCount": starBlogModel.star.starNumber,
+      "time": FieldValue.serverTimestamp(),
+    });
+  }
+
   rmvUserLocation(dynamic userID) => usersDB.doc(userID).delete();
 
   updateUserLocation(String userID, Location location) async {
@@ -110,9 +148,4 @@ class DBServices {
       print('Ann error occured $err');
     }
   }
-
-  // Stream<List<User>> userCollectionStream() {
-  //   return firestore.collection('users').snapshots().map((snapshot) =>
-  //       snapshot.docs.map((doc) => User((doc.data()))).toList());
-  // }
 }

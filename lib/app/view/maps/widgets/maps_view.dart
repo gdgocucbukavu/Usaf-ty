@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:usaficity/app/shared/shared.dart';
 
 import '../../../../controller/cubit/mapcubit.dart';
 import '../../../../controller/state/mapstate.dart';
@@ -31,13 +33,15 @@ class _MapsViewState extends State<MapsView> {
 
   @override
   Widget build(BuildContext context) {
+    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     dynamic user = Provider.of<User?>(context);
     dynamic cubit = MapCubit.get(context);
     dynamic theme = Theme.of(context);
     return BlocConsumer<MapCubit, MapState>(
       listener: (context, state) {},
       builder: (context, state) => cubit.currentLocation == null
-          ? SizedBox(
+          ? Container(
+              color: theme.highlightColor,
               height: double.infinity,
               width: double.infinity,
               child: Column(
@@ -49,7 +53,12 @@ class _MapsViewState extends State<MapsView> {
                     strokeWidth: 2,
                   ),
                   Gap(10),
-                  Text('Localisation ...'),
+                  Text(
+                    'Localisation ...'.tr(),
+                    style: TextStyle(
+                      fontSize: sizeWidth * 0.02,
+                    ),
+                  ),
                 ],
               ),
             )
@@ -73,25 +82,27 @@ class _MapsViewState extends State<MapsView> {
                 }
               },
               initialCameraPosition: CameraPosition(
-                target: LatLng(
-                  cubit.currentLocation!.latitude,
-                  cubit.currentLocation!.longitude,
-                ),
-                zoom: 16.0,
+                target: LatLng(-2.5004023743252253, 28.85180266668908),
+                zoom: 14.0,
               ),
               onTap: (latLng) => cubit.addMarker(latLng),
               polylines: {
                 Polyline(
                   polylineId: PolylineId('route'),
                   points: cubit.polylineCoordinates,
+                  color: AppColors.tdGreenO,
+                  width: 3,
                 ),
               },
               markers: cubit.markers.toSet(),
               myLocationEnabled: true,
-              tiltGesturesEnabled: true,
+              myLocationButtonEnabled: false,
+              zoomControlsEnabled: false,
+              tiltGesturesEnabled: false,
               compassEnabled: true,
               scrollGesturesEnabled: true,
               zoomGesturesEnabled: true,
+              mapToolbarEnabled: false,
             ),
     );
   }

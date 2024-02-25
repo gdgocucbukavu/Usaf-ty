@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:usaficity/controller/state/profilstate.dart';
+import 'package:usaficity/data/models/blog.dart';
 import 'package:usaficity/data/models/location.dart';
 import 'package:usaficity/data/models/signalisation.dart';
 
@@ -20,6 +22,22 @@ class ProfilCubit extends Cubit<ProfilState> {
 
   dynamic useR;
 
+  bool isConnecting = false;
+
+  bool isConnected = true;
+
+  checkConnection() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].address.isNotEmpty) {
+        isConnected = true;
+      }
+    } on SocketException catch (_) {
+      isConnected = false;
+    }
+    emit(CheckConnectionState());
+  }
+
   ProfilPage personnage = ProfilPage(
     name: "Bénédict Lubembela",
     mail: "mhg4@gmail.com",
@@ -31,38 +49,28 @@ class ProfilCubit extends Cubit<ProfilState> {
     photoP: AppImages.logo,
   );
 
-  void seConnecter() {
-    DBServices().signInWithGoogle();
+  Future seConnecter(BuildContext context) async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].address.isNotEmpty) {
+        DBServices().signInWithGoogle();
+        isConnecting = true;
+      }
+    } on SocketException catch (_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        customSnackBar(
+          context,
+          "Il semble que vous n'avez pas de connexion ...",
+        ),
+      );
+    }
     emit(SeConnecterState());
   }
 
   void seDeconnecter() {
     DBServices().signOut();
+    isConnecting = false;
     emit(SeDeconnecterState());
-  }
-
-  bool c1 = true;
-  bool c2 = false;
-  bool c3 = false;
-
-  void selectLanguage(int du) {
-    if (du == 0) {
-      c1 = true;
-      c2 = false;
-      c3 = false;
-    }
-    if (du == 1) {
-      c1 = false;
-      c2 = true;
-      c3 = false;
-    }
-    if (du == 2) {
-      c1 = false;
-      c2 = false;
-      c3 = true;
-    }
-
-    emit(SelectLanguageState());
   }
 
   dynamic imgFile;
@@ -89,7 +97,7 @@ class ProfilCubit extends Cubit<ProfilState> {
                   ),
                   Gap(MediaQuery.sizeOf(context).width * 0.025),
                   Text(
-                    'Gallerie',
+                    'Gallerie'.tr(),
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                           fontSize: MediaQuery.sizeOf(context).width * 0.03,
                           fontWeight: FontWeight.normal,
@@ -110,7 +118,7 @@ class ProfilCubit extends Cubit<ProfilState> {
                   ),
                   Gap(MediaQuery.sizeOf(context).width * 0.025),
                   Text(
-                    'Camera',
+                    'Camera'.tr(),
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                           fontSize: MediaQuery.sizeOf(context).width * 0.03,
                           fontWeight: FontWeight.normal,
@@ -160,27 +168,78 @@ class ProfilCubit extends Cubit<ProfilState> {
     lat,
     lng,
   }) async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      customSnackBar(
-        context,
-        'Merci pour votre signal ...',
-      ),
-    );
-    Navigator.pop(context);
-    String imgurl = await DBServices().uploadSignalisationFile(file);
-    DBServices().addSignalisation(
-      SignalModel(
-        name: user!.displayName,
-        email: user!.email,
-        content: content,
-        img: imgurl,
-        location: Location(
-          lat: lat,
-          lng: lng,
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].address.isNotEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          customSnackBar(
+            context,
+            'Merci pour votre signal ...',
+          ),
+        );
+        Navigator.pop(context);
+        String imgurl = await DBServices().uploadSignalisationFile(file);
+        DBServices().addSignalisation(
+          SignalModel(
+            name: user!.displayName,
+            email: user!.email,
+            content: content,
+            img: imgurl,
+            location: Location(
+              lat: lat,
+              lng: lng,
+            ),
+          ),
+        );
+      }
+    } on SocketException catch (_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        customSnackBar(
+          context,
+          "Veuillez vérifier votre connexion internet ...",
         ),
-      ),
-    );
+      );
+    }
+
     emit(OnSignalisationSubmitedState());
+  }
+
+  onEditSubmited({
+    dynamic file,
+    context,
+    content,
+    user,
+  }) async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].address.isNotEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          customSnackBar(
+            context,
+            'Merci pour votre participation ...'.tr(),
+          ),
+        );
+        Navigator.pop(context);
+        String imgurl = await DBServices().uploadBlogFile(file);
+        DBServices().addBlog(
+          BlogModel(
+            authorName: user.displayName,
+            authorMail: user.email,
+            authorImg: user.photoURL,
+            content: content,
+            img: imgurl,
+          ),
+        );
+      }
+    } on SocketException catch (_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        customSnackBar(
+          context,
+          "Veuillez vous connecter à internet pour l'envoie ...",
+        ),
+      );
+    }
+    emit(OnEditSubmitedState());
   }
 }
 

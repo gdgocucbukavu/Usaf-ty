@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ class SignalPage extends StatelessWidget {
     dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     dynamic user = Provider.of<User?>(context);
     dynamic cubit = ProfilCubit.get(context);
+    cubit.imgFile = null;
     return BlocConsumer<ProfilCubit, ProfilState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -29,7 +31,7 @@ class SignalPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Signalisation",
+                  "Signalisation".tr(),
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Gap(sizeWidth * 0.03),
@@ -37,7 +39,7 @@ class SignalPage extends StatelessWidget {
                   AppIcons.signal,
                   size: sizeWidth * 0.07,
                 ),
-                Gap(sizeWidth * 0.09)
+                Gap(sizeWidth * 0.1),
               ],
             ),
           ),
@@ -115,7 +117,7 @@ class SendButton extends StatelessWidget {
             ),
             Gap(sizeWidth * 0.04),
             Text(
-              "Envoyez",
+              "Envoyer".tr(),
               style: font2.copyWith(
                 fontSize: sizeWidth * 0.03,
                 fontWeight: FontWeight.w100,
@@ -167,7 +169,7 @@ class FiliedTextSignaler extends StatelessWidget {
           fontWeight: FontWeight.normal,
         ),
         decoration: InputDecoration(
-          hintText: "Signalez quelque chose !",
+          hintText: "Signalez quelque chose !".tr(),
           hintStyle: font1,
           border: InputBorder.none,
         ),
@@ -197,7 +199,7 @@ class LocalisationPicker extends StatelessWidget {
               ),
               Gap(sizeWidth * 0.04),
               Text(
-                "Location :",
+                "Localisation :".tr(),
                 style: font1.copyWith(
                   fontSize: sizeWidth * 0.03,
                   fontWeight: FontWeight.normal,
@@ -205,7 +207,7 @@ class LocalisationPicker extends StatelessWidget {
               ),
               Gap(sizeWidth * 0.04),
               Text(
-                "Fizi/Bukavu",
+                "- - - - - -",
                 style: font1.copyWith(
                   fontSize: sizeWidth * 0.03,
                   fontWeight: FontWeight.normal,
@@ -257,15 +259,15 @@ class PhotoPicker extends StatelessWidget {
                       child: Icon(
                         AppIcons.photoCapture,
                         color: AppColors.tdGrey,
-                        size: sizeWidth * 0.2,
+                        size: sizeWidth * 0.1,
                         weight: 1,
                       ),
                     ),
                     Gap(sizeWidth * 0.04),
                     Text(
-                      "Envoyer une photo",
+                      "Envoyer une photo".tr(),
                       style: font2.copyWith(
-                        fontSize: sizeWidth * 0.038,
+                        fontSize: sizeWidth * 0.03,
                         fontWeight: FontWeight.normal,
                         color: AppColors.tdGrey,
                       ),
