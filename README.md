@@ -28,3 +28,4 @@ But it should be noted that we were unable to test on iOS devices since all had 
 
 ### Contribution
 For any contributions or modifications please add your own branch using the functionality you want to add as the branch name.
+Then do an PR to the main branch
