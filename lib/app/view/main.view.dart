@@ -53,7 +53,7 @@ class MainView extends StatelessWidget {
                     elevation: 0,
                     indicatorColor: Colors.transparent,
                     backgroundColor: Colors.transparent,
-                    labelTextStyle: MaterialStatePropertyAll(
+                    labelTextStyle: WidgetStatePropertyAll(
                       GoogleFonts.poppins(
                         color: AppColors.tdYellowB,
                         fontWeight: FontWeight.w300,
@@ -62,7 +62,7 @@ class MainView extends StatelessWidget {
                       ),
                     ),
                     overlayColor:
-                        const MaterialStatePropertyAll(Colors.transparent),
+                        const WidgetStatePropertyAll(Colors.transparent),
                     labelBehavior:
                         NavigationDestinationLabelBehavior.onlyShowSelected,
                   ),

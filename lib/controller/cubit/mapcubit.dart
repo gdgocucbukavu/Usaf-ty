@@ -1,8 +1,10 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+// import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:usaficity/data/models/location.dart';
 
 import '../state/mapstate.dart';
@@ -78,21 +80,21 @@ class MapCubit extends Cubit<MapState> {
   List<LatLng> polylineCoordinates = [];
 
   void getPolyPoints() async {
-    PolylinePoints polylinePoints = PolylinePoints();
+    // PolylinePoints polylinePoints = PolylinePoints();
 
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      google_api_key,
-      PointLatLng(source.latitude, source.longitude),
-      PointLatLng(destination.latitude, destination.longitude),
-      travelMode: TravelMode.driving,
-      wayPoints: [PolylineWayPoint(location: "Bukavu, DRC")],
-    );
+    // PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+    //   google_api_key,
+    //   PointLatLng(source.latitude, source.longitude),
+    //   PointLatLng(destination.latitude, destination.longitude),
+    //   travelMode: TravelMode.driving,
+    //   wayPoints: [PolylineWayPoint(location: "Bukavu, DRC")], request: null,
+    // );
 
-    if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
-    }
+    // if (result.points.isNotEmpty) {
+    //   result.points.forEach((PointLatLng point) {
+    //     polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+    //   });
+    // }
     emit(GetPolyPointState());
   }
 
