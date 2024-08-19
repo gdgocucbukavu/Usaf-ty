@@ -1,4 +1,4 @@
-package com.example.usaficity
+package com.gdscucbukavu.usafty
 
 import io.flutter.embedding.android.FlutterActivity
 
