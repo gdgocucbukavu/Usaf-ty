@@ -1,12 +1,10 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:usaficity/app/shared/shared.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:usaficity/controller/cubit/cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:usaficity/controller/cubit/profilcubit.dart';
 import 'package:usaficity/controller/state/profilstate.dart';
 
@@ -19,12 +17,11 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic sizeHeight = MediaQuery.sizeOf(context).height;
-    dynamic user = Provider.of<User?>(context);
-    dynamic cubit1 = ProfilCubit.get(context);
-    dynamic cubit = MainCubit.get(context);
-    dynamic theme = Theme.of(context);
+    final sizeWidth = MediaQuery.sizeOf(context).width;
+    final sizeHeight = MediaQuery.sizeOf(context).height;
+    final cubit1 = ProfilCubit.get(context);
+    final cubit = MainCubit.get(context);
+    final theme = Theme.of(context);
 
     return BlocConsumer<ProfilCubit, ProfilState>(
       listener: (context, state) {},
@@ -70,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
                 Gap(sizeWidth * 0.05),
                 IconButtonWithArrow(),
                 Gap(sizeWidth * 0.1),
-                cubit1.isConnecting && user == null
+                cubit1.isConnecting
                     ? Column(
                         children: [
                           CircularProgressIndicator(

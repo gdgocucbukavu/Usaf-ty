@@ -22,8 +22,6 @@ class ProfilCubit extends Cubit<ProfilState> {
 
   dynamic useR;
 
-  bool isConnecting = false;
-
   bool isConnected = true;
 
   checkConnection() async {
@@ -49,12 +47,15 @@ class ProfilCubit extends Cubit<ProfilState> {
     photoP: AppImages.logo,
   );
 
+  bool isConnecting = false;
+
   Future seConnecter(BuildContext context) async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].address.isNotEmpty) {
-        DBServices().signInWithGoogle();
         isConnecting = true;
+        await DBServices().signInWithGoogle();
+        isConnecting = false;
       }
     } on SocketException catch (_) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -69,7 +70,6 @@ class ProfilCubit extends Cubit<ProfilState> {
 
   void seDeconnecter() {
     DBServices().signOut();
-    isConnecting = false;
     emit(SeDeconnecterState());
   }
 

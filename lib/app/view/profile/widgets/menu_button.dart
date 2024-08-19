@@ -18,10 +18,10 @@ class IconButtonWithArrow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic user = Provider.of<User?>(context);
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic cubit = ProfilCubit.get(context);
-    dynamic theme = Theme.of(context);
+    final user = Provider.of<User?>(context);
+    final sizeWidth = MediaQuery.sizeOf(context).width;
+    final cubit = ProfilCubit.get(context);
+    final theme = Theme.of(context);
     return BlocConsumer<ProfilCubit, ProfilState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -77,7 +77,7 @@ class IconButtonWithArrow extends StatelessWidget {
                               const Gap(10),
                               Text(
                                 "Veux-tu te déconnecter ?".tr(),
-                                style: theme.textTheme.bodySmall.copyWith(
+                                style: theme.textTheme.bodySmall!.copyWith(
                                   letterSpacing: 2.0,
                                   fontSize: sizeWidth * 0.05,
                                 ),
@@ -101,7 +101,7 @@ class IconButtonWithArrow extends StatelessWidget {
                                       child: Text(
                                         'Annuler'.tr(),
                                         style:
-                                            theme.textTheme.bodySmall.copyWith(
+                                            theme.textTheme.bodySmall!.copyWith(
                                           fontSize: sizeWidth * 0.03,
                                         ),
                                       ),
@@ -127,7 +127,7 @@ class IconButtonWithArrow extends StatelessWidget {
                                       child: Text(
                                         'Confirmer'.tr(),
                                         style:
-                                            theme.textTheme.bodySmall.copyWith(
+                                            theme.textTheme.bodySmall!.copyWith(
                                           fontSize: sizeWidth * 0.03,
                                           color: AppColors.tdBlueB,
                                         ),
@@ -169,7 +169,7 @@ class IconButtonWithArrow extends StatelessWidget {
 Widget listPuller(
   context,
   double sizeW,
-  dynamic icon,
+  final icon,
   String text,
   Color color,
 ) {
