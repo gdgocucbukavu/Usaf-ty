@@ -18,30 +18,25 @@ class BottomView extends StatefulWidget {
 class _BottomViewState extends State<BottomView> {
   @override
   Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic cubit = MapCubit.get(context);
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
+    final theme = Theme.of(context);
+    final cubit = MapCubit.get(context);
 
-    dynamic disFormat = cubit.distanceRestant / 1000;
+    final disFormat = cubit.distanceRestant / 1000;
     String distance = disFormat.toStringAsFixed(1);
 
     return BlocConsumer<MapCubit, MapState>(
       listener: (context, state) {},
       builder: (context, state) {
         return DraggableScrollableSheet(
-          initialChildSize: 0.22,
-          minChildSize: 0.22,
-          maxChildSize: 0.38,
+          initialChildSize: 0.25,
+          minChildSize: 0.25,
+          maxChildSize: 0.39,
           snap: true,
           builder: (context, scrollController) => SingleChildScrollView(
             scrollDirection: Axis.vertical,
             controller: scrollController,
             child: Container(
-              padding: EdgeInsets.only(
-                left: sizeWidth * 0.05,
-                right: sizeWidth * 0.05,
-                bottom: sizeWidth * 0.2,
-              ),
+              padding: EdgeInsets.only(left: 20, right: 20, bottom: 95),
               decoration: BoxDecoration(
                 color: theme.scaffoldBackgroundColor,
                 borderRadius: BorderRadius.only(
@@ -49,52 +44,55 @@ class _BottomViewState extends State<BottomView> {
                   topRight: Radius.circular(25),
                 ),
               ),
-              width: sizeWidth,
+              width: double.maxFinite,
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.all(sizeWidth * 0.03),
+                    margin: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: theme.primaryColorLight,
                       borderRadius: BorderRadius.circular(100),
                     ),
-                    width: sizeWidth * 0.25,
-                    height: sizeWidth * 0.01,
+                    width: 80,
+                    height: 4,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          Gap(sizeWidth * 0.04),
+                          const Gap(10),
                           Icon(AppIcons.car),
                           Text('  ...  '),
                           Text(
                             '$distance km ',
-                            style: theme.textTheme.titleMedium,
+                            style: theme.textTheme.titleMedium!.copyWith(
+                              fontSize: 12,
+                            ),
                           ),
-                          Text("restant".tr(),
-                              style: theme.textTheme.bodySmall),
+                          Text(
+                            "restant".tr(),
+                            style: theme.textTheme.bodySmall!.copyWith(
+                              fontSize: 11,
+                            ),
+                          ),
                         ],
                       ),
                     ],
                   ),
                   stationView(
-                    sizeWidth,
                     theme,
                     AppColors.tdGreenO,
                     '1ère Station'.tr(),
                     'Av. Fizi/Q. Ndendere/C. Ibanda',
                   ),
                   stationView(
-                    sizeWidth,
                     theme,
                     AppColors.tdYellowB,
                     '2ème Station'.tr(),
                     'Parking du Gouverneur',
                   ),
                   stationView(
-                    sizeWidth,
                     theme,
                     AppColors.tdRed,
                     '3ème Station'.tr(),

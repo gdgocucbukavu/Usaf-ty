@@ -25,9 +25,8 @@ class _UpperScrollwidgetState extends State<UpperScrollwidget> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     return Container(
-      height: 230,
+      height: 200,
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(20),
@@ -43,12 +42,8 @@ class _UpperScrollwidgetState extends State<UpperScrollwidget> {
         },
         pageSnapping: true,
         itemBuilder: (context, index) => Container(
-          width: sizeWidth,
-          height: 230,
-          margin: EdgeInsets.only(
-            left: sizeWidth * 0.01,
-            right: sizeWidth * 0.01,
-          ),
+          height: 200,
+          width: double.maxFinite,
           decoration: BoxDecoration(
             color: AppColors.tdGrey,
             borderRadius: BorderRadius.circular(20),
@@ -75,15 +70,15 @@ class _UpperScrollwidgetState extends State<UpperScrollwidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(sizeWidth * 0.04),
+                padding: EdgeInsets.all(15),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
+                      width: 80,
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                       alignment: Alignment.center,
-                      width: sizeWidth * 0.18,
-                      padding: EdgeInsets.all(sizeWidth * 0.015),
                       decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(20),
@@ -92,8 +87,7 @@ class _UpperScrollwidgetState extends State<UpperScrollwidget> {
                         'avec nous'.tr(),
                         style: TextStyle(
                           color: AppColors.tdWhite,
-                          fontSize: sizeWidth * 0.015,
-                          fontWeight: FontWeight.w300,
+                          fontSize: 8,
                         ),
                       ),
                     ),
@@ -104,8 +98,8 @@ class _UpperScrollwidgetState extends State<UpperScrollwidget> {
                           '${mainview[index].title}'.tr(),
                           style: TextStyle(
                             color: AppColors.tdYellowB,
-                            fontSize: sizeWidth * 0.04,
                             fontWeight: FontWeight.bold,
+                            fontSize: 16,
                             height: 2.5,
                           ),
                         ),
@@ -113,11 +107,10 @@ class _UpperScrollwidgetState extends State<UpperScrollwidget> {
                           '${mainview[index].content}'.tr(),
                           style: TextStyle(
                             color: AppColors.tdWhite,
-                            fontSize: sizeWidth * 0.02,
-                            fontWeight: FontWeight.w300,
+                            fontSize: 10,
                           ),
                         ),
-                        Gap(10),
+                        const Gap(10),
                         ActivePage(
                           currentPage: currentIndex,
                           numberOfPage: mainview.length,

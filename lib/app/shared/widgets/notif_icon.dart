@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../shared.dart';
 
-Container notifIcon(sizeHeight, theme, color) {
+Container notifIcon(ThemeData theme, color) {
   return Container(
     alignment: Alignment.center,
-    height: sizeHeight * 0.05,
-    width: sizeHeight * 0.05,
+    height: 40,
+    width: 40,
     decoration: BoxDecoration(
       color: color,
       border: Border.all(
@@ -20,8 +20,8 @@ Container notifIcon(sizeHeight, theme, color) {
       children: [
         Icon(
           AppIcons.notification,
-          size: sizeHeight * 0.02,
           color: theme.primaryColorLight,
+          size: 15,
         ),
         // Container(
         //   height: sizeHeight * 0.007,

@@ -14,28 +14,26 @@ class ScheduleContainer extends StatefulWidget {
 class _ScheduleContainerState extends State<ScheduleContainer> {
   @override
   Widget build(BuildContext context) {
-    monthtoday = DateTime.now().month;
-    dynamic theme = Theme.of(context);
-    dynamic sizeHeight = MediaQuery.sizeOf(context).height;
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
+    final theme = Theme.of(context);
+    final width = MediaQuery.sizeOf(context).width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "Aujourd'hui".tr(),
           style: TextStyle(
-            fontSize: 15,
             fontWeight: FontWeight.bold,
+            fontSize: 13,
           ),
         ),
-        Gap(sizeHeight * 0.01),
+        const Gap(10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              width: sizeWidth * 0.25,
-              height: sizeWidth * 0.3,
-              margin: EdgeInsets.only(right: sizeWidth * 0.01),
+              width: width * 0.25,
+              height: 120,
+              margin: EdgeInsets.only(right: width * 0.01),
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColorDark,
                 borderRadius: BorderRadius.only(
@@ -52,18 +50,15 @@ class _ScheduleContainerState extends State<ScheduleContainer> {
                   ),
                   Text(
                     getMonths(),
-                    style: theme.textTheme.titleLarge,
+                    style: theme.textTheme.titleLarge!.copyWith(fontSize: 15),
                   ),
                 ],
               ),
             ),
             Expanded(
               child: Container(
-                height: sizeWidth * 0.3,
-                padding: EdgeInsets.symmetric(
-                  vertical: sizeHeight * 0.02,
-                  horizontal: sizeHeight * 0.015,
-                ),
+                height: 120,
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Theme.of(context).primaryColorDark,
@@ -81,27 +76,24 @@ class _ScheduleContainerState extends State<ScheduleContainer> {
                     Text(
                       "Passage du car".tr(),
                       style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 11,
                       ),
                     ),
-                    Divider(
-                      color: Theme.of(context).primaryColorDark,
-                      endIndent: 20,
-                    ),
+                    Divider(),
                     Text(
                       "Lieu :".tr(),
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: AppColors.tdYellowB,
-                            fontWeight: FontWeight.bold,
-                            fontSize: sizeWidth * 0.03,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 10,
                           ),
                     ),
                     Text(
                       "Av. ---/Q. ---/C. ---",
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             color: AppColors.tdGrey,
-                            fontSize: sizeWidth * 0.025,
+                            fontSize: 10,
                           ),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
@@ -113,16 +105,16 @@ class _ScheduleContainerState extends State<ScheduleContainer> {
                           style:
                               Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: AppColors.tdYellowB,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: sizeWidth * 0.03,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 10,
                                   ),
                         ),
                         Text(
-                          "USAF'TY",
+                          " USAF'TY",
                           style:
                               Theme.of(context).textTheme.bodyMedium!.copyWith(
                                     color: AppColors.tdGrey,
-                                    fontSize: sizeWidth * 0.025,
+                                    fontSize: 10,
                                   ),
                         ),
                       ],

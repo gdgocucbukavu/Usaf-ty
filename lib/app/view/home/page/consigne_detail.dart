@@ -25,15 +25,11 @@ class ConsigneDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic theme = Theme.of(context);
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: EdgeInsets.only(
-          left: sizeWidth * 0.05,
-          right: sizeWidth * 0.05,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,15 +39,12 @@ class ConsigneDetail extends StatelessWidget {
               contentImg: contentImg,
               isNetworkImg: isNetworkImg,
             ),
-            Gap(sizeWidth * 0.05),
+            const Gap(20),
             Container(
               alignment: Alignment.topLeft,
-              padding: EdgeInsets.only(
-                top: sizeWidth * 0.15,
-                left: sizeWidth * 0.05,
-              ),
-              width: sizeWidth,
-              height: sizeWidth * 0.5,
+              width: double.maxFinite,
+              height: 200,
+              padding: const EdgeInsets.only(top: 10, left: 20),
               decoration: BoxDecoration(
                 color: theme.highlightColor,
                 borderRadius: BorderRadius.circular(20),
@@ -61,24 +54,24 @@ class ConsigneDetail extends StatelessWidget {
                 ),
               ),
             ),
-            Gap(sizeWidth * 0.05),
+            const Gap(20),
             Text(
               "Vue d'ensemble du contenu".tr(),
-              style: theme.textTheme.displaySmall.copyWith(
-                fontSize: sizeWidth * 0.04,
+              style: theme.textTheme.displaySmall!.copyWith(
+                fontSize: 15,
               ),
             ),
-            Gap(sizeWidth * 0.03),
+            const Gap(10),
             Text(
               overview,
-              style: theme.textTheme.bodyMedium.copyWith(
-                fontSize: sizeWidth * 0.025,
+              style: theme.textTheme.bodyMedium!.copyWith(
+                fontSize: 11,
               ),
               textAlign: TextAlign.justify,
             ),
-            Gap(sizeWidth * 0.05),
+            const Gap(10),
             Padding(
-              padding: EdgeInsets.only(right: sizeWidth * 0.1),
+              padding: EdgeInsets.only(right: 20),
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: Icon(CupertinoIcons.signature),

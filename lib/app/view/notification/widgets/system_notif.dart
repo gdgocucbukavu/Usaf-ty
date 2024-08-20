@@ -1,17 +1,16 @@
-import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../data/models/system_msg.dart';
 
-Container systemNotif(theme, size) {
+Container systemNotif(ThemeData theme) {
   return Container(
     decoration: BoxDecoration(
       color: theme.highlightColor,
       borderRadius: BorderRadius.circular(20),
     ),
-    width: size,
-    padding: EdgeInsets.all(size * 0.05),
+    width: double.maxFinite,
+    padding: EdgeInsets.all(15),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -19,11 +18,12 @@ Container systemNotif(theme, size) {
           'Système',
           style: theme.textTheme.bodyMedium,
         ),
+        const Gap(5),
         for (int i = 0; i < sytemMessages.length; i++) ...{
           Container(
-            margin: EdgeInsets.only(top: size * 0.05),
-            height: size * 0.15,
-            width: size,
+            margin: EdgeInsets.symmetric(vertical: 10),
+            width: double.maxFinite,
+            height: 50,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,17 +34,17 @@ Container systemNotif(theme, size) {
                     color: sytemMessages[i].color.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(100),
                   ),
-                  height: size * 0.1,
-                  width: size * 0.1,
-                  margin: EdgeInsets.only(right: size * 0.03),
+                  height: 40,
+                  width: 40,
+                  margin: const EdgeInsets.only(right: 10),
                   child: (sytemMessages[i].icon != null)
                       ? Icon(
                           sytemMessages[i].icon,
                           color: sytemMessages[i].color,
                         )
                       : SizedBox(
-                          width: size * 0.06,
-                          height: size * 0.06,
+                          width: 40,
+                          height: 40,
                           child: Image.asset(sytemMessages[i].image),
                         ),
                 ),
@@ -58,22 +58,25 @@ Container systemNotif(theme, size) {
                         children: [
                           Text(
                             sytemMessages[i].title,
-                            style: theme.textTheme.bodyMedium
-                                .copyWith(fontSize: size * 0.03),
+                            style: theme.textTheme.bodyMedium!.copyWith(
+                              fontSize: 11,
+                            ),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                           Text(
                             sytemMessages[i].time,
-                            style: theme.textTheme.labelMedium
-                                .copyWith(fontSize: size * 0.02),
+                            style: theme.textTheme.labelMedium!.copyWith(
+                              fontSize: 9,
+                            ),
                           ),
                         ],
                       ),
                       Text(
                         sytemMessages[i].msg,
-                        style: theme.textTheme.bodySmall
-                            .copyWith(fontSize: size * 0.025),
+                        style: theme.textTheme.bodySmall!.copyWith(
+                          fontSize: 10,
+                        ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
@@ -84,7 +87,6 @@ Container systemNotif(theme, size) {
             ),
           ),
         },
-        Gap(size * 0.05),
       ],
     ),
   );

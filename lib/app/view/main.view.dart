@@ -8,14 +8,14 @@ import '../../controller/state/state.dart';
 import '../shared/shared.dart';
 
 class MainView extends StatelessWidget {
-  static dynamic route = '/main';
+  static const route = '/main';
   const MainView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic cubit = MainCubit.get(context);
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
+    final theme = Theme.of(context);
+    final cubit = MainCubit.get(context);
+    final sizeWidth = MediaQuery.sizeOf(context).width;
     return BlocConsumer<MainCubit, MainState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -39,7 +39,7 @@ class MainView extends StatelessWidget {
                     color: theme.highlightColor.withOpacity(0.9),
                   ),
                   width: sizeWidth,
-                  height: 80,
+                  height: 70,
                   margin: EdgeInsets.only(top: 2),
                   child: Container(),
                 ),
@@ -47,7 +47,7 @@ class MainView extends StatelessWidget {
               Positioned(
                 left: 20,
                 right: 20,
-                bottom: 0,
+                bottom: -5,
                 child: NavigationBarTheme(
                   data: NavigationBarThemeData(
                     elevation: 0,
@@ -69,20 +69,21 @@ class MainView extends StatelessWidget {
                   child: NavigationBar(
                     backgroundColor: Colors.transparent,
                     animationDuration: const Duration(microseconds: 500),
-                    onDestinationSelected: (value) =>
-                        cubit.navigationBar(value),
+                    onDestinationSelected: (value) {
+                      cubit.navigationBar(value);
+                    },
                     selectedIndex: cubit.i,
                     destinations: [
                       NavigationDestination(
                         icon: Icon(
                           AppIcons.home,
                           color: theme.primaryColorLight,
-                          size: 25,
+                          size: 20,
                         ),
                         selectedIcon: Icon(
                           AppIcons.homeB,
                           color: theme.primaryColor,
-                          size: 35,
+                          size: 30,
                         ),
                         label: 'Accueil'.tr(),
                         tooltip: '',
@@ -91,12 +92,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.calendar,
                           color: theme.primaryColorLight,
-                          size: 25,
+                          size: 20,
                         ),
                         selectedIcon: Icon(
                           AppIcons.calendarB,
                           color: theme.primaryColor,
-                          size: 35,
+                          size: 30,
                         ),
                         label: 'Horaire'.tr(),
                         tooltip: '',
@@ -105,12 +106,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.maps,
                           color: theme.primaryColorLight,
-                          size: 25,
+                          size: 20,
                         ),
                         selectedIcon: Icon(
                           AppIcons.mapsB,
                           color: theme.primaryColor,
-                          size: 35,
+                          size: 30,
                         ),
                         label: 'Map'.tr(),
                         tooltip: '',
@@ -119,12 +120,12 @@ class MainView extends StatelessWidget {
                         icon: Icon(
                           AppIcons.account,
                           color: theme.primaryColorLight,
-                          size: 25,
+                          size: 20,
                         ),
                         selectedIcon: Icon(
                           AppIcons.accountB,
                           color: theme.primaryColor,
-                          size: 35,
+                          size: 30,
                         ),
                         label: 'Profil'.tr(),
                         tooltip: '',

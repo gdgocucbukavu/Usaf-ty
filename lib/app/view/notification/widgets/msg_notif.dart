@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 import '../../../../data/models/msg.dart';
 import '../../../shared/shared.dart';
 
-Container msgNotif(theme, size) {
+Container msgNotif(ThemeData theme) {
   return Container(
     decoration: BoxDecoration(
       color: theme.highlightColor,
       borderRadius: BorderRadius.circular(20),
     ),
-    width: size,
-    margin: EdgeInsets.symmetric(vertical: size * 0.05),
-    padding: EdgeInsets.all(size * 0.05),
+    width: double.maxFinite,
+    padding: EdgeInsets.all(15),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,11 +20,11 @@ Container msgNotif(theme, size) {
           'Messages',
           style: theme.textTheme.bodyMedium,
         ),
+        const Gap(5),
         for (int i = 0; i < msgs.length; i++) ...{
           Container(
-            margin: EdgeInsets.only(top: size * 0.05),
-            height: size * 0.15,
-            width: size,
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            width: double.maxFinite,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,8 +32,8 @@ Container msgNotif(theme, size) {
                 (msgs[i].isString)
                     ? Container(
                         alignment: Alignment.center,
-                        height: size * 0.1,
-                        width: size * 0.1,
+                        height: 40,
+                        width: 40,
                         decoration: BoxDecoration(
                           color: AppColors.tdGrey,
                           borderRadius: BorderRadius.circular(100),
@@ -43,18 +42,18 @@ Container msgNotif(theme, size) {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        margin: EdgeInsets.only(right: size * 0.03),
+                        margin: EdgeInsets.only(right: 10),
                       )
                     : (msgs[i].haveIcon)
                         ? Container(
                             alignment: Alignment.center,
-                            height: size * 0.1,
-                            width: size * 0.1,
+                            height: 40,
+                            width: 40,
                             decoration: BoxDecoration(
                               color: msgs[i].color.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(100),
                             ),
-                            margin: EdgeInsets.only(right: size * 0.03),
+                            margin: const EdgeInsets.only(right: 10),
                             child: Icon(
                               msgs[i].icon,
                               color: msgs[i].color,
@@ -64,14 +63,15 @@ Container msgNotif(theme, size) {
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(100),
                               image: DecorationImage(
                                 image: AssetImage(msgs[i].icon),
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            height: size * 0.1,
-                            width: size * 0.1,
-                            margin: EdgeInsets.only(right: size * 0.03),
+                            height: 40,
+                            width: 40,
+                            margin: EdgeInsets.only(right: 10),
                           ),
                 Expanded(
                   child: Column(
@@ -83,22 +83,25 @@ Container msgNotif(theme, size) {
                         children: [
                           Text(
                             msgs[i].name,
-                            style: theme.textTheme.bodyMedium
-                                .copyWith(fontSize: size * 0.03),
+                            style: theme.textTheme.bodyMedium!.copyWith(
+                              fontSize: 11,
+                            ),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                           Text(
                             DateFormat('HH:mm a').format(msgs[i].date),
-                            style: theme.textTheme.labelMedium
-                                .copyWith(fontSize: size * 0.02),
+                            style: theme.textTheme.labelMedium!.copyWith(
+                              fontSize: 9,
+                            ),
                           ),
                         ],
                       ),
                       Text(
                         msgs[i].msg,
-                        style: theme.textTheme.bodySmall
-                            .copyWith(fontSize: size * 0.025),
+                        style: theme.textTheme.bodySmall!.copyWith(
+                          fontSize: 10,
+                        ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
@@ -109,7 +112,6 @@ Container msgNotif(theme, size) {
             ),
           ),
         },
-        Gap(size * 0.05),
       ],
     ),
   );

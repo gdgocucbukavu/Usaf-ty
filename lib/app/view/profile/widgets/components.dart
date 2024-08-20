@@ -18,22 +18,21 @@ class HeadProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic user = Provider.of<User?>(context);
-    dynamic cubit = ProfilCubit.get(context);
+    final user = Provider.of<User?>(context);
+    final cubit = ProfilCubit.get(context);
     return BlocConsumer<ProfilCubit, ProfilState>(
       listener: (context, state) {},
       builder: (context, state) {
         return Column(
           children: [
             Container(
-              width: sizeWidth * 0.24,
-              height: sizeWidth * 0.24,
+              width: 100,
+              height: 100,
               decoration: user != null
                   ? BoxDecoration(
                       color: AppColors.tdGrey,
                       image: DecorationImage(
-                        image: NetworkImage(user.photoURL),
+                        image: NetworkImage(user.photoURL!),
                         fit: BoxFit.cover,
                       ),
                       shape: BoxShape.circle,
@@ -58,41 +57,109 @@ class HeadProfile extends StatelessWidget {
               child: !cubit.isConnected
                   ? Icon(
                       CupertinoIcons.exclamationmark_circle,
-                      size: sizeWidth * 0.1,
+                      size: 20,
                     )
                   : Container(),
             ),
-            Gap(15),
-            Text(user != null ? user.displayName : "Nom".tr(),
-                style: Theme.of(context).textTheme.titleMedium),
-            Gap(3),
+            const Gap(20),
+            Text(
+              user != null ? user.displayName! : "Nom".tr(),
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const Gap(3),
             Text(
               user != null
-                  ? user.email
+                  ? user.email!
                   : "Veuillez vous connecter pour d'autres infos !".tr(),
-              style: Theme.of(context).textTheme.bodySmall,
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontSize: 10,
+                  ),
             ),
             Gap(20),
-            Container(
-              child: user != null
-                  ? Column(
-                      children: [
-                        abonnementStruct(
-                          context,
-                          sizeWidth,
-                          "${ProfilCubit.get(context).personnage.imgPhoto}",
-                          ProfilCubit.get(context).personnage.agence,
-                          ProfilCubit.get(context).personnage.frais,
-                        ),
-                      ],
-                    )
-                  : Container(),
-            ),
+            if (user != null)
+              Column(
+                children: [
+                  abonnementStruct(
+                    context,
+                    "${ProfilCubit.get(context).personnage.imgPhoto}",
+                    ProfilCubit.get(context).personnage.agence,
+                    ProfilCubit.get(context).personnage.frais,
+                  ),
+                ],
+              ),
           ],
         );
       },
     );
   }
+}
+
+//Abonnement Information
+Widget abonnementStruct(
+  context,
+  String logoImg,
+  String agenceName,
+  String fret,
+) {
+  final theme = Theme.of(context);
+  return Container(
+    alignment: Alignment.center,
+    margin: EdgeInsets.only(bottom: 15),
+    width: double.maxFinite,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            image: DecorationImage(
+              image: AssetImage(AppImages.logo),
+              fit: BoxFit.cover,
+            ),
+            border: Border.all(
+              color: AppColors.tdGrey,
+              style: BorderStyle.solid,
+              width: 1,
+            ),
+          ),
+        ),
+        const Gap(15),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '$agenceName',
+              style: theme.textTheme.bodyMedium!.copyWith(
+                color: AppColors.tdYellowB,
+              ),
+            ),
+            Container(
+              height: 1,
+              width: 120,
+              color: theme.primaryColorDark,
+              margin: const EdgeInsets.symmetric(vertical: 3),
+            ),
+            Text(
+              'Abonnement'.tr(),
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontSize: 11,
+                  ),
+            ),
+            Text(
+              "$fret",
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                    fontSize: 10,
+                  ),
+            ),
+          ],
+        )
+      ],
+    ),
+  );
 }
 
 //Pour les trois Button de Contrôle, le privacy, conseil et consigner
@@ -101,12 +168,10 @@ class ControllerOptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic user = Provider.of<User?>(context);
+    final user = Provider.of<User?>(context);
 
     return Container(
-      margin: EdgeInsets.only(bottom: sizeWidth * 0.04),
-      width: sizeWidth * 0.87,
+      width: double.maxFinite,
       child: user != null
           ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -114,7 +179,6 @@ class ControllerOptionButton extends StatelessWidget {
                 GestureDetector(
                   child: boutonC(
                     context,
-                    sizeWidth,
                     AppIcons.note,
                     "Participation",
                   ),
@@ -123,7 +187,6 @@ class ControllerOptionButton extends StatelessWidget {
                 GestureDetector(
                   child: boutonC(
                     context,
-                    sizeWidth,
                     AppIcons.signal,
                     "Signalisation",
                   ),
@@ -132,7 +195,6 @@ class ControllerOptionButton extends StatelessWidget {
                 GestureDetector(
                   child: boutonC(
                     context,
-                    sizeWidth,
                     AppIcons.privacy,
                     "Confidentialité",
                   ),
@@ -146,7 +208,6 @@ class ControllerOptionButton extends StatelessWidget {
                 GestureDetector(
                   child: boutonC(
                     context,
-                    sizeWidth,
                     AppIcons.privacy,
                     "Confidentialité",
                   ),
@@ -159,7 +220,7 @@ class ControllerOptionButton extends StatelessWidget {
 }
 
 //Adresse de localisation
-Widget adresseLocal(context, double sizeHe, List<String> adresse, dynamic th) {
+Widget adresseLocal(context, double sizeHe, List<String> adresse, final th) {
   return Container(
     margin: EdgeInsets.only(bottom: sizeHe * 0.04),
     width: sizeHe * 0.87,
@@ -181,7 +242,7 @@ Widget adresseLocal(context, double sizeHe, List<String> adresse, dynamic th) {
 }
 
 //Numéro de téléphone
-Widget numberCountry(context, double sizeHe, String tel, dynamic th) {
+Widget numberCountry(context, double sizeHe, String tel, final th) {
   return Container(
     alignment: Alignment.center,
     margin: EdgeInsets.only(bottom: sizeHe * 0.011),
@@ -190,154 +251,84 @@ Widget numberCountry(context, double sizeHe, String tel, dynamic th) {
   );
 }
 
-//Abonnement Information
-Widget abonnementStruct(
-  context,
-  double sizew,
-  String logoImg,
-  String agenceName,
-  String fret,
-) {
-  dynamic theme = Theme.of(context);
-  return Container(
-    margin: EdgeInsets.only(bottom: sizew * 0.04),
-    width: sizew * 0.87,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: sizew * 0.15,
-          height: sizew * 0.15,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            image: DecorationImage(
-              image: AssetImage(AppImages.logo),
-              fit: BoxFit.cover,
-            ),
-            border: Border.all(
-              color: AppColors.tdGrey,
-              style: BorderStyle.solid,
-              width: 1,
-            ),
-          ),
-        ),
-        Gap(sizew * 0.05),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '$agenceName',
-              style: theme.textTheme.bodyMedium.copyWith(
-                color: AppColors.tdYellowB,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(
-                bottom: sizew * 0.005,
-                top: sizew * 0.005,
-              ),
-              width: sizew * 0.3,
-              height: sizew * 0.001,
-              color: AppColors.tdGrey,
-            ),
-            Text(
-              'Abonnement'.tr(),
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            Text(
-              "$fret",
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ],
-        )
-      ],
-    ),
-  );
-}
-
 //
-Widget boutonC(context, double sizew, dynamic ico, String txt) {
+Widget boutonC(BuildContext context, IconData ico, String txt) {
   return Container(
-    margin: EdgeInsets.only(right: sizew * 0.02),
-    width: sizew * 0.27,
-    height: sizew * 0.20,
+    color: Colors.transparent,
+    margin: const EdgeInsets.only(bottom: 15),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Icon(
           ico,
-          size: sizew * 0.1,
+          size: 35,
         ),
-        Gap(sizew * 0.02),
+        const Gap(10),
         Text(
           "$txt".tr(),
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall!
-              .copyWith(fontSize: sizew * 0.02),
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 8),
         ),
       ],
     ),
   );
 }
 
-class TextContainerForm extends StatelessWidget {
-  final String titre;
-  final String text;
-  const TextContainerForm({super.key, required this.titre, required this.text});
+// class TextContainerForm extends StatelessWidget {
+//   final String titre;
+//   final String text;
+//   const TextContainerForm({super.key, required this.titre, required this.text});
 
-  @override
-  Widget build(BuildContext context) {
-    dynamic sizeHeight = MediaQuery.sizeOf(context).height;
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic theme = Theme.of(context);
-    dynamic font = Theme.of(context).textTheme.displaySmall;
-    dynamic font1 = Theme.of(context).textTheme.headlineSmall;
+//   @override
+//   Widget build(BuildContext context) {
+//     final sizeHeight = MediaQuery.sizeOf(context).height;
+//     final sizeWidth = MediaQuery.sizeOf(context).width;
+//     final theme = Theme.of(context);
+//     final font = Theme.of(context).textTheme.displaySmall;
+//     final font1 = Theme.of(context).textTheme.headlineSmall;
 
-    return Container(
-      margin: EdgeInsets.only(bottom: sizeHeight * 0.015),
-      width: sizeWidth * 0.90,
-      decoration: BoxDecoration(
-        color: theme.highlightColor,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Gap(sizeHeight * 0.01),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: sizeWidth * 0.05,
-              vertical: sizeWidth * 0.01,
-            ),
-            child: Text(
-              titre.tr(),
-              style: font.copyWith(
-                fontSize: sizeWidth * 0.045,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ),
-          Container(
-            width: sizeWidth * 0.90,
-            padding: EdgeInsets.symmetric(
-              horizontal: sizeWidth * 0.05,
-              vertical: sizeWidth * 0.02,
-            ),
-            child: Text(
-              text.tr(),
-              style: font1.copyWith(
-                fontSize: sizeWidth * 0.035,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ),
-          Gap(sizeHeight * 0.015)
-        ],
-      ),
-    );
-  }
-}
+//     return Container(
+//       margin: EdgeInsets.only(bottom: sizeHeight * 0.015),
+//       width: sizeWidth * 0.90,
+//       decoration: BoxDecoration(
+//         color: theme.highlightColor,
+//         borderRadius: BorderRadius.circular(20),
+//       ),
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Gap(sizeHeight * 0.01),
+//           Padding(
+//             padding: EdgeInsets.symmetric(
+//               horizontal: sizeWidth * 0.05,
+//               vertical: sizeWidth * 0.01,
+//             ),
+//             child: Text(
+//               titre.tr(),
+//               style: font!.copyWith(
+//                 fontSize: sizeWidth * 0.045,
+//                 fontWeight: FontWeight.normal,
+//               ),
+//             ),
+//           ),
+//           Container(
+//             width: sizeWidth * 0.90,
+//             padding: EdgeInsets.symmetric(
+//               horizontal: sizeWidth * 0.05,
+//               vertical: sizeWidth * 0.02,
+//             ),
+//             child: Text(
+//               text.tr(),
+//               style: font1!.copyWith(
+//                 fontSize: sizeWidth * 0.035,
+//                 fontWeight: FontWeight.normal,
+//               ),
+//             ),
+//           ),
+//           Gap(sizeHeight * 0.015)
+//         ],
+//       ),
+//     );
+//   }
+// }

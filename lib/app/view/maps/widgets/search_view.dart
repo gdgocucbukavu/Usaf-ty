@@ -11,65 +11,77 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic sizeHeight = MediaQuery.sizeOf(context).height;
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    return Container(
-      width: sizeWidth,
-      padding: EdgeInsets.only(
-        top: sizeWidth * 0.12,
-        left: sizeWidth * 0.05,
-        right: sizeWidth * 0.05,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: theme.scaffoldBackgroundColor.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(50),
-                border: Border.all(
-                  color: theme.primaryColorLight,
-                  width: 1,
+    final theme = Theme.of(context);
+    return SafeArea(
+      child: Container(
+        alignment: Alignment.topCenter,
+        height: 50,
+        width: double.maxFinite,
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Expanded(
+              child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: theme.scaffoldBackgroundColor.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border.all(
+                    color: theme.primaryColorLight,
+                    width: 1,
+                  ),
                 ),
-              ),
-              padding: EdgeInsets.symmetric(horizontal: sizeHeight * 0.02),
-              height: sizeHeight * 0.05,
-              child: Row(
-                children: [
-                  Icon(AppIcons.mapPin),
-                  Gap(sizeWidth * 0.05),
-                  Expanded(
-                    child: TextField(
-                      autocorrect: false,
-                      autofillHints: const <String>[AutofillHints.addressCity],
-                      cursorColor: theme.primaryColorLight,
-                      style: theme.textTheme.bodyMedium,
-                      maxLines: null,
-                      onTapOutside: (event) =>
-                          FocusScope.of(context).requestFocus(FocusNode()),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Rechercher une station'.tr(),
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                height: 40,
+                child: Row(
+                  children: [
+                    Icon(AppIcons.mapPin, size: 18),
+                    const Gap(10),
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: TextField(
+                          autocorrect: false,
+                          autofillHints: const <String>[
+                            AutofillHints.addressCity
+                          ],
+                          cursorColor: theme.primaryColorLight,
+                          style: theme.textTheme.bodyMedium!.copyWith(
+                            color: theme.primaryColorLight,
+                            fontSize: 12,
+                          ),
+                          maxLines: 1,
+                          onTapOutside: (event) {
+                            FocusScope.of(context).requestFocus(FocusNode());
+                          },
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Rechercher une station'.tr(),
+                            hintStyle: theme.textTheme.bodySmall!.copyWith(
+                              color: theme.primaryColorLight,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  Icon(AppIcons.search),
-                ],
+                    const Gap(10),
+                    Icon(AppIcons.search, size: 18),
+                  ],
+                ),
               ),
             ),
-          ),
-          Gap(sizeWidth * 0.01),
-          GestureDetector(
-            onTap: () => context.push(RoutePath.notification),
-            child: notifIcon(
-              sizeHeight,
-              theme,
-              theme.scaffoldBackgroundColor.withOpacity(0.5),
+            const Gap(10),
+            GestureDetector(
+              onTap: () => context.push(RoutePath.notification),
+              child: notifIcon(
+                theme,
+                theme.scaffoldBackgroundColor.withOpacity(0.5),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

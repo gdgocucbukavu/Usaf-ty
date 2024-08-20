@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../controller/cubit/profilcubit.dart';
 import '../../../../controller/state/profilstate.dart';
 import '../../../shared/shared.dart';
+import 'photo_picker_widget.dart';
 
 class Conseil extends StatefulWidget {
   static const route = '/conseil';
@@ -20,13 +21,13 @@ class Conseil extends StatefulWidget {
 class _ConseilState extends State<Conseil> {
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic user = Provider.of<User?>(context);
-    dynamic cubit = ProfilCubit.get(context);
-    dynamic formKey = GlobalKey<FormState>();
-    dynamic theme = Theme.of(context);
+    final sizeWidth = MediaQuery.sizeOf(context).width;
+    final user = Provider.of<User?>(context);
+    final cubit = ProfilCubit.get(context);
+    final formKey = GlobalKey<FormState>();
+    final theme = Theme.of(context);
     cubit.imgFile = null;
-    dynamic content;
+    String content = "";
     return BlocConsumer<ProfilCubit, ProfilState>(
       listener: (context, state) {
         if (state is OnEditSubmitedState) {
@@ -66,249 +67,168 @@ class _ConseilState extends State<Conseil> {
                     color: theme.primaryColorDark.withOpacity(0.9),
                   ),
                   margin: EdgeInsets.only(right: sizeWidth * 0.05),
-                  height: sizeWidth * 0.08,
-                  width: sizeWidth * 0.18,
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  height: 35,
                   child: Text(
                     'Envoyer'.tr(),
-                    style: theme.textTheme.bodyMedium.copyWith(
-                      fontSize: sizeWidth * 0.02,
+                    style: theme.textTheme.bodyMedium!.copyWith(
                       color: theme.highlightColor,
+                      fontSize: 10,
                     ),
                   ),
                 ),
               ),
             ],
           ),
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: sizeWidth * 0.05),
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          body: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(right: sizeWidth * 0.05),
-                            width: sizeWidth / 6.2,
-                            height: sizeWidth / 6.2,
-                            decoration: BoxDecoration(
-                              color: AppColors.tdGrey,
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: AssetImage(AppImages.logo),
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: AppColors.tdGrey,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage(AppImages.logo),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Contribuer au bien-être de la ville avec".tr(),
+                              style: theme.textTheme.labelMedium!.copyWith(
+                                fontSize: 11,
                               ),
                             ),
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Contribuer au bien-être de la ville avec".tr(),
-                                style: theme.textTheme.labelMedium.copyWith(
-                                  fontSize: sizeWidth * 0.025,
-                                ),
+                            Text(
+                              "Usaf'ty",
+                              style: theme.textTheme.displaySmall!.copyWith(
+                                fontSize: 15,
                               ),
-                              Text(
-                                "Usaf'ty",
-                                style: theme.textTheme.displaySmall.copyWith(
-                                  fontSize: sizeWidth * 0.05,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Gap(sizeWidth * 0.05),
-                      Text(
-                        "? Avez-vous un conseil à donner, une expérience à partager, une connaissance à transmettre sur la gestion de déchêts ..."
-                            .tr(),
-                        style: theme.textTheme.bodyMedium.copyWith(
-                          fontSize: sizeWidth * 0.025,
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Gap(sizeWidth * 0.02),
-                      Text(
-                        "? Sur la notion du Triple-R (Reduire, Reutiliser, Recycler) ..."
-                            .tr(),
-                        style: theme.textTheme.bodyMedium.copyWith(
-                          fontSize: sizeWidth * 0.025,
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Gap(sizeWidth * 0.02),
-                      Text(
-                        "? Avez-vous des informations sur les pratiques d'hygiène et d'assainissement ..."
-                            .tr(),
-                        style: theme.textTheme.bodyMedium.copyWith(
-                          fontSize: sizeWidth * 0.025,
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Gap(sizeWidth * 0.02),
-                      Text(
-                        "Ne doute pas de \"Changer le monde\" !".tr(),
-                        style: theme.textTheme.bodyMedium.copyWith(
-                          fontSize: sizeWidth * 0.035,
-                          color: AppColors.tdYellowB,
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Gap(sizeWidth * 0.02),
-                      Text(
-                        "Commence dès maintenant et envoie ta participation à tous les utilisateurs de cette application et le monde entier !"
-                            .tr(),
-                        style: theme.textTheme.bodyMedium.copyWith(
-                          fontSize: sizeWidth * 0.025,
-                        ),
-                        textAlign: TextAlign.justify,
-                      ),
-                      Gap(sizeWidth * 0.05),
-                      Form(
-                        key: formKey,
-                        child: TextFormField(
-                          autocorrect: true,
-                          onChanged: (value) {
-                            content = value;
-                          },
-                          onTapOutside: (event) =>
-                              FocusScope.of(context).requestFocus(
-                            FocusNode(),
-                          ),
-                          canRequestFocus: true,
-                          cursorColor: theme.primaryColorLight,
-                          maxLines: null,
-                          style: theme.textTheme.bodyMedium.copyWith(
-                            fontSize: sizeWidth * 0.03,
-                          ),
-                          decoration: InputDecoration(
-                            focusColor: theme.primaryColorLight,
-                            hintText: "Taper vos idées ici ...".tr(),
-                            hintStyle: theme.textTheme.labelMedium,
-                            errorStyle: theme.textTheme.labelSmall,
-                            border: InputBorder.none,
-                          ),
-                          validator: (value) {
-                            return (value == null || value.isEmpty)
-                                ? 'Veuillez entrer du texte'.tr()
-                                : null;
-                          },
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                  Gap(sizeWidth * 0.05),
-                  GestureDetector(
-                    onTap: () => cubit.showImagePickerOptions(context),
-                    child: PhotoPicker(),
+                  const Gap(20),
+                  Text(
+                    "? Avez-vous un conseil à donner, une expérience à partager, une connaissance à transmettre sur la gestion de déchêts ..."
+                        .tr(),
+                    style: theme.textTheme.bodyMedium!.copyWith(fontSize: 11),
+                    textAlign: TextAlign.justify,
                   ),
-                  Gap(sizeWidth * 0.02),
-                  Padding(
-                    padding: EdgeInsets.only(left: sizeWidth * 0.4),
-                    child: Text(
-                      "Il tient à noter qu'en envoyant ceci, nous récupérons vos infos telle que :"
-                          .tr(),
-                      style: theme.textTheme.bodyMedium.copyWith(
-                        fontSize: sizeWidth * 0.02,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
+                  const Gap(10),
+                  Text(
+                    "? Sur la notion du Triple-R (Reduire, Reutiliser, Recycler) ..."
+                        .tr(),
+                    style: theme.textTheme.bodyMedium!.copyWith(fontSize: 11),
+                    textAlign: TextAlign.justify,
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: sizeWidth * 0.02,
-                      left: sizeWidth * 0.2,
-                    ),
-                    child: Text(
-                      "+ votre nom\n+ votre mail\n+ votre photo".tr(),
-                      style: theme.textTheme.bodyMedium.copyWith(
-                        fontSize: sizeWidth * 0.02,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
+                  const Gap(10),
+                  Text(
+                    "? Avez-vous des informations sur les pratiques d'hygiène et d'assainissement ..."
+                        .tr(),
+                    style: theme.textTheme.bodyMedium!.copyWith(fontSize: 11),
+                    textAlign: TextAlign.justify,
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: sizeWidth * 0.02,
-                      left: sizeWidth * 0.4,
+                  const Gap(10),
+                  Text(
+                    "Ne doute pas de \"Changer le monde\" !".tr(),
+                    style: theme.textTheme.bodyMedium!.copyWith(
+                      color: AppColors.tdYellowB,
+                      fontSize: 12,
                     ),
-                    child: Text(
-                      "Pour être utiliser dans l'affichage de votre blog.".tr(),
-                      style: theme.textTheme.bodyMedium.copyWith(
-                        fontSize: sizeWidth * 0.02,
+                    textAlign: TextAlign.justify,
+                  ),
+                  const Gap(10),
+                  Text(
+                    "Commence dès maintenant et envoie ta participation à tous les utilisateurs de cette application et le monde entier !"
+                        .tr(),
+                    style: theme.textTheme.bodyMedium!.copyWith(fontSize: 11),
+                    textAlign: TextAlign.justify,
+                  ),
+                  const Gap(10),
+                  Form(
+                    key: formKey,
+                    child: TextFormField(
+                      autocorrect: true,
+                      onChanged: (value) {
+                        content = value;
+                      },
+                      onTapOutside: (event) =>
+                          FocusScope.of(context).requestFocus(
+                        FocusNode(),
                       ),
-                      textAlign: TextAlign.start,
+                      canRequestFocus: true,
+                      cursorColor: theme.primaryColorLight,
+                      maxLines: null,
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                        fontSize: sizeWidth * 0.03,
+                      ),
+                      decoration: InputDecoration(
+                        focusColor: theme.primaryColorLight,
+                        hintText: "Taper vos idées ici ...".tr(),
+                        hintStyle: theme.textTheme.labelMedium,
+                        errorStyle: theme.textTheme.labelSmall,
+                        border: InputBorder.none,
+                      ),
+                      validator: (value) {
+                        return (value == null || value.isEmpty)
+                            ? 'Veuillez entrer du texte'.tr()
+                            : null;
+                      },
                     ),
                   ),
                 ],
               ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class PhotoPicker extends StatelessWidget {
-  const PhotoPicker({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic font2 = Theme.of(context).textTheme.bodyMedium;
-    dynamic cubit = ProfilCubit.get(context);
-    return BlocConsumer<ProfilCubit, ProfilState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        return Container(
-          margin: EdgeInsets.only(bottom: sizeWidth * 0.05),
-          width: sizeWidth,
-          height: sizeWidth * 0.5,
-          decoration: cubit.imgFile == null
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: theme.highlightColor,
-                )
-              : BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: theme.highlightColor,
-                  image: DecorationImage(
-                    image: FileImage(cubit.imgFile),
-                    fit: BoxFit.cover,
+              Gap(sizeWidth * 0.05),
+              GestureDetector(
+                onTap: () => cubit.showImagePickerOptions(context),
+                child: PhotoPickerWidget(text: "Une image illustrative"),
+              ),
+              const Gap(10),
+              Padding(
+                padding: EdgeInsets.only(left: sizeWidth * 0.4),
+                child: Text(
+                  "Il tient à noter qu'en envoyant ceci, nous récupérons vos infos telle que :"
+                      .tr(),
+                  style: theme.textTheme.bodyMedium!.copyWith(
+                    fontSize: 9,
                   ),
+                  textAlign: TextAlign.start,
                 ),
-          child: (cubit.imgFile == null)
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Icon(
-                        AppIcons.photoCapture,
-                        color: AppColors.tdGrey,
-                        size: sizeWidth * 0.1,
-                        weight: 1,
-                      ),
-                    ),
-                    Gap(sizeWidth * 0.04),
-                    Text(
-                      "Une image illustrative".tr(),
-                      style: font2.copyWith(
-                        fontSize: sizeWidth * 0.03,
-                        fontWeight: FontWeight.normal,
-                        color: AppColors.tdGrey,
-                      ),
-                    ),
-                  ],
-                )
-              : Container(),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: sizeWidth * 0.45, top: 8),
+                child: Text(
+                  "+ votre nom\n+ votre mail\n+ votre photo".tr(),
+                  style: theme.textTheme.bodyMedium!.copyWith(fontSize: 8),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: sizeWidth * 0.4, top: 8),
+                child: Text(
+                  "Pour être utiliser dans l'affichage de votre blog.".tr(),
+                  style: theme.textTheme.bodyMedium!.copyWith(fontSize: 9),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+            ],
+          ),
         );
       },
     );

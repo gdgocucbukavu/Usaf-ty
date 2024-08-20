@@ -1,27 +1,31 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-Container stationView(sizeWidth, theme, color, title, adress) {
+Container stationView(
+  ThemeData theme,
+  Color color,
+  String title,
+  String adress,
+) {
   return Container(
-    margin: EdgeInsets.only(top: sizeWidth * 0.04),
-    width: sizeWidth,
+    margin: EdgeInsets.only(top: 10),
+    width: double.maxFinite,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        stationIcon(sizeWidth, color),
+        stationIcon(color),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title,
-              style: theme.textTheme.titleMedium
-                  .copyWith(fontSize: sizeWidth * 0.03),
+              style: theme.textTheme.titleMedium!.copyWith(fontSize: 10),
             ),
             Text(
               adress,
-              style: theme.textTheme.bodySmall
-                  .copyWith(fontSize: sizeWidth * 0.025),
+              style: theme.textTheme.bodySmall!.copyWith(fontSize: 10),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
@@ -32,12 +36,12 @@ Container stationView(sizeWidth, theme, color, title, adress) {
   );
 }
 
-Container stationIcon(sizeWidth, color) {
+Container stationIcon(color) {
   return Container(
     alignment: Alignment.center,
-    height: sizeWidth * 0.12,
-    width: sizeWidth * 0.12,
-    margin: EdgeInsets.only(right: sizeWidth * 0.05),
+    height: 45,
+    width: 45,
+    margin: EdgeInsets.only(right: 15, bottom: 5),
     decoration: BoxDecoration(
       color: color.withOpacity(0.1),
       border: Border.all(
@@ -49,7 +53,7 @@ Container stationIcon(sizeWidth, color) {
     child: Icon(
       CupertinoIcons.map_pin_ellipse,
       color: color,
-      size: sizeWidth * 0.05,
+      size: 20,
     ),
   );
 }

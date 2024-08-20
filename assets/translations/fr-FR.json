@@ -113,7 +113,7 @@
     "Apropos": "Apropos",
     "Veux-tu te déconnecter ?": "Veux-tu te déconnecter ?",
     "Déconnecter": "Déconnecter",
-    "Se déconnecter": "Se déconnecter",
+    "Se Déconnecter": "Se Déconnecter",
     "Se Connecter": "Se Connecter",
     "Abonnement": "Abonnement",
     "Français (France)": "Français (France)",
@@ -129,5 +129,6 @@
     "Merci pour votre feedback, nous en prendront note ...": "Merci pour votre feedback, nous en prendront note ...",
     "Gallerie": "Gallerie",
     "Camera": "Camera",
-    "Merci pour votre signal ...": "Merci pour votre signal ..."
+    "Merci pour votre signal ...": "Merci pour votre signal ...",
+    "Participation": "Participation"
 }

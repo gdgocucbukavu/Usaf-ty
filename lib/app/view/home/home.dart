@@ -12,28 +12,29 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: EdgeInsets.only(
-          top: sizeWidth * 0.12,
-          left: sizeWidth * 0.05,
-          right: sizeWidth * 0.05,
-        ),
-        child: SingleChildScrollView(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             children: [
               HeaderPage(),
-              Gap(sizeWidth * 0.02),
-              HeaderTextPage(),
-              Gap(sizeWidth * 0.02),
-              UpperScrollwidget(),
-              Gap(sizeWidth * 0.02),
-              ScheduleContainer(),
-              Gap(sizeWidth * 0.02),
-              ConsigneView(),
-              Gap(sizeWidth * 0.2),
+              const Gap(10),
+              Expanded(
+                child: ListView(
+                  children: [
+                    HeaderTextPage(),
+                    const Gap(10),
+                    UpperScrollwidget(),
+                    const Gap(10),
+                    ScheduleContainer(),
+                    const Gap(10),
+                    ConsigneView(),
+                    const Gap(100),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

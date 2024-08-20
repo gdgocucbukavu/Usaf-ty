@@ -9,9 +9,8 @@ import '../../../../controller/state/state.dart';
 import '../../../shared/shared.dart';
 
 void bottomSheetLangage(
-  context,
-  double sizeWidth,
-  theme,
+  BuildContext context,
+  ThemeData theme,
 ) {
   dynamic swBool;
   dynamic frBool;
@@ -36,10 +35,10 @@ void bottomSheetLangage(
       return BlocConsumer<MainCubit, MainState>(
         listener: (context, state) {},
         builder: (context, state) {
-          dynamic cubit = MainCubit.get(context);
+          final cubit = MainCubit.get(context);
           return Container(
-            height: sizeWidth * 0.7,
-            width: sizeWidth,
+            height: 250,
+            width: double.infinity,
             decoration: BoxDecoration(
               color: theme.scaffoldBackgroundColor,
               borderRadius: BorderRadius.only(
@@ -49,39 +48,39 @@ void bottomSheetLangage(
             ),
             child: Column(
               children: [
-                Gap(sizeWidth * 0.08),
+                const Gap(20),
                 Text(
                   "Langue".tr(),
-                  style: Theme.of(context).textTheme.displaySmall,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall!
+                      .copyWith(fontSize: 25),
                 ),
-                Gap(sizeWidth * 0.08),
+                const Gap(20),
                 GestureDetector(
                   onTap: () => cubit.changeLanguagesToFrench(context),
                   child: lineLanguage(
                     context,
-                    sizeWidth,
                     AppIcons.franais,
                     "Français (France)",
                     frBool,
                   ),
                 ),
-                Gap(sizeWidth * 0.02),
+                const Gap(10),
                 GestureDetector(
                   onTap: () => cubit.changeLanguagesToEnglish(context),
                   child: lineLanguage(
                     context,
-                    sizeWidth,
                     AppIcons.english,
                     "Anglais (USA)",
                     enBool,
                   ),
                 ),
-                Gap(sizeWidth * 0.02),
+                const Gap(10),
                 GestureDetector(
                   onTap: () => cubit.changeLanguagesToSwahili(context),
                   child: lineLanguage(
                     context,
-                    sizeWidth,
                     AppIcons.swahili,
                     "Swahili (Tanzanie)",
                     swBool,
@@ -97,16 +96,14 @@ void bottomSheetLangage(
 }
 
 Widget lineLanguage(
-  context,
-  double sizeW,
-  dynamic icon,
+  BuildContext context,
+  String icon,
   String langue,
   dynamic selected,
 ) {
   return Container(
-    margin: EdgeInsets.only(bottom: sizeW * 0.04),
     color: Colors.transparent,
-    width: sizeW * 0.8,
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -114,25 +111,25 @@ Widget lineLanguage(
           children: [
             Flag(
               icon,
-              size: sizeW * 0.04,
+              size: 20,
             ),
-            Gap(sizeW * 0.05),
+            const Gap(10),
             Text(
               langue.tr(),
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(fontSize: 11),
             ),
           ],
         ),
-        Padding(
-          padding: EdgeInsets.only(right: sizeW * 0.02),
-          child: selected
-              ? Icon(
-                  AppIcons.validate,
-                  size: sizeW * 0.06,
-                  color: AppColors.tdGreenO,
-                )
-              : SizedBox(),
-        ),
+        selected
+            ? Icon(
+                AppIcons.validate,
+                size: 20,
+                color: AppColors.tdGreenO,
+              )
+            : SizedBox(),
       ],
     ),
   );

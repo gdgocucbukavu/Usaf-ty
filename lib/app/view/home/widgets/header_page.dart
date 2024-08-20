@@ -14,9 +14,7 @@ class HeaderPage extends StatefulWidget {
 class _HeaderPageState extends State<HeaderPage> {
   @override
   Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic sizeHeight = MediaQuery.sizeOf(context).height;
-    // dynamic sizeWidth = MediaQuery.sizeOf(context).width;
+    final theme = Theme.of(context);
     return Column(
       children: [
         Row(
@@ -25,14 +23,11 @@ class _HeaderPageState extends State<HeaderPage> {
             GestureDetector(
               onTap: () => context.push(RoutePath.notification),
               child: notifIcon(
-                sizeHeight,
-                theme,
-                theme.scaffoldBackgroundColor.withOpacity(0.5),
-              ),
+                  theme, theme.scaffoldBackgroundColor.withOpacity(0.5)),
             ),
           ],
         ),
-        Gap(sizeHeight * 0.01),
+        const Gap(15),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,11 +35,11 @@ class _HeaderPageState extends State<HeaderPage> {
             Text.rich(
               TextSpan(
                 text: "Usaf",
-                style: theme.textTheme.displayMedium.copyWith(fontSize: 40.0),
+                style: theme.textTheme.displayMedium!.copyWith(fontSize: 40.0),
                 children: [
                   TextSpan(
                     text: "'",
-                    style: theme.textTheme.displayMedium.copyWith(
+                    style: theme.textTheme.displayMedium!.copyWith(
                       color: AppColors.tdGrey,
                       fontSize: 40.0,
                     ),

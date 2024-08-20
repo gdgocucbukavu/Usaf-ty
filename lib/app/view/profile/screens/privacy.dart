@@ -9,82 +9,62 @@ class Privacy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
+    final font = Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 11);
     return Scaffold(
       appBar: AppBar(),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: sizeWidth * 0.05),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                margin: EdgeInsets.only(
-                  top: sizeWidth * 0.02,
-                  bottom: sizeWidth * 0.05,
-                ),
-                width: sizeWidth / 6.2,
-                height: sizeWidth / 6.2,
+                width: 60,
+                height: 60,
                 decoration: BoxDecoration(
                   color: AppColors.tdGrey,
                   shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage(AppImages.logo),
-                  ),
+                  image: DecorationImage(image: AssetImage(AppImages.logo)),
                 ),
               ),
-              Gap(sizeWidth * 0.02),
-              Text(
-                dataTerms.gtitre,
-                style: Theme.of(context).textTheme.displaySmall,
-              ),
-              Gap(sizeWidth * 0.05),
-              SmallTextContent(txt: dataTerms.text1),
-              SmallTextContent(txt: dataTerms.text2),
-              SmallTextContent(txt: dataTerms.text3),
-              TitleLine(titre: dataTerms.stitre1),
-              TextPoint(txt: dataTerms.pts1),
-              TextPoint(txt: dataTerms.pts2),
-              TextPoint(txt: dataTerms.pts3),
-              TextPoint(txt: dataTerms.pts4),
-              SizedBox(
-                height: sizeWidth * 0.03,
-              ),
-              TitleLine(titre: dataTerms.stitre2),
-              SmallTextContent(txt: dataTerms.text4),
-              TextPoint(txt: dataTerms.pts5),
-              TextPoint(txt: dataTerms.pts6),
-              TextPoint(txt: dataTerms.pts7),
-              TextPoint(txt: dataTerms.pts8),
-              TextPoint(txt: dataTerms.pts9),
-              SizedBox(
-                height: sizeWidth * 0.03,
-              ),
-              TitleLine(titre: dataTerms.stitre3),
-              SmallTextContent(txt: dataTerms.text5),
-              TitleLine(titre: dataTerms.stitre4),
-              SmallTextContent(txt: dataTerms.text6),
-              Footer(),
             ],
           ),
-        ),
+          const Gap(10),
+          Text(
+            dataTerms.gtitre,
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+          const Gap(10),
+          Text(dataTerms.text1, style: font),
+          const Gap(10),
+          Text(dataTerms.text2, style: font),
+          const Gap(10),
+          Text(dataTerms.text3, style: font),
+          const Gap(10),
+          TitleLine(titre: dataTerms.stitre1),
+          TextPoint(txt: dataTerms.pts1),
+          TextPoint(txt: dataTerms.pts2),
+          TextPoint(txt: dataTerms.pts3),
+          TextPoint(txt: dataTerms.pts4),
+          const Gap(10),
+          TitleLine(titre: dataTerms.stitre2),
+          Text(dataTerms.text4, style: font),
+          const Gap(10),
+          TextPoint(txt: dataTerms.pts5),
+          TextPoint(txt: dataTerms.pts6),
+          TextPoint(txt: dataTerms.pts7),
+          TextPoint(txt: dataTerms.pts8),
+          TextPoint(txt: dataTerms.pts9),
+          const Gap(10),
+          TitleLine(titre: dataTerms.stitre3),
+          Text(dataTerms.text5, style: font),
+          const Gap(10),
+          TitleLine(titre: dataTerms.stitre4),
+          Text(dataTerms.text6, style: font),
+          const Gap(10),
+          Footer(),
+        ],
       ),
-    );
-  }
-}
-
-class SmallTextContent extends StatelessWidget {
-  final String txt;
-  const SmallTextContent({super.key, required this.txt});
-
-  @override
-  Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic font = Theme.of(context).textTheme.bodySmall;
-    return Container(
-      padding: EdgeInsets.only(bottom: sizeWidth * 0.04),
-      width: sizeWidth - sizeWidth * 0.1,
-      child: Text(txt.tr(), style: font),
     );
   }
 }
@@ -95,16 +75,14 @@ class TitleLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
     return Container(
-      width: sizeWidth - sizeWidth * 0.1,
-      padding: EdgeInsets.only(bottom: sizeWidth * 0.05),
+      margin: const EdgeInsets.only(bottom: 10),
       child: Text(
         titre.tr(),
         style: TextStyle(
           fontWeight: FontWeight.w500,
-          fontSize: 16,
           color: AppColors.tdYellowB,
+          fontSize: 12,
         ),
       ),
     );
@@ -117,27 +95,27 @@ class TextPoint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic font = Theme.of(context).textTheme.bodySmall;
-    dynamic theme = Theme.of(context).primaryColorLight;
-
+    final theme = Theme.of(context);
     return Container(
-      width: sizeWidth - sizeWidth * 0.1,
-      padding: EdgeInsets.only(bottom: sizeWidth * 0),
+      margin: const EdgeInsets.only(bottom: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(left: sizeWidth * 0.07, right: 7, top: 5),
+            margin: EdgeInsets.only(left: 16, right: 8, top: 6),
             width: 5,
             height: 5,
-            decoration: BoxDecoration(shape: BoxShape.circle, color: theme),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: theme.primaryColorLight,
+            ),
           ),
-          Container(
-            padding: EdgeInsets.only(bottom: sizeWidth * 0.01),
-            width: sizeWidth - sizeWidth * 0.1 - sizeWidth * 0.1,
-            child: Text(txt.tr(), style: font),
+          Expanded(
+            child: Text(
+              txt.tr(),
+              style: theme.textTheme.bodySmall!.copyWith(fontSize: 11),
+            ),
           )
         ],
       ),

@@ -9,6 +9,7 @@ import 'package:usaficity/controller/cubit/mapcubit.dart';
 
 import '../../../../controller/cubit/profilcubit.dart';
 import '../../../../controller/state/profilstate.dart';
+import 'photo_picker_widget.dart';
 
 class SignalPage extends StatelessWidget {
   static const route = '/signaler';
@@ -16,9 +17,8 @@ class SignalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic user = Provider.of<User?>(context);
-    dynamic cubit = ProfilCubit.get(context);
+    final user = Provider.of<User?>(context);
+    final cubit = ProfilCubit.get(context);
     cubit.imgFile = null;
     return BlocConsumer<ProfilCubit, ProfilState>(
       listener: (context, state) {},
@@ -34,12 +34,9 @@ class SignalPage extends StatelessWidget {
                   "Signalisation".tr(),
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
-                Gap(sizeWidth * 0.03),
-                Icon(
-                  AppIcons.signal,
-                  size: sizeWidth * 0.07,
-                ),
-                Gap(sizeWidth * 0.1),
+                const Gap(10),
+                Icon(AppIcons.signal, size: 25),
+                const Gap(50),
               ],
             ),
           ),
@@ -48,7 +45,7 @@ class SignalPage extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () => cubit.showImagePickerOptions(context),
-                  child: PhotoPicker(),
+                  child: PhotoPickerWidget(text: "Envoyer une photo"),
                 ),
                 LocalisationPicker(),
                 FiliedTextSignaler(),
@@ -89,19 +86,15 @@ class SendButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic font2 = Theme.of(context).textTheme.titleMedium;
+    final font2 = Theme.of(context).textTheme.titleMedium;
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: sizeWidth * 0.05,
-        vertical: sizeWidth * 0.02,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 50,
+        vertical: 10,
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: sizeWidth * 0.05,
-        vertical: sizeWidth * 0.01,
-      ),
-      width: sizeWidth,
-      height: 60,
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      width: double.maxFinite,
+      height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
         color: AppColors.tdYellowB,
@@ -113,15 +106,15 @@ class SendButton extends StatelessWidget {
             Icon(
               AppIcons.send,
               color: AppColors.tdWhite,
-              size: sizeWidth * 0.05,
+              size: 20,
             ),
-            Gap(sizeWidth * 0.04),
+            const Gap(10),
             Text(
               "Envoyer".tr(),
-              style: font2.copyWith(
-                fontSize: sizeWidth * 0.03,
+              style: font2!.copyWith(
                 fontWeight: FontWeight.w100,
                 color: AppColors.tdWhite,
+                fontSize: 12,
               ),
             )
           ],
@@ -136,20 +129,15 @@ class FiliedTextSignaler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic font1 = Theme.of(context).textTheme.labelMedium;
-
+    final theme = Theme.of(context);
+    final font = Theme.of(context).textTheme.labelMedium;
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: sizeWidth * 0.05,
-        vertical: sizeWidth * 0.02,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 15,
+        vertical: 10,
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: sizeWidth * 0.05,
-        vertical: sizeWidth * 0.01,
-      ),
-      width: sizeWidth * 0.90,
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      width: double.maxFinite,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: theme.highlightColor,
@@ -163,15 +151,15 @@ class FiliedTextSignaler extends StatelessWidget {
         ),
         cursorColor: theme.primaryColorLight,
         maxLines: null,
-        style: font1.copyWith(
-          fontSize: sizeWidth * 0.03,
+        style: font!.copyWith(
+          fontSize: 11,
           color: theme.primaryColorLight,
           fontWeight: FontWeight.normal,
         ),
         decoration: InputDecoration(
           hintText: "Signalez quelque chose !".tr(),
-          hintStyle: font1,
           border: InputBorder.none,
+          hintStyle: font,
         ),
       ),
     );
@@ -183,11 +171,10 @@ class LocalisationPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic font1 = Theme.of(context).textTheme.headlineSmall;
+    final font = Theme.of(context).textTheme.headlineSmall;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: sizeWidth * 0.05),
-      width: sizeWidth * 0.90,
+      margin: const EdgeInsets.symmetric(horizontal: 15),
+      width: double.maxFinite,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -196,20 +183,21 @@ class LocalisationPicker extends StatelessWidget {
               Icon(
                 AppIcons.mapPin,
                 color: AppColors.tdYellowB,
+                size: 20,
               ),
-              Gap(sizeWidth * 0.04),
+              const Gap(10),
               Text(
                 "Localisation :".tr(),
-                style: font1.copyWith(
-                  fontSize: sizeWidth * 0.03,
+                style: font!.copyWith(
                   fontWeight: FontWeight.normal,
+                  fontSize: 12,
                 ),
               ),
-              Gap(sizeWidth * 0.04),
+              const Gap(10),
               Text(
                 "- - - - - -",
-                style: font1.copyWith(
-                  fontSize: sizeWidth * 0.03,
+                style: font.copyWith(
+                  fontSize: 11,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -217,66 +205,6 @@ class LocalisationPicker extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class PhotoPicker extends StatelessWidget {
-  const PhotoPicker({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
-    dynamic font2 = Theme.of(context).textTheme.bodyMedium;
-    dynamic cubit = ProfilCubit.get(context);
-    return BlocConsumer<ProfilCubit, ProfilState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        return Container(
-          margin: EdgeInsets.all(sizeWidth * 0.05),
-          width: sizeWidth * 0.90,
-          height: sizeWidth * 0.60,
-          decoration: cubit.imgFile == null
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: theme.highlightColor,
-                )
-              : BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: theme.highlightColor,
-                  image: DecorationImage(
-                    image: FileImage(cubit.imgFile),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-          child: (cubit.imgFile == null)
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Icon(
-                        AppIcons.photoCapture,
-                        color: AppColors.tdGrey,
-                        size: sizeWidth * 0.1,
-                        weight: 1,
-                      ),
-                    ),
-                    Gap(sizeWidth * 0.04),
-                    Text(
-                      "Envoyer une photo".tr(),
-                      style: font2.copyWith(
-                        fontSize: sizeWidth * 0.03,
-                        fontWeight: FontWeight.normal,
-                        color: AppColors.tdGrey,
-                      ),
-                    ),
-                  ],
-                )
-              : Container(),
-        );
-      },
     );
   }
 }

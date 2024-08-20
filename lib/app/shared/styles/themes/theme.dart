@@ -24,6 +24,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.tdWhiteO,
     highlightColor: AppColors.tdWhite,
     unselectedWidgetColor: AppColors.tdGrey,
+    dividerTheme: DividerThemeData(color: AppColors.tdBlackO),
     appBarTheme: AppBarTheme(
       actionsIconTheme: IconThemeData(color: AppColors.tdBlack),
       backgroundColor: Colors.transparent,
@@ -69,6 +70,7 @@ class AppTheme {
     scaffoldBackgroundColor: AppColors.tdBlackO,
     highlightColor: AppColors.tdBlack,
     unselectedWidgetColor: AppColors.tdGrey,
+    dividerTheme: DividerThemeData(color: AppColors.tdWhiteO),
     appBarTheme: AppBarTheme(
       actionsIconTheme: IconThemeData(color: AppColors.tdWhite),
       backgroundColor: Colors.transparent,

@@ -26,28 +26,27 @@ class _ConsigneViewState extends State<ConsigneView> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
+    final theme = Theme.of(context);
     return Container(
       color: Colors.transparent,
-      width: sizeWidth,
+      width: double.maxFinite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "Consignes & Conseils".tr(),
             style: TextStyle(
-              fontSize: 15,
               fontWeight: FontWeight.bold,
+              fontSize: 13,
             ),
           ),
-          Gap(sizeWidth * 0.005),
           Container(
-            height: sizeWidth * 0.5,
+            height: 200,
+            margin: const EdgeInsets.symmetric(vertical: 10),
             color: Colors.transparent,
             child: ListWheelScrollViewX(
               scrollDirection: Axis.horizontal,
-              itemExtent: sizeWidth * 0.9,
+              itemExtent: MediaQuery.sizeOf(context).width * 0.9,
               diameterRatio: 3,
               onSelectedItemChanged: (value) {
                 setState(() {
@@ -75,7 +74,7 @@ class _ConsigneViewState extends State<ConsigneView> {
                       );
                     },
                     child: Container(
-                      height: sizeWidth * 0.45,
+                      height: 200,
                       decoration: BoxDecoration(
                         color: Theme.of(context).highlightColor,
                         borderRadius: BorderRadius.circular(20),
@@ -122,8 +121,8 @@ class _ConsigneViewState extends State<ConsigneView> {
                                               fit: BoxFit.cover,
                                             ),
                                           ),
-                                    height: sizeWidth * 0.1,
-                                    width: sizeWidth * 0.1,
+                                    height: 40,
+                                    width: 40,
                                   ),
                                   Column(
                                     crossAxisAlignment:
@@ -137,9 +136,9 @@ class _ConsigneViewState extends State<ConsigneView> {
                                             consignes[index].name,
                                             style: GoogleFonts.poppins(
                                               color: theme.primaryColorLight,
-                                              fontSize: sizeWidth * 0.035,
                                               fontWeight: FontWeight.bold,
                                               letterSpacing: 2,
+                                              fontSize: 12,
                                               height: 1.5,
                                             ),
                                           ),
@@ -148,7 +147,7 @@ class _ConsigneViewState extends State<ConsigneView> {
                                                 ? CupertinoIcons.lightbulb
                                                 : CupertinoIcons.light_max,
                                             color: theme.primaryColorLight,
-                                            size: sizeWidth * 0.04,
+                                            size: 15,
                                           ),
                                         ],
                                       ),
@@ -156,9 +155,9 @@ class _ConsigneViewState extends State<ConsigneView> {
                                         consignes[index].mail,
                                         style: GoogleFonts.poppins(
                                           color: AppColors.tdGrey,
-                                          fontSize: sizeWidth * 0.02,
                                           fontWeight: FontWeight.w300,
                                           letterSpacing: 1.5,
+                                          fontSize: 10,
                                           height: 1.5,
                                         ),
                                       ),
@@ -166,40 +165,29 @@ class _ConsigneViewState extends State<ConsigneView> {
                                   ),
                                 ],
                               ),
-                              Container(
-                                padding: EdgeInsets.only(
-                                  top: sizeWidth * 0.01,
-                                  left: sizeWidth * 0.02,
-                                  right: sizeWidth * 0.02,
+                              const Gap(10),
+                              Text(
+                                consignes[index].content,
+                                style: GoogleFonts.poppins(
+                                  color: theme.primaryColorDark,
+                                  fontWeight: FontWeight.normal,
+                                  letterSpacing: 1.5,
+                                  fontSize: 9,
+                                  height: 1.8,
                                 ),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      consignes[index].content,
-                                      style: GoogleFonts.poppins(
-                                        color: theme.primaryColorDark,
-                                        fontSize: sizeWidth * 0.02,
-                                        fontWeight: FontWeight.normal,
-                                        letterSpacing: 1.5,
-                                        height: 1.8,
-                                      ),
-                                      softWrap: true,
-                                      textAlign: TextAlign.justify,
-                                      maxLines: 6,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
-                                ),
+                                softWrap: true,
+                                textAlign: TextAlign.justify,
+                                maxLines: 6,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ],
                           ),
-                          Icon(
-                            (consignes[index].img == '')
-                                ? null
-                                : CupertinoIcons.signature,
-                            color: theme.primaryColorDark,
-                            size: sizeWidth * 0.04,
-                          ),
+                          if (consignes[index].img != '')
+                            Icon(
+                              CupertinoIcons.signature,
+                              color: theme.primaryColorDark,
+                              size: 15,
+                            )
                         ],
                       ),
                     ),

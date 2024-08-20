@@ -2,7 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import 'widgets/notif_body.dart';
+import 'widgets/system_notif.dart';
+import 'widgets/msg_notif.dart';
 
 class NotificationScreen extends StatelessWidget {
   static const route = '/notification';
@@ -10,8 +11,7 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic size = MediaQuery.sizeOf(context).width;
-    dynamic theme = Theme.of(context);
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -24,13 +24,22 @@ class NotificationScreen extends StatelessWidget {
               style: theme.textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
-            Gap(size * 0.03),
+            const Gap(10),
             const Icon(Icons.notifications_on_rounded),
-            Gap(size * 0.1),
+            const Gap(50),
           ],
         ),
       ),
-      body: notifBody(theme, size),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        children: [
+          const Gap(20),
+          systemNotif(theme),
+          const Gap(20),
+          msgNotif(theme),
+          const Gap(20),
+        ],
+      ),
     );
   }
 }

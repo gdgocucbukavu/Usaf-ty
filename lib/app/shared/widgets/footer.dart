@@ -14,16 +14,15 @@ class Footer extends StatefulWidget {
 class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
-    dynamic theme = Theme.of(context);
-    dynamic sizeWidth = MediaQuery.sizeOf(context).width;
+    final theme = Theme.of(context);
     return Container(
-      width: sizeWidth,
+      width: double.maxFinite,
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: sizeWidth * 0.1,
+            height: 50,
             decoration: BoxDecoration(
               color: Colors.transparent,
               image: DecorationImage(image: AssetImage(AppImages.gdsclogo)),
@@ -32,15 +31,13 @@ class _FooterState extends State<Footer> {
           const Gap(10),
           Text(
             'Développé par GDSC-UCB®'.tr(),
-            style:
-                theme.textTheme.bodyMedium.copyWith(fontSize: sizeWidth * 0.02),
+            style: theme.textTheme.bodyMedium!.copyWith(fontSize: 9),
             textAlign: TextAlign.center,
           ),
           const Gap(5),
           Text(
             '©2024 Tous droits réservés'.tr(),
-            style: theme.textTheme.labelMedium
-                .copyWith(fontSize: sizeWidth * 0.015),
+            style: theme.textTheme.labelMedium!.copyWith(fontSize: 8),
             textAlign: TextAlign.center,
           ),
           const Gap(20),
