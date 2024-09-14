@@ -72,7 +72,7 @@ class Usafty extends StatelessWidget {
       child: BlocConsumer<MainCubit, MainState>(
         listener: (context, state) {},
         builder: (context, state) {
-          dynamic cubit = MainCubit.get(context);
+          final cubit = MainCubit.get(context);
           SystemChrome.setSystemUIOverlayStyle(
             SystemUiOverlayStyle(
               statusBarColor: Colors.transparent,
